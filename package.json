@@ -1,0 +1,64 @@
+{
+  "name": "OctopusXMLPrinter",
+  "version": "1.2.11",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/luisgustavorr/OctopusXML.git"
+  },
+  "icon": "./app/assets/images/favicon_io/favicon.ico",
+  "description": "Código em Node para auxiliar na impressão de NfC-e, apartir do xml.",
+  "main": "./app.js",
+  "scripts": {
+    "start": "electron .",
+    "build": "electron-builder --win -p always"
+  },
+  "build": {
+    "files": "!build_assets{/*}",
+    "appId": "com.electron.octopusxml",
+    "forceCodeSigning": true,
+    "win": {
+      "publish": [
+        {
+          "provider": "github",
+          "owner": "luisgustavorr",
+          "repo": "OctopusXML"
+        }
+      ],
+      "target": [
+        "nsis"
+      ],
+      "icon": "./app/assets/images/favicon_io/favicon.ico"
+    },
+    "nsis": {
+      "oneClick": true,
+      "deleteAppDataOnUninstall": true,
+      "removeDefaultUninstallWelcomePage": false,
+      "installerIcon": "./app/assets/images/favicon_io/favicon.ico",
+      "uninstallerIcon": "./app/assets/images/favicon_io/favicon.ico",
+      "uninstallDisplayName": "Octopus-Xml-Printer",
+      "license": "./app/assets/license.md",
+      "allowToChangeInstallationDirectory": false
+    }
+  },
+  "author": "Luís Gustavo R. Rezende",
+  "license": "ISC",
+  "dependencies": {
+    "auto-launch": "^5.0.6",
+    "body-parser": "^1.20.2",
+    "date-fns": "^3.6.0",
+    "electron-store": "^8.2.0",
+    "electron-updater": "^6.1.8",
+    "escpos": "^3.0.0-alpha.6",
+    "escpos-usb": "^3.0.0-alpha.4",
+    "express": "^4.18.3",
+    "multer": "^1.4.5-lts.1",
+    "pdf-parse": "^1.1.1",
+    "tcp-port-used": "^1.0.2",
+    "usb": "^1.9.2",
+    "xml-js": "^1.6.11"
+  },
+  "devDependencies": {
+    "electron": "^29.1.0",
+    "electron-builder": "^24.13.3"
+  }
+}
