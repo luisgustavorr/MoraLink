@@ -3,138 +3,174 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>OctopusXMLPrinter</title>
-    <link rel="stylesheet" href="./app/js/jquery-confirm-v3.3.4/css/jquery-confirm.css">
+    <title>MoraLink</title>
+    <link
+      rel="stylesheet"
+      href="./app/js/jquery-confirm-v3.3.4/css/jquery-confirm.css"
+    />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link rel="stylesheet" href="./app/assets/icons/css/all.css" />
-
     <link
-      href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Jura:wght@300..700&display=swap"
       rel="stylesheet"
     />
   </head>
 
   <body>
-    <header>
-      <img src="./app/assets/images/gif_printing.gif"  />
-      <div class="header_infos">
-        <h3>OctopusXMLPrinter</h3>
-        <div>
-          <p
-            >Status :
-            <span>Rodando</span></p
-          >
-          <p
-            >Porta :
-            <span id="porta">3000</span></p
-          >
-        </div>
-      </div>
-    </header>
+    <section id="sidebar">
+      <span class="selected_page" page="inf_shark">INF. SHARK</span>
+
+      <span page="inf_db">INF. DATA BANK</span>
+      <span page="config">CONFIGURAÇÕES</span>
+    </section>
     <section id="content">
-      <section id="config_father">
-        <h3>&lt; Configurações &gt;</h3>
-          <h4>Alterar Porta : <input type="text" value="3000"></h4>
-
+      <section id="content_config">
+        <h3>CONFIGURAÇÕES</h3>
+        <div id="config_father" class="input_father_classic">
+          <label for="">Porta:</label>
+          <input id="PORT" value="3000" type="text" name="" />
+        </div>
+        <div class="input_father_classic">
+          <label for="">Versão: <version>1.0.0</version></label>
+        </div>
       </section>
-      <section id="info_father">
-        <h3>&lt; Informações &gt;</h3>
-
-          <h4>Versão do Sistema : <p id="version"></p></h4>
-          <h4 id="porcentagem"></h4>
-
-
+      <section id="content_inf_db">
+        <h3>INFORMAÇÕES BANCO DE DADOS</h3>
+        <div class="input_father_classic">
+          <label for="">DB type:</label>
+          <input id="db_type_db" value="mysql" type="text" name="" />
+        </div>
+        <div class="input_father_classic">
+          <label for="">Host:</label>
+          <input id="host_db" value="localhost" type="text" name="" />
+        </div>
+        <div class="input_father_classic">
+          <label for="">Port:</label>
+          <input id="port_db" value="localhost" type="text" name="" />
+        </div>
+        <div class="input_father_classic">
+          <label for="">User:</label>
+          <input id="user_db" value="root" type="text" name="" />
+        </div>
+        <div class="input_father_classic">
+          <label for="">Password:</label>
+          <input id="password_db" required = false value="(EMPTY)" type="text" name="" />
+        </div>
+        <div class="input_father_classic">
+          <label for="">Db_name:</label>
+          <input id="db_name_db" value="vendas" type="text" name="" />
+        </div>
+        <div class="input_father_classic">
+          <label for="">Query:</label>
+          <textarea id="query_db" value="SELECT * FROM " type="text" name="" ></textarea>
+        </div>
+     
+      </section>
+      <section id="content_inf_shark">
+        <h3>INFORMAÇÕES SHARK</h3>
+        <div class="input_father_classic">
+          <label for="">Dias :</label>
+          <input id="dias_shark" value="10" type="text" name="" />
+        </div>
       </section>
     </section>
+    <img
+      id="img_logo_name"
+      src="./app/assets/images/moralink_logo_with_name.png"
+      alt=""
+    />
   </body>
   <style>
-    #version {
-      margin: 0 5px;
+    #content_config, #content_inf_db{
+      display: none;
     }
-    #config_father{
-      margin: 20px;
-      width: 40vw;
-      border: 1px solid #DBDBDB;
-      border-radius: 5px;
-      background: #EBEBEB;
-      padding: 10px;
-    }
-    #info_father{
-      margin: 20px;
-      width: 40vw;
-      border: 1px solid #DBDBDB;
-      border-radius: 5px;
-      background: #EBEBEB;
-      padding: 10px;
-    }
-    #info_father h3{
-      font-weight: 400;
-      margin-bottom: 10px;
-    }
-    #info_father h4{
-      font-weight: 400;
-      margin: 0 20px;
+    .input_father_classic {
+      margin-left: 20px;
+      margin-bottom: 20px; 
       display: flex;
-
     }
-    #config_father h3{
-      font-weight: 400;
-      margin-bottom: 10px;
+    .input_father_classic label {
+      font-size: 20px;
     }
-    #config_father h4{
-      font-weight: 400;
-      margin: 0 20px;
+    .input_father_classic input {
+      font-size: 18px;
+      text-align: center;
+      margin-left: 5px;
+      width: 160px;
     }
-    body header .header_infos {
+    .input_father_classic textarea {
+      font-size: 18px;
+      text-align: left;
+      padding: 5px;
+      margin-left: 5px;
+      width: 300px;
+    }
+    #content {
+      width: 930px;
+      padding-left: 20px;
+      padding-top: 20px;
+    }
+    #content h3 {
+      font-size: 25px;
+      margin-bottom: 30px;
+    }
+    #sidebar span {
+      width: 70%;
+      height: 65px;
+      margin: 2% 0;
+      background: #181e2e;
+      padding-left: 50px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 13px;
+      cursor: pointer;
+      padding-right: 5px;
+      border-radius: 0 15px 15px 0;
+    }
+    /* #sidebar span:hover {
+      background: #ffffff;
+      color: #181e2e;
+    } */
+    #sidebar .selected_page {
+      background: #ffffff;
+      color: #181e2e;
+    }
+    #sidebar {
+      width: 250px;
+      height: 100vh;
+      background: #181e2e;
+      color: white;
       display: flex;
       flex-direction: column;
-      position: relative;
-      width: 90vw;
-      
+      justify-content: center;
+      align-items: start;
     }
- 
-    body header .header_infos h3 {
+    #img_logo_name {
+      width: 110px;
       position: absolute;
-      transform: translate(-50%, -50%);
-      top: 17%;
-      left: 50%;
-    }
-    body header .header_infos div p{
-      margin: 5px 0;
-      font-weight: 500;
-    }
-    body header .header_infos div span{
-      font-weight: 400;
-
-    }
-    body header .header_infos div {
-      position: absolute;
-      top: 45%;
-      left: 0%;
-    }
-    header img {
-      width: 20vh;
-}
-    body header {
-      width: 100%;
-    border-bottom: 1px solid black;
-    height: 16vh;
-    display: flex;
+      bottom: 5px;
+      right: 5px;
     }
     * {
       margin: 0;
-      font-family: "Roboto", sans-serif;
+      font-family: "Jura", sans-serif;
+      font-weight: 700;
     }
     body {
+      display: flex;
       width: 99.9vw;
-      height: 99vh;
+      height: 99.9vh;
+      position: relative;
     }
   </style>
   <script src="app/js/jquery.js"></script>
   <script src="app/js/jQuery-Mask-Plugin-master/src/jquery.mask.js"></script>
   <script src="app/js/jquery-confirm-v3.3.4/js/jquery-confirm.js"></script>
   <script src="app/js/alertar.js"></script>
-  <script src="app/js/index.js"></script>
 
+
+
+  <script type="module" src="app/js/index.js"></script>
 </html>

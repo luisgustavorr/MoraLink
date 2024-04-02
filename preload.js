@@ -8,7 +8,9 @@ let indexBridge = {
     renderToMainOneWay: (arg) => ipcRenderer.send('renderToMainOneWay',arg),
     restartServer: (port) => ipcRenderer.invoke('restartServer',port),
     checkPort: (port) => ipcRenderer.invoke('checkPort',port),
-    getPort: (callback) => ipcRenderer.on('getPort',callback)
+    getPort: (callback) => ipcRenderer.on('getPort',callback),
+    getVariable: (arg) => ipcRenderer.invoke('getVariable',arg),
+    setVariable: (id,value) => ipcRenderer.invoke('setVariable',id,value)
 
 }
 contextBridge.exposeInMainWorld("indexBridge",indexBridge)

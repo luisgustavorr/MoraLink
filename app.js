@@ -4,7 +4,6 @@ const { autoUpdater } = require("electron-updater")
 var tcpPortUsed = require('tcp-port-used');
 const serverManager = require('./app/modules/server');
 const Store = require('electron-store');
-const AutoLaunch = require('auto-launch');
 const fs = require('fs');
 const logsDir = "C:\\Users\\Public\\Documents\\OctopusXMLLogs";
 const logFilePath = path.join(logsDir, "logfile.txt");
@@ -35,7 +34,7 @@ let mainWindow = null;
 const appVersion = app.getVersion()
 app.setLoginItemSettings({
     openAtLogin: true,
-  });
+});
 if (!gotTheLock) {
     app.quit()
 } else {
@@ -59,21 +58,16 @@ if (!gotTheLock) {
     autoUpdater.on('checking-for-update', () => {
         console.log('Checking for update...');
     });
-
     autoUpdater.on('update-available', (info) => {
         console.log('Update available.');
         mainWindow.webContents.send('changePercentDisplay', "block")
-
     });
-
     autoUpdater.on('update-not-available', (info) => {
         console.log('Update not available.');
     });
-
     autoUpdater.on('error', (err) => {
         console.log('Error in auto-updater. ' + err);
     });
-
     autoUpdater.on('download-progress', (progressObj) => {
         let log_message = 'Progresso Atualização :' + parseFloat(progressObj.percent).toFixed(2) + '%';
         if (mainWindow !== null) {
@@ -89,11 +83,13 @@ if (!gotTheLock) {
 
     });
     function createWindow() {
-
+        if (mainWindow != null) {
+            mainWindow.destroy()
+        };
 
         mainWindow = new BrowserWindow({
-            width: 800,
-            height: 600,
+            width: 1200,
+            height: 800,
             icon: __dirname + './app/assets/images/favicon_io/favicon.ico',
             autoHideMenuBar: true,
             webPreferences: {
@@ -111,19 +107,23 @@ if (!gotTheLock) {
             mainWindow = null;
         });
         setTimeout(() => {
-            mainWindow.webContents.send("getVersion",appVersion)
+            if (mainWindow != null) {
 
-        mainWindow.webContents.send("getPort",store.get("PORT"))
-        },500)
+                mainWindow.webContents.send("getVersion", appVersion)
+
+                mainWindow.webContents.send("getPort", store.get("PORT"))
+            }
+
+        }, 500)
     }
 
     function createTray() {
-        tray = new Tray(path.join(__dirname, "app", "assets", "images", "favicon_io", 'favicon.ico')); // Path to your tray icon
+        tray = new Tray(path.join(__dirname, "app", "assets", "images", "favicon_io", 'android-chrome-192x192.png')); // Path to your tray icon
         const contextMenu = Menu.buildFromTemplate([
             { label: 'Abrir', click: () => createWindow() },
             { label: 'Fechar ( parar impressão )', click: () => app.quit() }
         ]);
-        tray.setToolTip('Octopus');
+        tray.setToolTip('MoraLink');
         tray.setContextMenu(contextMenu);
 
         tray.on('double-click', () => {
@@ -169,11 +169,22 @@ if (!gotTheLock) {
     });
     app.on("ready", () => {
         console.log("ready")
- 
+
         ipcMain.handle('restartServer', async (event, arg) => {
             console.log(arg)
             server.setPort(arg)
             return "funcionou"
+        })
+        ipcMain.handle('setVariable', async (event, id,value) => {
+            store.set(id,value, 3000);
+            return 200
+        })
+        ipcMain.handle('getVariable', async (event, arg) => {
+            let variable = store.get(arg,"(EMPTY)")
+            if(variable == ""){
+                variable = "(EMPTY)"
+            }
+            return variable;
         })
         ipcMain.handle('checkPort', async (event, arg) => {
             try {
@@ -185,15 +196,6 @@ if (!gotTheLock) {
                 return false;
             }
         })
-        // let autoLaunch = new AutoLaunch({
-        //     name: 'OctopusXMLPrinter',
-        //     path: app.getPath('exe'),
-        // });
-
-        // autoLaunch.isEnabled().then((isEnabled) => {
-        //     if (!isEnabled) autoLaunch.enable();
-        // });
-
     })
     app.on('activate', () => {
         if (mainWindow === null) {

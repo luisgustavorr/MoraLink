@@ -1,9 +1,9 @@
 {
-  "name": "OctopusXMLPrinter",
-  "version": "1.2.11",
+  "name": "MoraLink",
+  "version": "1.0.0",
   "repository": {
     "type": "git",
-    "url": "https://github.com/luisgustavorr/OctopusXML.git"
+    "url": "https://github.com/luisgustavorr/MoraLink.git"
   },
   "icon": "./app/assets/images/favicon_io/favicon.ico",
   "description": "Código em Node para auxiliar na impressão de NfC-e, apartir do xml.",
@@ -14,14 +14,14 @@
   },
   "build": {
     "files": "!build_assets{/*}",
-    "appId": "com.electron.octopusxml",
+    "appId": "com.electron.moralink",
     "forceCodeSigning": true,
     "win": {
       "publish": [
         {
           "provider": "github",
           "owner": "luisgustavorr",
-          "repo": "OctopusXML"
+          "repo": "MoraLink"
         }
       ],
       "target": [
@@ -35,7 +35,7 @@
       "removeDefaultUninstallWelcomePage": false,
       "installerIcon": "./app/assets/images/favicon_io/favicon.ico",
       "uninstallerIcon": "./app/assets/images/favicon_io/favicon.ico",
-      "uninstallDisplayName": "Octopus-Xml-Printer",
+      "uninstallDisplayName": "MoraLink",
       "license": "./app/assets/license.md",
       "allowToChangeInstallationDirectory": false
     }
@@ -52,6 +52,8 @@
     "escpos-usb": "^3.0.0-alpha.4",
     "express": "^4.18.3",
     "multer": "^1.4.5-lts.1",
+    "mysql": "^2.18.1",
+    "node-firebird": "^1.1.8",
     "pdf-parse": "^1.1.1",
     "tcp-port-used": "^1.0.2",
     "usb": "^1.9.2",
