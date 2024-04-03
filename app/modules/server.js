@@ -42,10 +42,9 @@ app.post('/select', async (req, res) => {
     const connectionClass = connectionSelector.selectConnectionType();
     // Agora você pode usar a classe retornada normalmente
     const connectionInstance = new connectionClass();
-    await connectionInstance.connect()
+    connectionInstance.connect()
     let results = await connectionInstance.exec()
-    console.log(results)
-    res.status(200).json({ status: 200 });
+    res.status(200).json({ status: 200, results: JSON.stringify(results)});
 
 });
 class serverManager {
@@ -55,7 +54,7 @@ class serverManager {
     startServer() {
         try {
             this.server = app.listen(port, () => {
-                console.log(`octopus rodando na porta :  ${port}`);
+                console.log(`MoraLink rodando na porta :  ${port}`);
                 return true;
             });
         } catch (e) {
@@ -67,7 +66,7 @@ class serverManager {
     }
     async stopServer() {
         try {
-            console.log(`octopus parou de rodar na porta:  ${port}`);
+            console.log(`MoraLink parou de rodar na porta:  ${port}`);
             this.server.close();
             return true
 

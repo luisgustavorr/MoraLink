@@ -5,7 +5,7 @@ var tcpPortUsed = require('tcp-port-used');
 const serverManager = require('./app/modules/server');
 const Store = require('electron-store');
 const fs = require('fs');
-const logsDir = "C:\\Users\\Public\\Documents\\OctopusXMLLogs";
+const logsDir = "C:\\Users\\Public\\Documents\\MoraLink";
 const logFilePath = path.join(logsDir, "logfile.txt");
 
 // Cria o diretório de logs recursivamente, se necessário
@@ -137,7 +137,7 @@ if (!gotTheLock) {
                 if (inUse) {
                     console.log("parou")
                     createWindow();
-                    mainWindow.webContents.send('alert', "Porta Ocupada, caso não seja o próprio Octopus XML Printer, altere a porta nas configurações do aplicativo.", "Mensagem do Sistema", "700px", 'fa fa-warning')
+                    mainWindow.webContents.send('alert', "Porta Ocupada, caso não seja a própria MoraLink, altere a porta nas configurações do aplicativo.", "Mensagem do Sistema", "700px", 'fa fa-warning')
                     app.exit(0)
                     return;
                 } else {
