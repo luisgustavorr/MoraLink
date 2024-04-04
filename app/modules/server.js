@@ -47,6 +47,11 @@ app.post('/select', async (req, res) => {
     res.status(200).json({ status: 200, results: JSON.stringify(results)});
 
 });
+app.post('/clear', async (req, res) => {
+    store.clear()
+    res.status(200).json({ status: 200});
+
+});
 class serverManager {
     constructor() {
         this.server = null

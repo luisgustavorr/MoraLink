@@ -90,7 +90,7 @@ if (!gotTheLock) {
         mainWindow = new BrowserWindow({
             width: 1200,
             height: 800,
-            icon: __dirname + './app/assets/images/favicon_io/favicon.ico',
+            icon: __dirname + '/app/assets/images/favicon_io/favicon.ico',
             autoHideMenuBar: true,
             webPreferences: {
                 preload: path.join(__dirname, 'preload.js'),
@@ -118,7 +118,7 @@ if (!gotTheLock) {
     }
 
     function createTray() {
-        tray = new Tray(path.join(__dirname, "app", "assets", "images", "favicon_io", 'android-chrome-192x192.png')); // Path to your tray icon
+        tray = new Tray(path.join(__dirname, "app", "assets", "images", "favicon_io", 'favicon.ico')); // Path to your tray icon
         const contextMenu = Menu.buildFromTemplate([
             { label: 'Abrir', click: () => createWindow() },
             { label: 'Fechar ( parar impressão )', click: () => app.quit() }
@@ -141,16 +141,13 @@ if (!gotTheLock) {
                     app.exit(0)
                     return;
                 } else {
-                    createWindow();
-
+                    createTray()
                     setTimeout(() => {
                         ipcMain.on('renderToMainOneWay', (event, arg) => {
                             console.log("arg")
                             return arg
                         })
                     }, 500)
-
-                    createTray();
 
                     server.startServer();
                 }
@@ -199,7 +196,7 @@ if (!gotTheLock) {
     })
     app.on('activate', () => {
         if (mainWindow === null) {
-            createWindow();
+            createTray()
         }
     });
 }

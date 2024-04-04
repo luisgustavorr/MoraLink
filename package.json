@@ -1,11 +1,11 @@
 {
   "name": "MoraLink",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "repository": {
     "type": "git",
     "url": "https://github.com/luisgustavorr/MoraLink.git"
   },
-  "icon": "./app/assets/images/favicon_io/android-chrome-512x512.ico",
+  "icon": "./app/assets/images/favicon_io/favicon.ico",
   "description": "Código em Node para auxiliar na impressão de NfC-e, apartir do xml.",
   "main": "./app.js",
   "scripts": {
@@ -27,14 +27,14 @@
       "target": [
         "nsis"
       ],
-      "icon": "./app/assets/images/favicon_io/android-chrome-512x512.ico"
+      "icon": "./app/assets/images/favicon_io/favicon.ico"
     },
     "nsis": {
       "oneClick": true,
       "deleteAppDataOnUninstall": true,
       "removeDefaultUninstallWelcomePage": false,
-      "installerIcon": "./app/assets/images/favicon_io/android-chrome-512x512.ico",
-      "uninstallerIcon": "./app/assets/images/favicon_io/android-chrome-512x512.ico",
+      "installerIcon": "./app/assets/images/favicon_io/favicon.ico",
+      "uninstallerIcon": "./app/assets/images/favicon_io/favicon.ico",
       "uninstallDisplayName": "MoraLink",
       "license": "./app/assets/license.md",
       "allowToChangeInstallationDirectory": false
