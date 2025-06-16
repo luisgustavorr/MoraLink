@@ -3,3 +3,7 @@
 /dist
 /cert
 HowToUse.txt
+.env
+oldQuerys.js
+/clients_objects
+.qodo

@@ -6,6 +6,7 @@ export class infoShark {
         this.setValues()
         this.submitAtChange()
         this.submitAtEnter()
+        this.syncShark()
     }
     submitAtChange() {
         let sendForm = this.enviarFormulario
@@ -27,6 +28,11 @@ export class infoShark {
                 $(this).change()
             }
         })
+    }
+    async syncShark(){
+      $('#syncShark').click(async function(){
+        let sync = await window.indexBridge.syncShark()
+      })
     }
     async enviarFormulario(id,value) {
         let setVariable = await window.indexBridge.setVariable(id, value)

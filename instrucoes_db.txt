@@ -1,0 +1,69 @@
+As instruções seguem o seguinte padrão :
+-> {NOME DA VIEW}
+{Nome do Campo} [{alias necessário}] ({instruções de preenchimento})
+
+-> VENDAS
+ID [id_externo] 
+ID CLIENTE [cliente] (ID do cliente na venda)
+ID VENDEDOR [vendedor] (ID do vendedor)
+DATA DA VENDA [data_compra] 
+VALOR TOTAL VENDA [total_compra]
+VALOR LÍQUIDO VENDA [valor_liquido]
+TIPO PAGAMENTO [tipo_pagamento] (se a venda for a vista, use 'a_vista' se não, use 'parcelado')
+RECORRENTE [recorrente] (use 0)
+PARCELAS [parcelas] (quantidade de parcelas)
+VALOR ENTRADA [entrada] (valor da entrada)
+DATA VENCIMENTO [data_vencimento] (se for uma venda a prazo deve ser a data de vencimento da primeira parcela)
+MÉTODO DE PAGAMENTO [metodo_pagamento] (deve ser um dos seguintes valores : [dinheiro,pix,debito,credito,boleto])
+ORÇAMENTO [orcamento] (se for um orçamento, use 1 se não, use 0)
+TEMPO PARA REOFERTA [oferecer_denovo] (se for um orçamento colocar a quantidade (número inteiro) de dias para oferecer novamente ao cliente)
+PRODUTOS NA VENDA [produtos_venda] (um JSON com os produtos na venda, deve seguir a estrutura : [{"nome":"CSN CIMENTO CP II E 32","produto_id":3607,"valor_unitario":28.500000,"quantidade":1.0000}])
+OBSERVAÇÃO DA VENDA [observacao]
+DATAS DE VENCIMENTO [datas_vencimento] (um JSON com as datas de vencimento das parcelas, deve seguir a estrutura : [{"data_vencimento":"2025-02-28"}]. Ou deve ser NULL se for uma venda a vista)
+
+
+-> VENDEDORES
+ID [id_externo] 
+NOME [nome] 
+CODIGO [codigo] (código de identificação do usuário, se não houver pode usar um contador mesmo)
+
+-> CLIENTES
+ID [id_externo] 
+NOME [nome] 
+REFERÊNCIA [referencia]
+WHATSAPP [whatsapp]
+EMAIL [email]
+ANIVERSARIO [aniversario] (se não tiver, não adicionar essa essa coluna)
+TIPO PESSOA [pj_ou_pf] (se o cliente é CPF ou CNPJ, 'PF' se for CPF e 'PJ' se for CNPJ)
+CPF/CNPJ [cpf_cnpj] (CPF ou CNPJ do cliente)
+
+-> CATEGORIAS
+ID [id_externo] 
+NOME [nome] (nome ou descrição da categoria)
+
+-> PRODUTOS 
+ID [id_externo] 
+NOME [nome]
+CODIGO [codigo]
+VALOR [valor]
+DURACAO [duracao] (é um número inteiro baseado na categoria/grupo do produto)
+RECOMPRA [no_buyback] (define se o produto vai ter recompra, por enquanto todos terão então pode deixar como 0)
+COMISSAO [comissao] (pode deixar como 0, o sistema não será usado para calcular comissão)
+ID CATEGORIA [categoria] (é o ID da categoria/grupo. Depende de como chamam no seu sistema)
+NOME CATEGORIA [nome_categoria] (é nome da categoria/grupo)
+DESCRIÇÃO [descricao] 
+ESTOQUE [estoque] (quantidade de produtos no estoque)
+DEVE CONTAR ESTOQUE [contar_estoque] (se deve contar o estoque no Shark, o sistema não será usado para isso então pode deixar como 0)
+
+Observações Finais:
+
+    Campos opcionais (ex.: aniversario, observacao, referencia) podem ser omitidos quando não aplicáveis.
+
+    Consistência de tipos:
+        Todas as datas devem seguir o padrão: 2025-02-28 00:00:00
+
+        Datas sempre em string no formato especificado.
+
+        Numéricos (valores, quantidades) como números (não strings).
+
+    JSON arrays: sempre usar [] mesmo que contenha apenas um elemento.
