@@ -12,7 +12,7 @@ class firebirdConnection {
     this.options.database = store.get('db_name_db');
     this.options.user = store.get('user_db');
     this.options.password = store.get('password_db');
-    this.options.lowercase_keys = false; // set to true to lowercase keys
+    this.options.lowercase_keys = true; // set to true to lowercase keys
     this.options.role = null;            // default
     this.options.pageSize = 4096;        // default when creating database
     this.options.pageSize = 4096;        // default when creating database
@@ -33,7 +33,7 @@ async connect() {
         this.options
       );
     } else {
-      console.log('FIREBIRD', this.options)
+      console.log('FIREBIRD', JSON.stringify(this.options))
       this.connection = Firebird.pool(5, this.options); // sem await!
     }
   } catch (err) {
