@@ -5,7 +5,7 @@ const store = new Store();
 const moment = require('moment')
 const cliProgress = require('cli-progress');
 const { HttpsProxyAgent } = require('https-proxy-agent'); // ← AQUI
-const httpsAgent = store.get('ssl_string') != undefined && store.get('ssl_string') != '(EMPTY)' ?  new HttpsProxyAgent(store.get('ssl_string')) : undefined
+const httpsAgent = store.get('ssl_string') != undefined && store.get('ssl_string') != '(EMPTY)' && store.get('ssl_string') != 'desativado' ? new HttpsProxyAgent(store.get('ssl_string')) : undefined
 class sharkConnection {
   constructor(db) {
     this.db = db
@@ -22,7 +22,7 @@ class sharkConnection {
         "username": store.get('user'),
         "password": store.get('password')
       });
-      console.log('HTTP AGENT SENDO USADO : ',store.get('ssl_string'))
+      console.log('HTTP AGENT SENDO USADO : ', store.get('ssl_string'))
       let config = {
         method: 'post',
         maxBodyLength: Infinity,
@@ -31,7 +31,7 @@ class sharkConnection {
           'Content-Type': 'application/json',
           'User-Agent': 'insomnia/2023.5.8'
         },
-        httpsAgent : httpsAgent,
+        httpsAgent: httpsAgent,
         data: data
       };
       await new Promise((resolve) => {
@@ -64,7 +64,7 @@ class sharkConnection {
   }
 
   async cleanShark(token = this.token, infos = ['vendedores', 'vendas', 'produto', 'cliente', 'categoria']) {
-    const BATCH_SIZE = 35; // Tamanho do lote de requisições
+    const BATCH_SIZE = 25; // Tamanho do lote de requisições
     if (typeof infos == 'string') {
       infos = JSON.parse(infos.replace(/'/g, '"'))
     }
@@ -74,10 +74,12 @@ class sharkConnection {
       dadosShark = dadosShark.filter(item => item.id_externo != null && item.id_externo != undefined);
       const bar1 = new cliProgress.SingleBar({}, cliProgress.Presets.shades_classic);
       bar1.start(dadosShark.length, 0);
+      let totalRequests = 0; // contador global
+
       for (let i = 0; i < dadosShark.length; i += BATCH_SIZE) {
         const batch = dadosShark.slice(i, i + BATCH_SIZE);
-        await Promise.all(batch.map(async f => {
 
+        await Promise.all(batch.map(async (f, idx) => {
           const config = {
             method: 'delete',
             maxBodyLength: Infinity,
@@ -91,11 +93,17 @@ class sharkConnection {
           };
           try {
             await axios.request(config);
-            bar1.update(i);
+            totalRequests++;
+            bar1.increment();
+            if (totalRequests % 500 === 0) {
+              console.log(`\n${totalRequests} requisições feitas. Pausando 1 minuto...`);
+              await new Promise(resolve => setTimeout(resolve, 60000));
+            } else {
+              await new Promise(resolve => setTimeout(resolve, 350)); // Delay curto
+            }
           } catch (error) {
-            console.error(`Erro ao excluir ${e}:`, error.response?.data || error.message);
-          } finally {
-            await new Promise(resolve => setTimeout(resolve, 150)); // Delay entre as requisições
+            console.error(`Erro ao excluir ${e} -> ${f.id}:`, error.response?.data || error.message);
+            await new Promise(resolve => setTimeout(resolve, 70000));
           }
         }));
       }
@@ -164,7 +172,6 @@ class sharkConnection {
             hasMorePages = false; // Para o loop se não houver mais páginas
           }
         }
-
         // Atualiza a página inicial do próximo batch
         currentPage += batchSize;
       }

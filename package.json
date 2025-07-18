@@ -1,6 +1,6 @@
 {
   "name": "MoraLink",
-  "version": "1.2.1",
+  "version": "1.2.4",
   "repository": {
     "type": "git",
     "url": "https://github.com/luisgustavorr/MoraLink.git"
@@ -10,7 +10,8 @@
   "main": "./app.js",
   "scripts": {
     "start": "electron .",
-    "build": "electron-builder --win -p always"
+    "build": "electron-builder --linux -p always ",
+    "build:win": "electron-builder --windows -p always"
   },
   "build": {
     "files": "!build_assets{/*}",
@@ -39,7 +40,9 @@
       "target": [
         "nsis"
       ],
-      "icon": "./app/assets/images/favicon_io/favicon.ico"
+      "certificateFile": "build_assets/cert.pfx",
+      "certificatePassword": "galo1313",
+      "icon": "app/assets/images/favicon_io/favicon.ico"
     },
     "nsis": {
       "oneClick": true,
@@ -64,8 +67,6 @@
     "dotenv": "^16.4.5",
     "electron-store": "^8.2.0",
     "electron-updater": "^6.1.8",
-    "escpos": "^3.0.0-alpha.6",
-    "escpos-usb": "^3.0.0-alpha.4",
     "express": "^4.18.3",
     "http-proxy": "^1.18.1",
     "jsonic": "^2.15.2",
@@ -74,7 +75,7 @@
     "moment": "^2.30.1",
     "mssql": "^11.0.1",
     "multer": "^1.4.5-lts.1",
-    "mysql": "^2.18.1",
+    "mysql": "2.14.1",
     "mysql-connection-pool-manager": "^1.5.9",
     "node-cron": "^3.0.3",
     "node-firebird": "^1.1.9",
@@ -85,7 +86,6 @@
     "ssh2": "^1.16.0",
     "ssh2-promise": "^1.0.3",
     "tcp-port-used": "^1.0.2",
-    "usb": "^1.9.2",
     "winston": "^3.17.0",
     "ws": "^8.18.1",
     "xml-js": "^1.6.11"
@@ -97,5 +97,9 @@
     "electron-builder": "^24.13.3",
     "eslint": "^9.17.0",
     "globals": "^15.14.0"
-  }
+  },
+  "resolutions": {
+  "mysql": "2.14.1"
+}
+
 }

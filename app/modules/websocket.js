@@ -5,7 +5,7 @@ const Store = require('electron-store');
 
 const { HttpsProxyAgent } = require('https-proxy-agent');
 const store = new Store();
-const httpsAgent = store.get('ssl_string') != undefined && store.get('ssl_string') != '(EMPTY)' ?  new HttpsProxyAgent(store.get('ssl_string')) : undefined
+const httpsAgent = store.get('ssl_string') != undefined && store.get('ssl_string') != '(EMPTY)'&& store.get('ssl_string') != 'desativado'  ? new HttpsProxyAgent(store.get('ssl_string')) : undefined
 
 
 
@@ -18,23 +18,31 @@ async function accessObjectByPath(array, pathToInfo) {
   let paths = pathToInfo.split('/')
   let recursiveInfo = array
   for (const path of paths) {
-    recursiveInfo = recursiveInfo[path]
+    if (path != "") {
+      recursiveInfo = recursiveInfo[path]
+
+    }
   }
   return recursiveInfo
 }
-async function getInfosBetweenPages(url, type, body, headers, batchSize = 1, pathToData = undefined) {
-  let page = 1
+async function getInfosBetweenPages(url, type, body, headers, batchSize = 1, pathToData = undefined, minPagName = undefined, maxPagName = "page", page = 1) {
   let arrayCompleto = [];
   let hasMorePages = true;
   let pageSelected = undefined
+  if (minPagName != undefined) {
+    url += `${minPagName}={{minPag}}`
+  }
+  url += `&${maxPagName}={{currentPage}}`
   const fetchPage = async (currentPage) => {
     pageSelected = currentPage
     try {
       if (hasMorePages) {
-        console.log(headers)
-        const response = await sendRequestToClientAPI(`${url}page=${currentPage}`, type, undefined, headers)
+        // console.log('CurrentPage hp:',currentPage,batchSize)
 
-        let responseSearchResult = pathToData == undefined ? response.data.data : await accessObjectByPath(response, pathToData)
+        const response = await sendRequestToClientAPI(`${url.replace(/{{minPag}}/g, currentPage - batchSize).replace(/{{currentPage}}/g, batchSize)}`, type, undefined, headers)
+
+        let responseSearchResult = pathToData == undefined ? response : await accessObjectByPath(response, pathToData)
+
         if (responseSearchResult.length == 0) {
           hasMorePages = false
         }
@@ -56,17 +64,14 @@ async function getInfosBetweenPages(url, type, body, headers, batchSize = 1, pat
 
     while (hasMorePages) {
       const promises = [];
-
       // Adiciona as requisições do batch
-      for (let i = 0; i < batchSize; i++) {
-        promises.push(fetchPage(currentPage + i));
-      }
+      promises.push(fetchPage(currentPage + batchSize));
 
       // Executa todas as requisições do batch
       const responses = await Promise.all(promises);
       for (const response of responses) {
         if (response == undefined) continue
-        console.log('RESPOTSA :', response)
+        // console.log('RESPOTSA :', response)
         arrayCompleto = arrayCompleto.concat(response);
         if (response.length == 0) {
           hasMorePages = false
@@ -77,7 +82,6 @@ async function getInfosBetweenPages(url, type, body, headers, batchSize = 1, pat
 
       // Atualiza a página inicial do próximo batch
       currentPage += batchSize;
-      console.log('->açksndlawknldk', currentPage, batchSize)
 
     }
 
@@ -95,11 +99,23 @@ function inverse(obj) {
   return retobj;
 }
 async function getResultadoFromAPI(element, token_api_cliente, tokenResponse, data_last_sync = moment().format('YYYY-MM-DD')) {
-  let retorno = await getInfosBetweenPages(element.url.replace(/{{now}}/g, data_last_sync), element.type, undefined, { ...element.headers, Authorization: `${tokenResponse.token_type} ${token_api_cliente}` }, undefined, element.pathToData)
+  let resultadoJoin = []
+  if (element.join != undefined) {
+        console.log("FAAZER JOIN")
+        for (let joinnedElement of element.join) {
+          let returned = await getInfosBetweenPages(joinnedElement.url.replace(/{{now}}/g, data_last_sync), joinnedElement.type, undefined, { ...joinnedElement.headers, Authorization: `${tokenResponse.token_type} ${token_api_cliente}`.trim() }, joinnedElement.pagLength, joinnedElement.pathToData, joinnedElement.minPagName, joinnedElement.maxPagName, joinnedElement.pagStart)
+
+          resultadoJoin.push(...returned.map(e => { return{...e,on:joinnedElement.on}}))
+        }
+      }
+  let retorno = await getInfosBetweenPages(element.url.replace(/{{now}}/g, data_last_sync), element.type, undefined, { ...element.headers, Authorization: `${tokenResponse.token_type} ${token_api_cliente}`.trim() }, element.pagLength, element.pathToData, element.minPagName, element.maxPagName, element.pagStart)
   let formattedData = []
   let translateInfo = element.resultTranslate
+  if (element.resultTranslate == undefined) {
+    return retorno
+  }
   if (translateInfo['filter'] != undefined) {
-    retorno = retorno.filter(()=> {
+    retorno = retorno.filter((e) => {
       return eval(translateInfo['filter'])
     })
     delete translateInfo['filter']
@@ -107,6 +123,7 @@ async function getResultadoFromAPI(element, token_api_cliente, tokenResponse, da
   let translateInfoKeys = inverse(translateInfo)
 
   for (const unformattedElement of retorno) {
+    let joinnedInfo = resultadoJoin.find(sub => eval(sub.on))
     let formatedElement = {}
     for (let e of Object.keys(translateInfoKeys)) {
       if (e.includes('<?') && e.includes('?>')) {
@@ -143,8 +160,13 @@ async function getResultadoFromAPI(element, token_api_cliente, tokenResponse, da
         e = e.replace(/<<|>>/g, '')
         let splittedSearch = e.split(' as ')
         let key = splittedSearch[1].trim()
-        formatedElement[key] = eval(splittedSearch[0]) || ''
-        console.log('Formatted Key', formatedElement[key])
+        try {
+          formatedElement[key] = eval(splittedSearch[0]) || ''
+
+        } catch (e) {
+          console.log(`Erro ao executar query :"${splittedSearch[0]}" de ${key}: `, e)
+        }
+        // console.log('Formatted Key', formatedElement[key])
       } else {
         formatedElement[translateInfoKeys[e]] = unformattedElement[e] || ''
       }
@@ -169,6 +191,7 @@ async function sendRequestToClientAPI(url, type, body, headers = undefined) {
   };
   console.log(config)
   const response = await axios.request(config);
+  console.log('RESPOSTA', response)
   return response
 }
 async function getTokenAPICliente(url, type, tokenBody, responseKeysMap) {
@@ -179,22 +202,32 @@ async function getTokenAPICliente(url, type, tokenBody, responseKeysMap) {
   resposta = resposta.data
   let token = resposta[responseKeysMap["token"]]
   let expiresIn = resposta[responseKeysMap["expires_in"]]
+  console.log('RESPONSE KEY MAP !!!!!!', resposta)
   let token_type = responseKeysMap["token_type"].includes('<<') ? responseKeysMap["token_type"].replace(/<<|>>/g, "") : resposta[responseKeysMap["token_type"]]
   if (APIClienteToken['timeout_id'] != undefined) {
     clearTimeout(APIClienteToken['timeout_id']);
+    APIClienteToken['timeout_id'] = setTimeout(() => {
+      APIClienteToken = {}
+    }, expiresIn * 1000);
   }
   APIClienteToken['token'] = token
-  APIClienteToken['token_type'] = token_type || 'Bearer'
-  APIClienteToken['timeout_id'] = setTimeout(() => {
-    APIClienteToken = {}
-  }, expiresIn * 1000);
+  APIClienteToken['token_type'] = token_type || ""
+
   return APIClienteToken
+
+}
+function joinQuerys(mainQuery, subQuery, subQueryAlias, joinFactor) {
+  return mainQuery.map(main => {
+    main[subQueryAlias] = subQuery.find(sub => eval(joinFactor))
+    return main
+  })
+
 }
 class webSocket {
   openWebSocket(token, user, db, wsDomain, app, autoUpdater, shark) {
     try {
       console.log('Abrindo ws', wsDomain)
-      ws = new WebSocket('wss://' + wsDomain + '/ws/local',{agent:httpsAgent});
+      ws = new WebSocket('wss://' + wsDomain + '/ws/local', { agent: httpsAgent });
       ws.on('open', () => {
         console.log('WebSocket conectado');
         ws.send(JSON.stringify({ type: 'Connection', token: token, user: user }));
@@ -232,7 +265,7 @@ class webSocket {
             return
           }
           if (command["type"] !== undefined && command["type"] === "Query") {
-            console.log('Solicitação para gerar query :',JSON.stringify(command))
+            console.log('Solicitação para gerar query :', JSON.stringify(command))
             this.execQuery(db, command["query"], command["idQuery"], wsDomain, command["batchSize"], command["getToken"])
           }
         } catch (error) {
@@ -276,23 +309,25 @@ class webSocket {
     let totalEnviados = 0
 
     if (tokenInfo != undefined && Object.keys(tokenInfo).length != 0) {
-      console.log('Recuperando por API')
+      console.log('Recuperando por API', JSON.stringify(tokenInfo))
       let tokenBody = JSON.parse(JSON.stringify(tokenInfo.getTokenBody).replace(/{{token}}/g, tokenInfo.tokenString))
       let tokenResponse = await getTokenAPICliente(tokenInfo.tokenURL, 'POST', tokenBody, tokenInfo.getTokenResponseKeys)
+      console.log('Resposta token : ', tokenResponse)
       let token_api_cliente = tokenResponse.token
-      console.log('Infos', token_api_cliente, query)
-
+   
       resultado = await getResultadoFromAPI(query, token_api_cliente, tokenResponse)
+
+      console.log(resultado, 'Resultado')
     }
     try {
       if (resultado == undefined) {
-          resultado = await db.exec(query)
-          if(resultado != undefined){
-            console.log('Recuperando por DB', resultado.length)
-          }else{
-            await this.sendBatch({ error: "Resultado vazio rodando query :| "+query+" |", status: 500 }, 1, 1, idQuery, wsDomain);
-            return
-          }
+        resultado = await db.exec(query)
+        if (resultado != undefined) {
+          console.log('Recuperando por DB', resultado.length)
+        } else {
+          await this.sendBatch({ error: "Resultado vazio rodando query :| " + query + " |", status: 500 }, 1, 1, idQuery, wsDomain);
+          return
+        }
 
       }
     } catch (e) {
@@ -316,6 +351,7 @@ class webSocket {
     const queue = async (batch, index, total) => {
       console.time(`Batch ${index}`);
       totalEnviados += batch.length
+      await new Promise((resolve) => {setTimeout(resolve, 1000*index);})
       console.log(`Enviando BATCH ------- (${index}/${total}) ${totalEnviados} adicionados`);
       await this.sendBatch(batch, index, total, idQuery, wsDomain);
       console.timeEnd(`Batch ${index}`);
@@ -325,6 +361,7 @@ class webSocket {
     const chunks = [];
     const totalBatches = batches.length;
     while (batches.length) {
+
       chunks.push(batches.splice(0, 5));
     }
 
@@ -333,8 +370,12 @@ class webSocket {
       await Promise.all(
         chunk.map(async (batch) => {
           await queue(batch, batchIndex++, totalBatches);
+      await new Promise((resolve) => {setTimeout(resolve, 1000);})
+
         })
       );
+      await new Promise((resolve) => {setTimeout(resolve, 1000);})
+
     }
 
   }
@@ -346,7 +387,7 @@ class webSocket {
       repeticoes: index + 1,
       repeticoesNecesasrias: totalBatches
     };
-    console.log(index + 1, totalBatches)
+    console.log(index + 1, totalBatches, `https://${wsDomain}/queryResult`)
     try {
       let config = {
         method: 'post',

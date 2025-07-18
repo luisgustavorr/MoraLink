@@ -48,16 +48,16 @@ process.on('unhandledRejection', (reason, promise) => {
 });
 
 // Tratamento global de exceções
-process.on('uncaughtException',async  (error) => {
+process.on('uncaughtException', async (error) => {
   log('electron', 'uncaught_exception', {
     error: error.message,
     stack: error.stack
   });
   // Forçar recriação de conexões
-         serverDB = await new selectConnection(store.get('db_type_db'))
-            serverDB = serverDB.selectConnectionType()
-            serverDB = new serverDB()
-            await serverDB.connect()
+  serverDB = await new selectConnection(store.get('db_type_db'))
+  serverDB = serverDB.selectConnectionType()
+  serverDB = new serverDB()
+  await serverDB.connect()
 });
 require('dotenv').config({
   path: app.isPackaged
@@ -129,7 +129,30 @@ if (!fs.existsSync(logFilePath)) {
 
 const store = new Store();
 let token = undefined
-
+let cronReconnect = undefined
+async function startSharkConn() {
+  token = await Shark.getToken()
+  if(cronReconnect != undefined){
+    cronReconnect.stop()
+  }
+  USERINFO = await db.exec("SELECT * FROM client_info WHERE token = '" + token + "'")
+  USERINFO = USERINFO[0]
+  if (token != undefined) {
+    if (serverDB === undefined) {
+      serverDB = await new selectConnection(store.get('db_type_db'))
+      serverDB = serverDB.selectConnectionType()
+      serverDB = new serverDB()
+      await serverDB.connect()
+    }
+    console.log('Indo ali abrir o websocket manualmente -> ', store.get('user'))
+    webSokcet.openWebSocket(token, store.get('user'), serverDB, USERINFO.domainws, app, autoUpdater, Shark)
+  } else {
+    cronReconnect = cron.schedule("0 * * * *", async () => {
+      startSharkConn()
+    });
+    console.log('TOKEN UNDEFINED', token)
+  }
+}
 console.log('Rodando versao :', appVersion, process.env.SSH_DB_HOST)
 const gotTheLock = app.requestSingleInstanceLock()
 let tray = null;
@@ -191,7 +214,7 @@ if (!gotTheLock) {
     mainWindow = new BrowserWindow({
       width: 1200,
       height: 800,
-      icon: __dirname + '/app/assets/images/favicon_io/favicon.ico',
+      icon: __dirname + 'app/assets/images/favicon_io/Group 10.png',
       autoHideMenuBar: true,
       webPreferences: {
         preload: path.join(__dirname, 'preload.js'),
@@ -216,7 +239,7 @@ if (!gotTheLock) {
   }
 
   function createTray() {
-    tray = new Tray(path.join(__dirname, "app", "assets", "images", "favicon_io", 'favicon.ico')); // Path to your tray icon
+    tray = new Tray(path.join(__dirname, "app", "assets", "images", "favicon_io", 'Group 10.png')); // Path to your tray icon
     const contextMenu = Menu.buildFromTemplate([
       { label: 'Abrir', click: () => createWindow() },
       { label: 'Fechar ( parar impressão )', click: () => app.quit() }
@@ -261,7 +284,6 @@ if (!gotTheLock) {
 
   });
   app.on("ready", async () => {
-
     startConnection()
     ipcMain.handle('restartServer', async (event, arg) => {
       console.log(arg)
@@ -274,17 +296,7 @@ if (!gotTheLock) {
     })
     ipcMain.handle('syncShark', async () => {
       try {
-        token = await Shark.getToken()
-        if (token != undefined) {
-          if (serverDB === undefined) {
-            serverDB = await new selectConnection(store.get('db_type_db'))
-            serverDB = serverDB.selectConnectionType()
-            serverDB = new serverDB()
-            await serverDB.connect()
-          }
-          console.log('Indo ali abrir o websocket manualmente -> ', store.get('user'))
-          webSokcet.openWebSocket(token, store.get('user'), serverDB, USERINFO.domainws, app, autoUpdater, Shark)
-        }
+        startSharkConn()
         return 200
       } catch (e) {
         console.log('ERRO AO SINCRONIZAR BANCO DE DADOS get token', e)
@@ -340,21 +352,7 @@ async function startConnection() {
   }
   console.log(store.get('password'), store.get('user'))
   if (store.get('user') != undefined && store.get('password') != undefined) {
-    token = await Shark.getToken()
-    USERINFO = await db.exec("SELECT * FROM client_info WHERE token = '" + token + "'")
-    USERINFO = USERINFO[0]
-    console.log('-->>> TOKEN:', token)
-    if (token != undefined) {
-      if (serverDB === undefined) {
-        serverDB = await new selectConnection(store.get('db_type_db'))
-        serverDB = serverDB.selectConnectionType()
-        serverDB = new serverDB()
-        await serverDB.connect()
-      }
-      console.log('Indo ali abrir o websocket -> ', store.get('user'))
-      webSokcet.openWebSocket(token, store.get('user'), serverDB, USERINFO.domainws, app, autoUpdater, Shark)
-      // Shark.syncShark()
-    }
+    startSharkConn()
     // await fullSyncDB()
   }
 }

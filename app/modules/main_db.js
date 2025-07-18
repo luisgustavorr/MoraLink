@@ -1,6 +1,8 @@
 var postgresql = require('pg');
 const { Pool } = postgresql
 const { app } = require('electron');
+const net = require('net');
+
 const path = require('path');
 
 require('dotenv').config({
@@ -11,6 +13,14 @@ require('dotenv').config({
 const Ssh2Promise = require('ssh2-promise');
 const { log } = require('./logger');
 
+function isPortAvailable(port) {
+    return new Promise((resolve) => {
+        const tester = net.createServer()
+            .once('error', () => resolve(false))
+            .once('listening', () => tester.close(() => resolve(true)))
+            .listen(port);
+    });
+}
 async function connectToServer(connection, info, itsAClass = true) {
   log('ssh', 'pending', { host: process.env.SSH_DB_HOST });
   
@@ -37,7 +47,13 @@ async function connectToServer(connection, info, itsAClass = true) {
   try {
     await ssh.connect();
     log('ssh', 'connected', { host: process.env.SSH_DB_HOST });
-    
+        const isFree = await isPortAvailable(15432);
+        if (!isFree) {
+            log('ssh', 'info', { msg: 'Porta 15432 já em uso. Pulando túnel.' });
+        const dbConnection = itsAClass ? new connection(info) : connection(info);
+
+            return { dbConnection, ssh };; // já está rodando, evita colisão
+        }
     await ssh.addTunnel({
       remoteAddr: 'localhost',
       remotePort: 5432,

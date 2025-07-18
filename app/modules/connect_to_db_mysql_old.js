@@ -12,8 +12,9 @@ class mysqlConnection {
             user: store.get("user_db"),
             password: store.get("password_db"),
             database: store.get("db_name_db"),
-            port: store.get("port_db"),
-            charset: 'utf8mb4',
+            port: Number(store.get("port_db")) || 3306,
+            insecureAuth: true,   // Habilita autenticação antiga
+            ssl: false            // Desabilita SSL
 
         };
         this.poolManager = {
@@ -38,17 +39,25 @@ class mysqlConnection {
                 user: store.get("user_db"),
                 password: store.get("password_db"),
                 database: store.get("db_name_db"),
-                charset: 'utf8mb4',
+                port: Number(store.get("port_db")) || 3306,
+                insecureAuth: true,   // Habilita autenticação antiga
+                ssl: false            // Desabilita SSL
 
             }, false)
         } else {
-            console.log(JSON.stringify({
+            try{
+                console.log('Versão da lib mysql carregada:', require('mysql/package.json').version);
+            }catch{
+                console.log('eRROO NA VERSÃO ')
+            }
+            console.log('Conexão Mysql Old',JSON.stringify({
                 host: store.get("host_db"),
                 user: store.get("user_db"),
                 password: store.get("password_db"),
                 database: store.get("db_name_db"),
-                port: store.get("port_db"),
-                charset: 'utf8mb4',
+                port: Number(store.get("port_db")) || 3306,
+                insecureAuth: true,   // Habilita autenticação antiga
+                ssl: false            // Desabilita SSL
 
             }))
             this.connection = mysql.createPool({
@@ -56,8 +65,9 @@ class mysqlConnection {
                 user: store.get("user_db"),
                 password: store.get("password_db"),
                 database: store.get("db_name_db"),
-                port: store.get("port_db"),
-                charset: 'utf8mb4',
+                port: Number(store.get("port_db")) || 3306,
+                insecureAuth: true,   // Habilita autenticação antiga
+                ssl: false            // Desabilita SSL
 
             });
         }
