@@ -6,15 +6,8 @@ const store = new Store();
 const sshTunneling = require('./sshTunneling');
 const { reject } = require('lodash');
 class postgresqlConnection {
-  constructor() {
-    this.PostgreSql = {
-      host: store.get("host_db"),
-      user: store.get("user_db"),
-      password: store.get("password_db"),
-      database: store.get("db_name_db"),
-      charset: 'utf8mb4',
-      port: store.get("port_db")
-    };
+  constructor(connInfo) {
+    this.PostgreSql = connInfo
     this.tunnelConfig = {
       host: store.get("ssh_host"),
       port: store.get("ssh_port"),

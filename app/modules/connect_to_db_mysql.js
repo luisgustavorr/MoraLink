@@ -6,16 +6,8 @@ const PoolManager = require('mysql-connection-pool-manager');
 const sshTunneling = require('./sshTunneling')
 
 class mysqlConnection {
-    constructor() {
-        this.MySql = {
-            host: store.get("host_db"),
-            user: store.get("user_db"),
-            password: store.get("password_db"),
-            database: store.get("db_name_db"),
-            port: store.get("port_db"),
-            charset: 'utf8mb4',
-
-        };
+    constructor(connInfo) {
+        this.MySql = connInfo;
         this.poolManager = {
             idleCheckInterval: 1000,
             maxConnextionTimeout: 30000,
@@ -33,33 +25,10 @@ class mysqlConnection {
         if (store.get('ssh_host') != '' && store.get('ssh_host') != '(EMPTY)' && store.get('ssh_host') != 'desativado') {
             console.log('Tentando conectar por SSH', store.get('ssh_host'))
 
-            this.connection = await sshTunneling(mysql.createPool, {
-                host: store.get("host_db"),
-                user: store.get("user_db"),
-                password: store.get("password_db"),
-                database: store.get("db_name_db"),
-                charset: 'utf8mb4',
-
-            }, false)
+            this.connection = await sshTunneling(mysql.createPool, this.MySql, false)
         } else {
-            console.log(JSON.stringify({
-                host: store.get("host_db"),
-                user: store.get("user_db"),
-                password: store.get("password_db"),
-                database: store.get("db_name_db"),
-                port: store.get("port_db"),
-                charset: 'utf8mb4',
-
-            }))
-            this.connection = mysql.createPool({
-                host: store.get("host_db"),
-                user: store.get("user_db"),
-                password: store.get("password_db"),
-                database: store.get("db_name_db"),
-                port: store.get("port_db"),
-                charset: 'utf8mb4',
-
-            });
+            console.log(JSON.stringify(this.MySql))
+            this.connection = mysql.createPool(this.MySql);
         }
 
     }

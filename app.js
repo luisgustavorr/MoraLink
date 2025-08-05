@@ -54,9 +54,11 @@ process.on('uncaughtException', async (error) => {
     stack: error.stack
   });
   // Forçar recriação de conexões
-  serverDB = await new selectConnection(store.get('db_type_db'))
+  USERINFO = await db.exec("SELECT ci.*,dbc.config_json,dbc.type FROM client_info ci LEFT JOIN db_conn_client_info dbc on dbc.id_client_info = ci.id WHERE token = '" + token + "'")
+  USERINFO = USERINFO[0]
+  serverDB = await new selectConnection(USERINFO.type)
   serverDB = serverDB.selectConnectionType()
-  serverDB = new serverDB()
+  serverDB = new serverDB(USERINFO.config_json)
   await serverDB.connect()
 });
 require('dotenv').config({
@@ -132,16 +134,16 @@ let token = undefined
 let cronReconnect = undefined
 async function startSharkConn() {
   token = await Shark.getToken()
-  if(cronReconnect != undefined){
+  if (cronReconnect != undefined) {
     cronReconnect.stop()
   }
-  USERINFO = await db.exec("SELECT * FROM client_info WHERE token = '" + token + "'")
+  USERINFO = await db.exec("SELECT ci.*,dbc.config_json,dbc.type FROM client_info ci LEFT JOIN db_conn_client_info dbc on dbc.id_client_info = ci.id WHERE token = '" + token + "'")
   USERINFO = USERINFO[0]
   if (token != undefined) {
     if (serverDB === undefined) {
-      serverDB = await new selectConnection(store.get('db_type_db'))
+      serverDB = await new selectConnection(USERINFO.type)
       serverDB = serverDB.selectConnectionType()
-      serverDB = new serverDB()
+      serverDB = new serverDB(USERINFO.config_json)
       await serverDB.connect()
     }
     console.log('Indo ali abrir o websocket manualmente -> ', store.get('user'))
@@ -177,7 +179,6 @@ if (!gotTheLock) {
   })
   // parse application/json
   const server = new serverManager()
-
   // autoUpdater.checkForUpdatesAndNotify()
   // autoUpdater.on('checking-for-update', () => {
   //   console.log('Checking for update...');
@@ -210,7 +211,6 @@ if (!gotTheLock) {
     if (mainWindow != null) {
       mainWindow.destroy()
     };
-
     mainWindow = new BrowserWindow({
       width: 1200,
       height: 800,
@@ -246,14 +246,12 @@ if (!gotTheLock) {
     ]);
     tray.setToolTip('MoraLink');
     tray.setContextMenu(contextMenu);
-
     tray.on('double-click', () => {
       createWindow()
     });
   }
   app.whenReady().then(() => {
     tcpPortUsed.check(parseInt(server.getPort()), '127.0.0.1')
-
       .then(function (inUse) {
         if (inUse) {
           console.log("parou")
@@ -269,7 +267,6 @@ if (!gotTheLock) {
               return arg
             })
           }, 500)
-
           server.startServer();
         }
       }, function (err) {
@@ -284,6 +281,10 @@ if (!gotTheLock) {
 
   });
   app.on("ready", async () => {
+    cron.schedule("0 3 * * *", async () => {
+      app.relaunch();
+      app.exit(0);
+    });
     startConnection()
     ipcMain.handle('restartServer', async (event, arg) => {
       console.log(arg)
@@ -336,7 +337,12 @@ async function startConnection() {
     if (store.get('cron_shark') != undefined) {
       cron.schedule(store.get('cron_shark'), async () => {
         console.log('running a task every minute');
-        // await fullSyncDB()
+        const execPath = process.execPath;
+        spawn(execPath, [], {
+          detached: true,
+          stdio: 'ignore'
+        }).unref();
+        process.exit(0);
       });
     }
   } catch (e) {
@@ -552,9 +558,11 @@ async function syncEstoque() {
   if (store.get('chat_shark') != undefined && store.get('chat_shark') != '(EMPTY)') {
     console.log('Sincronizando Estoque')
     if (store.get('query_db') != undefined) {
-      serverDB = await new selectConnection(store.get('db_type_db'))
+      USERINFO = await db.exec("SELECT ci.*,dbc.config_json,dbc.type FROM client_info ci LEFT JOIN db_conn_client_info dbc on dbc.id_client_info = ci.id WHERE token = '" + token + "'")
+      USERINFO = USERINFO[0]
+      serverDB = await new selectConnection(USERINFO.type)
       serverDB = serverDB.selectConnectionType()
-      serverDB = new serverDB()
+      serverDB = new serverDB(USERINFO.config_json)
       await serverDB.connect()
       let querys = JSON.parse(store.get('query_db'))
       let resultado = undefined
@@ -688,9 +696,11 @@ async function fullSyncDB() {
       console.log('Sincronizando DB (passou do if 2)')
 
       if (serverDB === undefined) {
-        serverDB = await new selectConnection(store.get('db_type_db'))
+        USERINFO = await db.exec("SELECT ci.*,dbc.config_json,dbc.type FROM client_info ci LEFT JOIN db_conn_client_info dbc on dbc.id_client_info = ci.id WHERE token = '" + token + "'")
+        USERINFO = USERINFO[0]
+        serverDB = await new selectConnection(USERINFO.type)
         serverDB = serverDB.selectConnectionType()
-        serverDB = new serverDB()
+        serverDB = new serverDB(USERINFO.config_json)
         await serverDB.connect()
       }
 

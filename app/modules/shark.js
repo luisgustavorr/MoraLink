@@ -75,10 +75,8 @@ class sharkConnection {
       const bar1 = new cliProgress.SingleBar({}, cliProgress.Presets.shades_classic);
       bar1.start(dadosShark.length, 0);
       let totalRequests = 0; // contador global
-
       for (let i = 0; i < dadosShark.length; i += BATCH_SIZE) {
         const batch = dadosShark.slice(i, i + BATCH_SIZE);
-
         await Promise.all(batch.map(async (f, idx) => {
           const config = {
             method: 'delete',

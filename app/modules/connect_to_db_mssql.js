@@ -5,22 +5,8 @@ const store = new Store();
 const sshTunneling = require('./sshTunneling');
 
 class mssqlConnection {
-    constructor() {
-        this.Mssql = {
-            server: store.get("host_db"),
-            user: store.get("user_db"),
-            password: store.get("password_db"),
-            database: store.get("db_name_db"),
-            options: {
-                encrypt: true,
-                trustServerCertificate: true,
-                pool: {
-                    max: 10,
-                    min: 0,
-                    idleTimeoutMillis: 30000
-                }
-            }
-        };
+  constructor(connInfo) {
+        this.Mssql = connInfo;
         this.connection = null;
     }
 

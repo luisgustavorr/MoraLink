@@ -7351,3 +7351,721 @@
 {"timestamp":"2025-07-18T14:31:21.373Z","type":"ssh","status":"connected","host":"134.209.215.199"}
 {"timestamp":"2025-07-18T14:31:21.373Z","type":"ssh","status":"info","msg":"Porta 15432 já em uso. Pulando túnel."}
 {"timestamp":"2025-07-18T14:31:21.373Z","type":"postgresql","status":"connected","host":"localhost"}
+{"timestamp":"2025-07-18T14:40:37.280Z","type":"postgresql","status":"pending","host":"localhost"}
+{"timestamp":"2025-07-18T14:40:37.280Z","type":"ssh","status":"pending","host":"134.209.215.199"}
+{"timestamp":"2025-07-18T14:40:38.604Z","type":"ssh","status":"connected","host":"134.209.215.199"}
+{"timestamp":"2025-07-18T14:40:38.605Z","type":"ssh","status":"info","msg":"Porta 15432 já em uso. Pulando túnel."}
+{"timestamp":"2025-07-18T14:40:38.605Z","type":"postgresql","status":"connected","host":"localhost"}
+{"timestamp":"2025-07-18T14:40:38.607Z","type":"postgresql","status":"pending","host":"localhost"}
+{"timestamp":"2025-07-18T14:40:38.607Z","type":"ssh","status":"pending","host":"134.209.215.199"}
+{"timestamp":"2025-07-18T14:40:38.608Z","type":"ssh","status":"connected","host":"134.209.215.199"}
+{"timestamp":"2025-07-18T14:40:38.608Z","type":"ssh","status":"info","msg":"Porta 15432 já em uso. Pulando túnel."}
+{"timestamp":"2025-07-18T14:40:38.608Z","type":"postgresql","status":"connected","host":"localhost"}
+{"timestamp":"2025-07-18T14:40:40.898Z","type":"postgresql","status":"pending","host":"localhost"}
+{"timestamp":"2025-07-18T14:40:40.898Z","type":"ssh","status":"pending","host":"134.209.215.199"}
+{"timestamp":"2025-07-18T14:40:40.899Z","type":"ssh","status":"connected","host":"134.209.215.199"}
+{"timestamp":"2025-07-18T14:40:40.899Z","type":"ssh","status":"info","msg":"Porta 15432 já em uso. Pulando túnel."}
+{"timestamp":"2025-07-18T14:40:40.899Z","type":"postgresql","status":"connected","host":"localhost"}
+{"timestamp":"2025-07-18T14:40:48.229Z","type":"postgresql","status":"pending","host":"localhost"}
+{"timestamp":"2025-07-18T14:40:48.229Z","type":"ssh","status":"pending","host":"134.209.215.199"}
+{"timestamp":"2025-07-18T14:40:49.553Z","type":"ssh","status":"connected","host":"134.209.215.199"}
+{"timestamp":"2025-07-18T14:40:49.553Z","type":"ssh","status":"info","msg":"Porta 15432 já em uso. Pulando túnel."}
+{"timestamp":"2025-07-18T14:40:49.554Z","type":"postgresql","status":"connected","host":"localhost"}
+{"timestamp":"2025-07-18T14:40:49.556Z","type":"postgresql","status":"pending","host":"localhost"}
+{"timestamp":"2025-07-18T14:40:49.556Z","type":"ssh","status":"pending","host":"134.209.215.199"}
+{"timestamp":"2025-07-18T14:40:49.556Z","type":"ssh","status":"connected","host":"134.209.215.199"}
+{"timestamp":"2025-07-18T14:40:49.557Z","type":"ssh","status":"info","msg":"Porta 15432 já em uso. Pulando túnel."}
+{"timestamp":"2025-07-18T14:40:49.557Z","type":"postgresql","status":"connected","host":"localhost"}
+{"timestamp":"2025-07-18T14:40:51.644Z","type":"postgresql","status":"pending","host":"localhost"}
+{"timestamp":"2025-07-18T14:40:51.644Z","type":"ssh","status":"pending","host":"134.209.215.199"}
+{"timestamp":"2025-07-18T14:40:51.644Z","type":"ssh","status":"connected","host":"134.209.215.199"}
+{"timestamp":"2025-07-18T14:40:51.645Z","type":"ssh","status":"info","msg":"Porta 15432 já em uso. Pulando túnel."}
+{"timestamp":"2025-07-18T14:40:51.645Z","type":"postgresql","status":"connected","host":"localhost"}
+{"timestamp":"2025-07-18T14:41:01.172Z","type":"postgresql","status":"pending","host":"localhost"}
+{"timestamp":"2025-07-18T14:41:01.173Z","type":"ssh","status":"pending","host":"134.209.215.199"}
+{"timestamp":"2025-07-18T14:41:02.473Z","type":"ssh","status":"connected","host":"134.209.215.199"}
+{"timestamp":"2025-07-18T14:41:02.474Z","type":"ssh","status":"info","msg":"Porta 15432 já em uso. Pulando túnel."}
+{"timestamp":"2025-07-18T14:41:02.474Z","type":"postgresql","status":"connected","host":"localhost"}
+{"timestamp":"2025-07-18T14:41:02.476Z","type":"postgresql","status":"pending","host":"localhost"}
+{"timestamp":"2025-07-18T14:41:02.477Z","type":"ssh","status":"pending","host":"134.209.215.199"}
+{"timestamp":"2025-07-18T14:41:02.477Z","type":"ssh","status":"connected","host":"134.209.215.199"}
+{"timestamp":"2025-07-18T14:41:02.477Z","type":"ssh","status":"info","msg":"Porta 15432 já em uso. Pulando túnel."}
+{"timestamp":"2025-07-18T14:41:02.477Z","type":"postgresql","status":"connected","host":"localhost"}
+{"timestamp":"2025-07-21T12:03:27.993Z","type":"postgresql","status":"pending","host":"localhost"}
+{"timestamp":"2025-07-21T12:03:27.994Z","type":"ssh","status":"pending","host":"134.209.215.199"}
+{"timestamp":"2025-07-21T12:03:29.292Z","type":"ssh","status":"connected","host":"134.209.215.199"}
+{"timestamp":"2025-07-21T12:03:29.293Z","type":"ssh","status":"tunnel_created","localPort":15432}
+{"timestamp":"2025-07-21T12:03:29.294Z","type":"postgresql","status":"connected","host":"localhost"}
+{"timestamp":"2025-07-21T12:03:29.295Z","type":"postgresql","status":"pending","host":"localhost"}
+{"timestamp":"2025-07-21T12:03:29.295Z","type":"ssh","status":"pending","host":"134.209.215.199"}
+{"timestamp":"2025-07-21T12:03:29.295Z","type":"ssh","status":"connected","host":"134.209.215.199"}
+{"timestamp":"2025-07-21T12:03:29.295Z","type":"ssh","status":"info","msg":"Porta 15432 já em uso. Pulando túnel."}
+{"timestamp":"2025-07-21T12:03:29.295Z","type":"postgresql","status":"connected","host":"localhost"}
+{"timestamp":"2025-07-21T12:03:31.756Z","type":"postgresql","status":"pending","host":"localhost"}
+{"timestamp":"2025-07-21T12:03:31.757Z","type":"ssh","status":"pending","host":"134.209.215.199"}
+{"timestamp":"2025-07-21T12:03:31.757Z","type":"ssh","status":"connected","host":"134.209.215.199"}
+{"timestamp":"2025-07-21T12:03:31.757Z","type":"ssh","status":"info","msg":"Porta 15432 já em uso. Pulando túnel."}
+{"timestamp":"2025-07-21T12:03:31.757Z","type":"postgresql","status":"connected","host":"localhost"}
+{"timestamp":"2025-07-21T12:03:39.141Z","type":"postgresql","status":"pending","host":"localhost"}
+{"timestamp":"2025-07-21T12:03:39.142Z","type":"ssh","status":"pending","host":"134.209.215.199"}
+{"timestamp":"2025-07-21T12:03:40.471Z","type":"ssh","status":"connected","host":"134.209.215.199"}
+{"timestamp":"2025-07-21T12:03:40.472Z","type":"ssh","status":"tunnel_created","localPort":15432}
+{"timestamp":"2025-07-21T12:03:40.472Z","type":"postgresql","status":"connected","host":"localhost"}
+{"timestamp":"2025-07-21T12:03:40.473Z","type":"postgresql","status":"pending","host":"localhost"}
+{"timestamp":"2025-07-21T12:03:40.473Z","type":"ssh","status":"pending","host":"134.209.215.199"}
+{"timestamp":"2025-07-21T12:03:40.473Z","type":"ssh","status":"connected","host":"134.209.215.199"}
+{"timestamp":"2025-07-21T12:03:40.474Z","type":"ssh","status":"info","msg":"Porta 15432 já em uso. Pulando túnel."}
+{"timestamp":"2025-07-21T12:03:40.474Z","type":"postgresql","status":"connected","host":"localhost"}
+{"timestamp":"2025-07-21T12:03:42.471Z","type":"postgresql","status":"pending","host":"localhost"}
+{"timestamp":"2025-07-21T12:03:42.471Z","type":"ssh","status":"pending","host":"134.209.215.199"}
+{"timestamp":"2025-07-21T12:03:42.471Z","type":"ssh","status":"connected","host":"134.209.215.199"}
+{"timestamp":"2025-07-21T12:03:42.471Z","type":"ssh","status":"info","msg":"Porta 15432 já em uso. Pulando túnel."}
+{"timestamp":"2025-07-21T12:03:42.471Z","type":"postgresql","status":"connected","host":"localhost"}
+{"timestamp":"2025-07-22T10:26:20.992Z","type":"postgresql","status":"pending","host":"localhost"}
+{"timestamp":"2025-07-22T10:26:20.993Z","type":"ssh","status":"pending","host":"134.209.215.199"}
+{"timestamp":"2025-07-22T10:26:22.302Z","type":"ssh","status":"connected","host":"134.209.215.199"}
+{"timestamp":"2025-07-22T10:26:22.303Z","type":"ssh","status":"tunnel_created","localPort":15432}
+{"timestamp":"2025-07-22T10:26:22.304Z","type":"postgresql","status":"connected","host":"localhost"}
+{"timestamp":"2025-07-22T10:26:22.304Z","type":"postgresql","status":"pending","host":"localhost"}
+{"timestamp":"2025-07-22T10:26:22.305Z","type":"ssh","status":"pending","host":"134.209.215.199"}
+{"timestamp":"2025-07-22T10:26:22.305Z","type":"ssh","status":"connected","host":"134.209.215.199"}
+{"timestamp":"2025-07-22T10:26:22.305Z","type":"ssh","status":"info","msg":"Porta 15432 já em uso. Pulando túnel."}
+{"timestamp":"2025-07-22T10:26:22.305Z","type":"postgresql","status":"connected","host":"localhost"}
+{"timestamp":"2025-07-22T10:26:24.203Z","type":"postgresql","status":"pending","host":"localhost"}
+{"timestamp":"2025-07-22T10:26:24.203Z","type":"ssh","status":"pending","host":"134.209.215.199"}
+{"timestamp":"2025-07-22T10:26:24.203Z","type":"ssh","status":"connected","host":"134.209.215.199"}
+{"timestamp":"2025-07-22T10:26:24.203Z","type":"ssh","status":"info","msg":"Porta 15432 já em uso. Pulando túnel."}
+{"timestamp":"2025-07-22T10:26:24.204Z","type":"postgresql","status":"connected","host":"localhost"}
+{"timestamp":"2025-07-22T10:26:43.989Z","type":"postgresql","status":"pending","host":"localhost"}
+{"timestamp":"2025-07-22T10:26:43.990Z","type":"ssh","status":"pending","host":"134.209.215.199"}
+{"timestamp":"2025-07-22T10:26:45.305Z","type":"ssh","status":"connected","host":"134.209.215.199"}
+{"timestamp":"2025-07-22T10:26:45.307Z","type":"ssh","status":"tunnel_created","localPort":15432}
+{"timestamp":"2025-07-22T10:26:45.307Z","type":"postgresql","status":"connected","host":"localhost"}
+{"timestamp":"2025-07-22T10:26:45.309Z","type":"postgresql","status":"pending","host":"localhost"}
+{"timestamp":"2025-07-22T10:26:45.310Z","type":"ssh","status":"pending","host":"134.209.215.199"}
+{"timestamp":"2025-07-22T10:26:45.310Z","type":"ssh","status":"connected","host":"134.209.215.199"}
+{"timestamp":"2025-07-22T10:26:45.311Z","type":"ssh","status":"info","msg":"Porta 15432 já em uso. Pulando túnel."}
+{"timestamp":"2025-07-22T10:26:45.311Z","type":"postgresql","status":"connected","host":"localhost"}
+{"timestamp":"2025-07-22T10:26:47.430Z","type":"postgresql","status":"pending","host":"localhost"}
+{"timestamp":"2025-07-22T10:26:47.430Z","type":"ssh","status":"pending","host":"134.209.215.199"}
+{"timestamp":"2025-07-22T10:26:47.430Z","type":"ssh","status":"connected","host":"134.209.215.199"}
+{"timestamp":"2025-07-22T10:26:47.430Z","type":"ssh","status":"info","msg":"Porta 15432 já em uso. Pulando túnel."}
+{"timestamp":"2025-07-22T10:26:47.430Z","type":"postgresql","status":"connected","host":"localhost"}
+{"timestamp":"2025-07-23T17:40:37.081Z","type":"postgresql","status":"pending","host":"localhost"}
+{"timestamp":"2025-07-23T17:40:37.083Z","type":"ssh","status":"pending","host":"134.209.215.199"}
+{"timestamp":"2025-07-23T17:40:38.381Z","type":"ssh","status":"connected","host":"134.209.215.199"}
+{"timestamp":"2025-07-23T17:40:38.382Z","type":"ssh","status":"info","msg":"Porta 15432 já em uso. Pulando túnel."}
+{"timestamp":"2025-07-23T17:40:38.382Z","type":"postgresql","status":"connected","host":"localhost"}
+{"timestamp":"2025-07-23T17:40:38.383Z","type":"postgresql","status":"pending","host":"localhost"}
+{"timestamp":"2025-07-23T17:40:38.384Z","type":"ssh","status":"pending","host":"134.209.215.199"}
+{"timestamp":"2025-07-23T17:40:38.384Z","type":"ssh","status":"connected","host":"134.209.215.199"}
+{"timestamp":"2025-07-23T17:40:38.384Z","type":"ssh","status":"info","msg":"Porta 15432 já em uso. Pulando túnel."}
+{"timestamp":"2025-07-23T17:40:38.384Z","type":"postgresql","status":"connected","host":"localhost"}
+{"timestamp":"2025-07-23T17:40:40.471Z","type":"postgresql","status":"pending","host":"localhost"}
+{"timestamp":"2025-07-23T17:40:40.471Z","type":"ssh","status":"pending","host":"134.209.215.199"}
+{"timestamp":"2025-07-23T17:40:40.471Z","type":"ssh","status":"connected","host":"134.209.215.199"}
+{"timestamp":"2025-07-23T17:40:40.471Z","type":"ssh","status":"info","msg":"Porta 15432 já em uso. Pulando túnel."}
+{"timestamp":"2025-07-23T17:40:40.471Z","type":"postgresql","status":"connected","host":"localhost"}
+{"timestamp":"2025-07-23T17:57:21.228Z","type":"postgresql","status":"pending","host":"localhost"}
+{"timestamp":"2025-07-23T17:57:21.228Z","type":"ssh","status":"pending","host":"134.209.215.199"}
+{"timestamp":"2025-07-23T17:57:22.532Z","type":"ssh","status":"connected","host":"134.209.215.199"}
+{"timestamp":"2025-07-23T17:57:22.533Z","type":"ssh","status":"info","msg":"Porta 15432 já em uso. Pulando túnel."}
+{"timestamp":"2025-07-23T17:57:22.533Z","type":"postgresql","status":"connected","host":"localhost"}
+{"timestamp":"2025-07-23T17:57:22.535Z","type":"postgresql","status":"pending","host":"localhost"}
+{"timestamp":"2025-07-23T17:57:22.535Z","type":"ssh","status":"pending","host":"134.209.215.199"}
+{"timestamp":"2025-07-23T17:57:22.535Z","type":"ssh","status":"connected","host":"134.209.215.199"}
+{"timestamp":"2025-07-23T17:57:22.536Z","type":"ssh","status":"info","msg":"Porta 15432 já em uso. Pulando túnel."}
+{"timestamp":"2025-07-23T17:57:22.536Z","type":"postgresql","status":"connected","host":"localhost"}
+{"timestamp":"2025-07-23T17:57:24.593Z","type":"postgresql","status":"pending","host":"localhost"}
+{"timestamp":"2025-07-23T17:57:24.594Z","type":"ssh","status":"pending","host":"134.209.215.199"}
+{"timestamp":"2025-07-23T17:57:24.594Z","type":"ssh","status":"connected","host":"134.209.215.199"}
+{"timestamp":"2025-07-23T17:57:24.594Z","type":"ssh","status":"info","msg":"Porta 15432 já em uso. Pulando túnel."}
+{"timestamp":"2025-07-23T17:57:24.595Z","type":"postgresql","status":"connected","host":"localhost"}
+{"timestamp":"2025-07-23T17:58:14.792Z","type":"postgresql","status":"pending","host":"localhost"}
+{"timestamp":"2025-07-23T17:58:14.793Z","type":"ssh","status":"pending","host":"134.209.215.199"}
+{"timestamp":"2025-07-23T17:58:16.110Z","type":"ssh","status":"connected","host":"134.209.215.199"}
+{"timestamp":"2025-07-23T17:58:16.110Z","type":"ssh","status":"info","msg":"Porta 15432 já em uso. Pulando túnel."}
+{"timestamp":"2025-07-23T17:58:16.111Z","type":"postgresql","status":"connected","host":"localhost"}
+{"timestamp":"2025-07-23T17:58:16.112Z","type":"postgresql","status":"pending","host":"localhost"}
+{"timestamp":"2025-07-23T17:58:16.112Z","type":"ssh","status":"pending","host":"134.209.215.199"}
+{"timestamp":"2025-07-23T17:58:16.113Z","type":"ssh","status":"connected","host":"134.209.215.199"}
+{"timestamp":"2025-07-23T17:58:16.113Z","type":"ssh","status":"info","msg":"Porta 15432 já em uso. Pulando túnel."}
+{"timestamp":"2025-07-23T17:58:16.113Z","type":"postgresql","status":"connected","host":"localhost"}
+{"timestamp":"2025-07-23T17:58:18.182Z","type":"postgresql","status":"pending","host":"localhost"}
+{"timestamp":"2025-07-23T17:58:18.183Z","type":"ssh","status":"pending","host":"134.209.215.199"}
+{"timestamp":"2025-07-23T17:58:18.183Z","type":"ssh","status":"connected","host":"134.209.215.199"}
+{"timestamp":"2025-07-23T17:58:18.183Z","type":"ssh","status":"info","msg":"Porta 15432 já em uso. Pulando túnel."}
+{"timestamp":"2025-07-23T17:58:18.183Z","type":"postgresql","status":"connected","host":"localhost"}
+{"timestamp":"2025-07-23T17:59:01.423Z","type":"postgresql","status":"pending","host":"localhost"}
+{"timestamp":"2025-07-23T17:59:01.423Z","type":"ssh","status":"pending","host":"134.209.215.199"}
+{"timestamp":"2025-07-23T17:59:02.730Z","type":"ssh","status":"connected","host":"134.209.215.199"}
+{"timestamp":"2025-07-23T17:59:02.731Z","type":"ssh","status":"info","msg":"Porta 15432 já em uso. Pulando túnel."}
+{"timestamp":"2025-07-23T17:59:02.731Z","type":"postgresql","status":"connected","host":"localhost"}
+{"timestamp":"2025-07-23T17:59:02.733Z","type":"postgresql","status":"pending","host":"localhost"}
+{"timestamp":"2025-07-23T17:59:02.733Z","type":"ssh","status":"pending","host":"134.209.215.199"}
+{"timestamp":"2025-07-23T17:59:02.733Z","type":"ssh","status":"connected","host":"134.209.215.199"}
+{"timestamp":"2025-07-23T17:59:02.733Z","type":"ssh","status":"info","msg":"Porta 15432 já em uso. Pulando túnel."}
+{"timestamp":"2025-07-23T17:59:02.734Z","type":"postgresql","status":"connected","host":"localhost"}
+{"timestamp":"2025-07-23T17:59:04.734Z","type":"postgresql","status":"pending","host":"localhost"}
+{"timestamp":"2025-07-23T17:59:04.734Z","type":"ssh","status":"pending","host":"134.209.215.199"}
+{"timestamp":"2025-07-23T17:59:04.734Z","type":"ssh","status":"connected","host":"134.209.215.199"}
+{"timestamp":"2025-07-23T17:59:04.734Z","type":"ssh","status":"info","msg":"Porta 15432 já em uso. Pulando túnel."}
+{"timestamp":"2025-07-23T17:59:04.735Z","type":"postgresql","status":"connected","host":"localhost"}
+{"timestamp":"2025-07-23T18:00:40.630Z","type":"postgresql","status":"pending","host":"localhost"}
+{"timestamp":"2025-07-23T18:00:40.630Z","type":"ssh","status":"pending","host":"134.209.215.199"}
+{"timestamp":"2025-07-23T18:00:41.929Z","type":"ssh","status":"connected","host":"134.209.215.199"}
+{"timestamp":"2025-07-23T18:00:41.930Z","type":"ssh","status":"info","msg":"Porta 15432 já em uso. Pulando túnel."}
+{"timestamp":"2025-07-23T18:00:41.930Z","type":"postgresql","status":"connected","host":"localhost"}
+{"timestamp":"2025-07-23T18:00:41.932Z","type":"postgresql","status":"pending","host":"localhost"}
+{"timestamp":"2025-07-23T18:00:41.932Z","type":"ssh","status":"pending","host":"134.209.215.199"}
+{"timestamp":"2025-07-23T18:00:41.932Z","type":"ssh","status":"connected","host":"134.209.215.199"}
+{"timestamp":"2025-07-23T18:00:41.933Z","type":"ssh","status":"info","msg":"Porta 15432 já em uso. Pulando túnel."}
+{"timestamp":"2025-07-23T18:00:41.933Z","type":"postgresql","status":"connected","host":"localhost"}
+{"timestamp":"2025-07-23T18:00:44.253Z","type":"postgresql","status":"pending","host":"localhost"}
+{"timestamp":"2025-07-23T18:00:44.253Z","type":"ssh","status":"pending","host":"134.209.215.199"}
+{"timestamp":"2025-07-23T18:00:44.254Z","type":"ssh","status":"connected","host":"134.209.215.199"}
+{"timestamp":"2025-07-23T18:00:44.254Z","type":"ssh","status":"info","msg":"Porta 15432 já em uso. Pulando túnel."}
+{"timestamp":"2025-07-23T18:00:44.254Z","type":"postgresql","status":"connected","host":"localhost"}
+{"timestamp":"2025-07-23T18:00:45.347Z","type":"postgresql","status":"query_error","query":"SELECT ci.*,dbc.config_json,dbc.type FROM client_info ci LEFT JOIN db_conn_client_info dbc WHERE tok","error":"syntax error at or near \"WHERE\""}
+{"timestamp":"2025-07-23T18:00:45.348Z","type":"electron","status":"unhandled_rejection","reason":"syntax error at or near \"WHERE\"","stack":"error: syntax error at or near \"WHERE\"\n    at /home/luis-gustavo/Documentos/Projetos/MoraLink/node_modules/pg/lib/client.js:545:17\n    at process.processTicksAndRejections (node:internal/process/task_queues:96:5)\n    at async postgresqlConnection.exec (/home/luis-gustavo/Documentos/Projetos/MoraLink/app/modules/main_db.js:172:22)\n    at async startSharkConn (/home/luis-gustavo/Documentos/Projetos/MoraLink/app.js:138:14)"}
+{"timestamp":"2025-07-23T18:01:18.964Z","type":"postgresql","status":"pending","host":"localhost"}
+{"timestamp":"2025-07-23T18:01:18.964Z","type":"ssh","status":"pending","host":"134.209.215.199"}
+{"timestamp":"2025-07-23T18:01:20.292Z","type":"ssh","status":"connected","host":"134.209.215.199"}
+{"timestamp":"2025-07-23T18:01:20.292Z","type":"ssh","status":"info","msg":"Porta 15432 já em uso. Pulando túnel."}
+{"timestamp":"2025-07-23T18:01:20.293Z","type":"postgresql","status":"connected","host":"localhost"}
+{"timestamp":"2025-07-23T18:01:20.294Z","type":"postgresql","status":"pending","host":"localhost"}
+{"timestamp":"2025-07-23T18:01:20.294Z","type":"ssh","status":"pending","host":"134.209.215.199"}
+{"timestamp":"2025-07-23T18:01:20.294Z","type":"ssh","status":"connected","host":"134.209.215.199"}
+{"timestamp":"2025-07-23T18:01:20.294Z","type":"ssh","status":"info","msg":"Porta 15432 já em uso. Pulando túnel."}
+{"timestamp":"2025-07-23T18:01:20.294Z","type":"postgresql","status":"connected","host":"localhost"}
+{"timestamp":"2025-07-23T18:01:22.435Z","type":"postgresql","status":"pending","host":"localhost"}
+{"timestamp":"2025-07-23T18:01:22.435Z","type":"ssh","status":"pending","host":"134.209.215.199"}
+{"timestamp":"2025-07-23T18:01:22.435Z","type":"ssh","status":"connected","host":"134.209.215.199"}
+{"timestamp":"2025-07-23T18:01:22.436Z","type":"ssh","status":"info","msg":"Porta 15432 já em uso. Pulando túnel."}
+{"timestamp":"2025-07-23T18:01:22.436Z","type":"postgresql","status":"connected","host":"localhost"}
+{"timestamp":"2025-07-23T18:01:23.510Z","type":"postgresql","status":"query_error","query":"SELECT ci.*,dbc.config_json,dbc.type FROM client_info ci LEFT JOIN db_conn_client_info dbc on dbc.id","error":"column ci.client_info does not exist"}
+{"timestamp":"2025-07-23T18:01:23.511Z","type":"electron","status":"unhandled_rejection","reason":"column ci.client_info does not exist","stack":"error: column ci.client_info does not exist\n    at /home/luis-gustavo/Documentos/Projetos/MoraLink/node_modules/pg/lib/client.js:545:17\n    at process.processTicksAndRejections (node:internal/process/task_queues:96:5)\n    at async postgresqlConnection.exec (/home/luis-gustavo/Documentos/Projetos/MoraLink/app/modules/main_db.js:172:22)\n    at async startSharkConn (/home/luis-gustavo/Documentos/Projetos/MoraLink/app.js:138:14)"}
+{"timestamp":"2025-07-23T18:01:44.234Z","type":"postgresql","status":"pending","host":"localhost"}
+{"timestamp":"2025-07-23T18:01:44.235Z","type":"ssh","status":"pending","host":"134.209.215.199"}
+{"timestamp":"2025-07-23T18:01:45.644Z","type":"ssh","status":"connected","host":"134.209.215.199"}
+{"timestamp":"2025-07-23T18:01:45.644Z","type":"ssh","status":"info","msg":"Porta 15432 já em uso. Pulando túnel."}
+{"timestamp":"2025-07-23T18:01:45.644Z","type":"postgresql","status":"connected","host":"localhost"}
+{"timestamp":"2025-07-23T18:01:45.645Z","type":"postgresql","status":"pending","host":"localhost"}
+{"timestamp":"2025-07-23T18:01:45.646Z","type":"ssh","status":"pending","host":"134.209.215.199"}
+{"timestamp":"2025-07-23T18:01:45.646Z","type":"ssh","status":"connected","host":"134.209.215.199"}
+{"timestamp":"2025-07-23T18:01:45.646Z","type":"ssh","status":"info","msg":"Porta 15432 já em uso. Pulando túnel."}
+{"timestamp":"2025-07-23T18:01:45.646Z","type":"postgresql","status":"connected","host":"localhost"}
+{"timestamp":"2025-07-23T18:01:48.006Z","type":"postgresql","status":"pending","host":"localhost"}
+{"timestamp":"2025-07-23T18:01:48.006Z","type":"ssh","status":"pending","host":"134.209.215.199"}
+{"timestamp":"2025-07-23T18:01:48.006Z","type":"ssh","status":"connected","host":"134.209.215.199"}
+{"timestamp":"2025-07-23T18:01:48.006Z","type":"ssh","status":"info","msg":"Porta 15432 já em uso. Pulando túnel."}
+{"timestamp":"2025-07-23T18:01:48.007Z","type":"postgresql","status":"connected","host":"localhost"}
+{"timestamp":"2025-07-23T18:02:07.955Z","type":"postgresql","status":"pending","host":"localhost"}
+{"timestamp":"2025-07-23T18:02:07.955Z","type":"ssh","status":"pending","host":"134.209.215.199"}
+{"timestamp":"2025-07-23T18:02:09.266Z","type":"ssh","status":"connected","host":"134.209.215.199"}
+{"timestamp":"2025-07-23T18:02:09.267Z","type":"ssh","status":"info","msg":"Porta 15432 já em uso. Pulando túnel."}
+{"timestamp":"2025-07-23T18:02:09.267Z","type":"postgresql","status":"connected","host":"localhost"}
+{"timestamp":"2025-07-23T18:02:09.268Z","type":"postgresql","status":"pending","host":"localhost"}
+{"timestamp":"2025-07-23T18:02:09.268Z","type":"ssh","status":"pending","host":"134.209.215.199"}
+{"timestamp":"2025-07-23T18:02:09.269Z","type":"ssh","status":"connected","host":"134.209.215.199"}
+{"timestamp":"2025-07-23T18:02:09.269Z","type":"ssh","status":"info","msg":"Porta 15432 já em uso. Pulando túnel."}
+{"timestamp":"2025-07-23T18:02:09.269Z","type":"postgresql","status":"connected","host":"localhost"}
+{"timestamp":"2025-07-23T18:02:11.759Z","type":"postgresql","status":"pending","host":"localhost"}
+{"timestamp":"2025-07-23T18:02:11.760Z","type":"ssh","status":"pending","host":"134.209.215.199"}
+{"timestamp":"2025-07-23T18:02:11.760Z","type":"ssh","status":"connected","host":"134.209.215.199"}
+{"timestamp":"2025-07-23T18:02:11.760Z","type":"ssh","status":"info","msg":"Porta 15432 já em uso. Pulando túnel."}
+{"timestamp":"2025-07-23T18:02:11.761Z","type":"postgresql","status":"connected","host":"localhost"}
+{"timestamp":"2025-07-23T18:04:54.263Z","type":"postgresql","status":"pending","host":"localhost"}
+{"timestamp":"2025-07-23T18:04:54.264Z","type":"ssh","status":"pending","host":"134.209.215.199"}
+{"timestamp":"2025-07-23T18:04:55.760Z","type":"ssh","status":"connected","host":"134.209.215.199"}
+{"timestamp":"2025-07-23T18:04:55.761Z","type":"ssh","status":"info","msg":"Porta 15432 já em uso. Pulando túnel."}
+{"timestamp":"2025-07-23T18:04:55.761Z","type":"postgresql","status":"connected","host":"localhost"}
+{"timestamp":"2025-07-23T18:04:55.762Z","type":"postgresql","status":"pending","host":"localhost"}
+{"timestamp":"2025-07-23T18:04:55.762Z","type":"ssh","status":"pending","host":"134.209.215.199"}
+{"timestamp":"2025-07-23T18:04:55.762Z","type":"ssh","status":"connected","host":"134.209.215.199"}
+{"timestamp":"2025-07-23T18:04:55.763Z","type":"ssh","status":"info","msg":"Porta 15432 já em uso. Pulando túnel."}
+{"timestamp":"2025-07-23T18:04:55.763Z","type":"postgresql","status":"connected","host":"localhost"}
+{"timestamp":"2025-07-23T18:04:58.059Z","type":"postgresql","status":"pending","host":"localhost"}
+{"timestamp":"2025-07-23T18:04:58.059Z","type":"ssh","status":"pending","host":"134.209.215.199"}
+{"timestamp":"2025-07-23T18:04:58.059Z","type":"ssh","status":"connected","host":"134.209.215.199"}
+{"timestamp":"2025-07-23T18:04:58.060Z","type":"ssh","status":"info","msg":"Porta 15432 já em uso. Pulando túnel."}
+{"timestamp":"2025-07-23T18:04:58.060Z","type":"postgresql","status":"connected","host":"localhost"}
+{"timestamp":"2025-07-23T19:25:01.326Z","type":"postgresql","status":"pending","host":"localhost"}
+{"timestamp":"2025-07-23T19:25:01.329Z","type":"ssh","status":"pending","host":"134.209.215.199"}
+{"timestamp":"2025-07-23T19:25:02.646Z","type":"ssh","status":"connected","host":"134.209.215.199"}
+{"timestamp":"2025-07-23T19:25:02.648Z","type":"ssh","status":"info","msg":"Porta 15432 já em uso. Pulando túnel."}
+{"timestamp":"2025-07-23T19:25:02.648Z","type":"postgresql","status":"connected","host":"localhost"}
+{"timestamp":"2025-07-23T19:25:02.649Z","type":"postgresql","status":"pending","host":"localhost"}
+{"timestamp":"2025-07-23T19:25:02.649Z","type":"ssh","status":"pending","host":"134.209.215.199"}
+{"timestamp":"2025-07-23T19:25:02.650Z","type":"ssh","status":"connected","host":"134.209.215.199"}
+{"timestamp":"2025-07-23T19:25:02.650Z","type":"ssh","status":"info","msg":"Porta 15432 já em uso. Pulando túnel."}
+{"timestamp":"2025-07-23T19:25:02.650Z","type":"postgresql","status":"connected","host":"localhost"}
+{"timestamp":"2025-07-23T19:25:04.579Z","type":"postgresql","status":"pending","host":"localhost"}
+{"timestamp":"2025-07-23T19:25:04.579Z","type":"ssh","status":"pending","host":"134.209.215.199"}
+{"timestamp":"2025-07-23T19:25:04.579Z","type":"ssh","status":"connected","host":"134.209.215.199"}
+{"timestamp":"2025-07-23T19:25:04.580Z","type":"ssh","status":"info","msg":"Porta 15432 já em uso. Pulando túnel."}
+{"timestamp":"2025-07-23T19:25:04.580Z","type":"postgresql","status":"connected","host":"localhost"}
+{"timestamp":"2025-07-23T19:25:08.782Z","type":"electron","status":"unhandled_rejection","reason":"spawn is not defined","stack":"ReferenceError: spawn is not defined\n    at webSocket.restartApp (/home/luis-gustavo/Documentos/Projetos/MoraLink/app/modules/websocket.js:303:3)\n    at WebSocket.<anonymous> (/home/luis-gustavo/Documentos/Projetos/MoraLink/app/modules/websocket.js:252:18)\n    at WebSocket.emit (node:events:513:28)\n    at Receiver.receiverOnMessage (/home/luis-gustavo/Documentos/Projetos/MoraLink/node_modules/ws/lib/websocket.js:1220:20)\n    at Receiver.emit (node:events:513:28)\n    at Receiver.dataMessage (/home/luis-gustavo/Documentos/Projetos/MoraLink/node_modules/ws/lib/receiver.js:596:14)\n    at Receiver.getData (/home/luis-gustavo/Documentos/Projetos/MoraLink/node_modules/ws/lib/receiver.js:496:10)\n    at Receiver.startLoop (/home/luis-gustavo/Documentos/Projetos/MoraLink/node_modules/ws/lib/receiver.js:167:16)\n    at Receiver._write (/home/luis-gustavo/Documentos/Projetos/MoraLink/node_modules/ws/lib/receiver.js:94:10)\n    at writeOrBuffer (node:internal/streams/writable:391:12)"}
+{"timestamp":"2025-07-23T19:25:19.177Z","type":"postgresql","status":"pending","host":"localhost"}
+{"timestamp":"2025-07-23T19:25:19.178Z","type":"ssh","status":"pending","host":"134.209.215.199"}
+{"timestamp":"2025-07-23T19:25:20.485Z","type":"ssh","status":"connected","host":"134.209.215.199"}
+{"timestamp":"2025-07-23T19:25:20.486Z","type":"ssh","status":"info","msg":"Porta 15432 já em uso. Pulando túnel."}
+{"timestamp":"2025-07-23T19:25:20.486Z","type":"postgresql","status":"connected","host":"localhost"}
+{"timestamp":"2025-07-23T19:25:20.487Z","type":"postgresql","status":"pending","host":"localhost"}
+{"timestamp":"2025-07-23T19:25:20.488Z","type":"ssh","status":"pending","host":"134.209.215.199"}
+{"timestamp":"2025-07-23T19:25:20.488Z","type":"ssh","status":"connected","host":"134.209.215.199"}
+{"timestamp":"2025-07-23T19:25:20.488Z","type":"ssh","status":"info","msg":"Porta 15432 já em uso. Pulando túnel."}
+{"timestamp":"2025-07-23T19:25:20.488Z","type":"postgresql","status":"connected","host":"localhost"}
+{"timestamp":"2025-07-23T19:25:22.482Z","type":"postgresql","status":"pending","host":"localhost"}
+{"timestamp":"2025-07-23T19:25:22.482Z","type":"ssh","status":"pending","host":"134.209.215.199"}
+{"timestamp":"2025-07-23T19:25:22.482Z","type":"ssh","status":"connected","host":"134.209.215.199"}
+{"timestamp":"2025-07-23T19:25:22.483Z","type":"ssh","status":"info","msg":"Porta 15432 já em uso. Pulando túnel."}
+{"timestamp":"2025-07-23T19:25:22.483Z","type":"postgresql","status":"connected","host":"localhost"}
+{"timestamp":"2025-07-24T11:44:23.586Z","type":"postgresql","status":"pending","host":"localhost"}
+{"timestamp":"2025-07-24T11:44:23.587Z","type":"ssh","status":"pending","host":"134.209.215.199"}
+{"timestamp":"2025-07-24T11:44:24.882Z","type":"ssh","status":"connected","host":"134.209.215.199"}
+{"timestamp":"2025-07-24T11:44:24.883Z","type":"ssh","status":"tunnel_created","localPort":15432}
+{"timestamp":"2025-07-24T11:44:24.883Z","type":"postgresql","status":"connected","host":"localhost"}
+{"timestamp":"2025-07-24T11:44:24.884Z","type":"postgresql","status":"pending","host":"localhost"}
+{"timestamp":"2025-07-24T11:44:24.885Z","type":"ssh","status":"pending","host":"134.209.215.199"}
+{"timestamp":"2025-07-24T11:44:24.885Z","type":"ssh","status":"connected","host":"134.209.215.199"}
+{"timestamp":"2025-07-24T11:44:24.885Z","type":"ssh","status":"info","msg":"Porta 15432 já em uso. Pulando túnel."}
+{"timestamp":"2025-07-24T11:44:24.885Z","type":"postgresql","status":"connected","host":"localhost"}
+{"timestamp":"2025-07-24T11:44:27.260Z","type":"postgresql","status":"pending","host":"localhost"}
+{"timestamp":"2025-07-24T11:44:27.260Z","type":"ssh","status":"pending","host":"134.209.215.199"}
+{"timestamp":"2025-07-24T11:44:27.260Z","type":"ssh","status":"connected","host":"134.209.215.199"}
+{"timestamp":"2025-07-24T11:44:27.261Z","type":"ssh","status":"info","msg":"Porta 15432 já em uso. Pulando túnel."}
+{"timestamp":"2025-07-24T11:44:27.261Z","type":"postgresql","status":"connected","host":"localhost"}
+{"timestamp":"2025-07-24T11:44:34.738Z","type":"postgresql","status":"pending","host":"localhost"}
+{"timestamp":"2025-07-24T11:44:34.738Z","type":"ssh","status":"pending","host":"134.209.215.199"}
+{"timestamp":"2025-07-24T11:44:36.036Z","type":"ssh","status":"connected","host":"134.209.215.199"}
+{"timestamp":"2025-07-24T11:44:36.038Z","type":"ssh","status":"tunnel_created","localPort":15432}
+{"timestamp":"2025-07-24T11:44:36.038Z","type":"postgresql","status":"connected","host":"localhost"}
+{"timestamp":"2025-07-24T11:44:36.039Z","type":"postgresql","status":"pending","host":"localhost"}
+{"timestamp":"2025-07-24T11:44:36.040Z","type":"ssh","status":"pending","host":"134.209.215.199"}
+{"timestamp":"2025-07-24T11:44:36.040Z","type":"ssh","status":"connected","host":"134.209.215.199"}
+{"timestamp":"2025-07-24T11:44:36.040Z","type":"ssh","status":"info","msg":"Porta 15432 já em uso. Pulando túnel."}
+{"timestamp":"2025-07-24T11:44:36.041Z","type":"postgresql","status":"connected","host":"localhost"}
+{"timestamp":"2025-07-24T11:44:38.117Z","type":"postgresql","status":"pending","host":"localhost"}
+{"timestamp":"2025-07-24T11:44:38.117Z","type":"ssh","status":"pending","host":"134.209.215.199"}
+{"timestamp":"2025-07-24T11:44:38.118Z","type":"ssh","status":"connected","host":"134.209.215.199"}
+{"timestamp":"2025-07-24T11:44:38.118Z","type":"ssh","status":"info","msg":"Porta 15432 já em uso. Pulando túnel."}
+{"timestamp":"2025-07-24T11:44:38.118Z","type":"postgresql","status":"connected","host":"localhost"}
+{"timestamp":"2025-07-25T12:21:21.754Z","type":"postgresql","status":"pending","host":"localhost"}
+{"timestamp":"2025-07-25T12:21:21.755Z","type":"ssh","status":"pending","host":"134.209.215.199"}
+{"timestamp":"2025-07-25T12:21:23.045Z","type":"ssh","status":"connected","host":"134.209.215.199"}
+{"timestamp":"2025-07-25T12:21:23.046Z","type":"ssh","status":"tunnel_created","localPort":15432}
+{"timestamp":"2025-07-25T12:21:23.046Z","type":"postgresql","status":"connected","host":"localhost"}
+{"timestamp":"2025-07-25T12:21:23.047Z","type":"postgresql","status":"pending","host":"localhost"}
+{"timestamp":"2025-07-25T12:21:23.048Z","type":"ssh","status":"pending","host":"134.209.215.199"}
+{"timestamp":"2025-07-25T12:21:23.048Z","type":"ssh","status":"connected","host":"134.209.215.199"}
+{"timestamp":"2025-07-25T12:21:23.048Z","type":"ssh","status":"info","msg":"Porta 15432 já em uso. Pulando túnel."}
+{"timestamp":"2025-07-25T12:21:23.048Z","type":"postgresql","status":"connected","host":"localhost"}
+{"timestamp":"2025-07-25T12:21:25.469Z","type":"postgresql","status":"pending","host":"localhost"}
+{"timestamp":"2025-07-25T12:21:25.469Z","type":"ssh","status":"pending","host":"134.209.215.199"}
+{"timestamp":"2025-07-25T12:21:25.469Z","type":"ssh","status":"connected","host":"134.209.215.199"}
+{"timestamp":"2025-07-25T12:21:25.470Z","type":"ssh","status":"info","msg":"Porta 15432 já em uso. Pulando túnel."}
+{"timestamp":"2025-07-25T12:21:25.470Z","type":"postgresql","status":"connected","host":"localhost"}
+{"timestamp":"2025-07-25T12:21:32.639Z","type":"postgresql","status":"pending","host":"localhost"}
+{"timestamp":"2025-07-25T12:21:32.639Z","type":"ssh","status":"pending","host":"134.209.215.199"}
+{"timestamp":"2025-07-25T12:21:33.934Z","type":"ssh","status":"connected","host":"134.209.215.199"}
+{"timestamp":"2025-07-25T12:21:33.935Z","type":"ssh","status":"tunnel_created","localPort":15432}
+{"timestamp":"2025-07-25T12:21:33.935Z","type":"postgresql","status":"connected","host":"localhost"}
+{"timestamp":"2025-07-25T12:21:33.937Z","type":"postgresql","status":"pending","host":"localhost"}
+{"timestamp":"2025-07-25T12:21:33.937Z","type":"ssh","status":"pending","host":"134.209.215.199"}
+{"timestamp":"2025-07-25T12:21:33.937Z","type":"ssh","status":"connected","host":"134.209.215.199"}
+{"timestamp":"2025-07-25T12:21:33.937Z","type":"ssh","status":"info","msg":"Porta 15432 já em uso. Pulando túnel."}
+{"timestamp":"2025-07-25T12:21:33.938Z","type":"postgresql","status":"connected","host":"localhost"}
+{"timestamp":"2025-07-25T12:21:36.120Z","type":"postgresql","status":"pending","host":"localhost"}
+{"timestamp":"2025-07-25T12:21:36.120Z","type":"ssh","status":"pending","host":"134.209.215.199"}
+{"timestamp":"2025-07-25T12:21:36.120Z","type":"ssh","status":"connected","host":"134.209.215.199"}
+{"timestamp":"2025-07-25T12:21:36.120Z","type":"ssh","status":"info","msg":"Porta 15432 já em uso. Pulando túnel."}
+{"timestamp":"2025-07-25T12:21:36.120Z","type":"postgresql","status":"connected","host":"localhost"}
+{"timestamp":"2025-07-28T13:03:11.286Z","type":"postgresql","status":"pending","host":"localhost"}
+{"timestamp":"2025-07-28T13:03:11.287Z","type":"ssh","status":"pending","host":"134.209.215.199"}
+{"timestamp":"2025-07-28T13:03:12.592Z","type":"ssh","status":"connected","host":"134.209.215.199"}
+{"timestamp":"2025-07-28T13:03:12.593Z","type":"ssh","status":"tunnel_created","localPort":15432}
+{"timestamp":"2025-07-28T13:03:12.593Z","type":"postgresql","status":"connected","host":"localhost"}
+{"timestamp":"2025-07-28T13:03:12.594Z","type":"postgresql","status":"pending","host":"localhost"}
+{"timestamp":"2025-07-28T13:03:12.594Z","type":"ssh","status":"pending","host":"134.209.215.199"}
+{"timestamp":"2025-07-28T13:03:12.594Z","type":"ssh","status":"connected","host":"134.209.215.199"}
+{"timestamp":"2025-07-28T13:03:12.595Z","type":"ssh","status":"info","msg":"Porta 15432 já em uso. Pulando túnel."}
+{"timestamp":"2025-07-28T13:03:12.595Z","type":"postgresql","status":"connected","host":"localhost"}
+{"timestamp":"2025-07-28T13:03:14.977Z","type":"postgresql","status":"pending","host":"localhost"}
+{"timestamp":"2025-07-28T13:03:14.977Z","type":"ssh","status":"pending","host":"134.209.215.199"}
+{"timestamp":"2025-07-28T13:03:14.977Z","type":"ssh","status":"connected","host":"134.209.215.199"}
+{"timestamp":"2025-07-28T13:03:14.977Z","type":"ssh","status":"info","msg":"Porta 15432 já em uso. Pulando túnel."}
+{"timestamp":"2025-07-28T13:03:14.977Z","type":"postgresql","status":"connected","host":"localhost"}
+{"timestamp":"2025-07-28T13:03:21.320Z","type":"postgresql","status":"pending","host":"localhost"}
+{"timestamp":"2025-07-28T13:03:21.320Z","type":"ssh","status":"pending","host":"134.209.215.199"}
+{"timestamp":"2025-07-28T13:03:22.627Z","type":"ssh","status":"connected","host":"134.209.215.199"}
+{"timestamp":"2025-07-28T13:03:22.628Z","type":"ssh","status":"tunnel_created","localPort":15432}
+{"timestamp":"2025-07-28T13:03:22.629Z","type":"postgresql","status":"connected","host":"localhost"}
+{"timestamp":"2025-07-28T13:03:22.630Z","type":"postgresql","status":"pending","host":"localhost"}
+{"timestamp":"2025-07-28T13:03:22.630Z","type":"ssh","status":"pending","host":"134.209.215.199"}
+{"timestamp":"2025-07-28T13:03:22.630Z","type":"ssh","status":"connected","host":"134.209.215.199"}
+{"timestamp":"2025-07-28T13:03:22.630Z","type":"ssh","status":"info","msg":"Porta 15432 já em uso. Pulando túnel."}
+{"timestamp":"2025-07-28T13:03:22.631Z","type":"postgresql","status":"connected","host":"localhost"}
+{"timestamp":"2025-07-28T13:03:24.802Z","type":"postgresql","status":"pending","host":"localhost"}
+{"timestamp":"2025-07-28T13:03:24.802Z","type":"ssh","status":"pending","host":"134.209.215.199"}
+{"timestamp":"2025-07-28T13:03:24.802Z","type":"ssh","status":"connected","host":"134.209.215.199"}
+{"timestamp":"2025-07-28T13:03:24.803Z","type":"ssh","status":"info","msg":"Porta 15432 já em uso. Pulando túnel."}
+{"timestamp":"2025-07-28T13:03:24.803Z","type":"postgresql","status":"connected","host":"localhost"}
+{"timestamp":"2025-07-28T14:20:02.884Z","type":"postgresql","status":"pending","host":"localhost"}
+{"timestamp":"2025-07-28T14:20:02.885Z","type":"ssh","status":"pending","host":"134.209.215.199"}
+{"timestamp":"2025-07-28T14:20:04.295Z","type":"ssh","status":"connected","host":"134.209.215.199"}
+{"timestamp":"2025-07-28T14:20:04.296Z","type":"ssh","status":"tunnel_created","localPort":15432}
+{"timestamp":"2025-07-28T14:20:04.296Z","type":"postgresql","status":"connected","host":"localhost"}
+{"timestamp":"2025-07-28T14:20:04.297Z","type":"postgresql","status":"pending","host":"localhost"}
+{"timestamp":"2025-07-28T14:20:04.297Z","type":"ssh","status":"pending","host":"134.209.215.199"}
+{"timestamp":"2025-07-28T14:20:04.298Z","type":"ssh","status":"connected","host":"134.209.215.199"}
+{"timestamp":"2025-07-28T14:20:04.298Z","type":"ssh","status":"info","msg":"Porta 15432 já em uso. Pulando túnel."}
+{"timestamp":"2025-07-28T14:20:04.298Z","type":"postgresql","status":"connected","host":"localhost"}
+{"timestamp":"2025-07-29T11:45:38.682Z","type":"postgresql","status":"pending","host":"localhost"}
+{"timestamp":"2025-07-29T11:45:38.683Z","type":"ssh","status":"pending","host":"134.209.215.199"}
+{"timestamp":"2025-07-29T11:45:39.976Z","type":"ssh","status":"connected","host":"134.209.215.199"}
+{"timestamp":"2025-07-29T11:45:39.977Z","type":"ssh","status":"tunnel_created","localPort":15432}
+{"timestamp":"2025-07-29T11:45:39.978Z","type":"postgresql","status":"connected","host":"localhost"}
+{"timestamp":"2025-07-29T11:45:39.979Z","type":"postgresql","status":"pending","host":"localhost"}
+{"timestamp":"2025-07-29T11:45:39.979Z","type":"ssh","status":"pending","host":"134.209.215.199"}
+{"timestamp":"2025-07-29T11:45:39.979Z","type":"ssh","status":"connected","host":"134.209.215.199"}
+{"timestamp":"2025-07-29T11:45:39.979Z","type":"ssh","status":"info","msg":"Porta 15432 já em uso. Pulando túnel."}
+{"timestamp":"2025-07-29T11:45:39.980Z","type":"postgresql","status":"connected","host":"localhost"}
+{"timestamp":"2025-07-29T11:45:42.403Z","type":"postgresql","status":"pending","host":"localhost"}
+{"timestamp":"2025-07-29T11:45:42.403Z","type":"ssh","status":"pending","host":"134.209.215.199"}
+{"timestamp":"2025-07-29T11:45:42.403Z","type":"ssh","status":"connected","host":"134.209.215.199"}
+{"timestamp":"2025-07-29T11:45:42.403Z","type":"ssh","status":"info","msg":"Porta 15432 já em uso. Pulando túnel."}
+{"timestamp":"2025-07-29T11:45:42.403Z","type":"postgresql","status":"connected","host":"localhost"}
+{"timestamp":"2025-07-29T11:49:23.177Z","type":"postgresql","status":"pending","host":"localhost"}
+{"timestamp":"2025-07-29T11:49:23.177Z","type":"ssh","status":"pending","host":"134.209.215.199"}
+{"timestamp":"2025-07-29T11:49:24.535Z","type":"ssh","status":"connected","host":"134.209.215.199"}
+{"timestamp":"2025-07-29T11:49:24.537Z","type":"ssh","status":"tunnel_created","localPort":15432}
+{"timestamp":"2025-07-29T11:49:24.537Z","type":"postgresql","status":"connected","host":"localhost"}
+{"timestamp":"2025-07-29T11:49:24.538Z","type":"postgresql","status":"pending","host":"localhost"}
+{"timestamp":"2025-07-29T11:49:24.539Z","type":"ssh","status":"pending","host":"134.209.215.199"}
+{"timestamp":"2025-07-29T11:49:24.539Z","type":"ssh","status":"connected","host":"134.209.215.199"}
+{"timestamp":"2025-07-29T11:49:24.539Z","type":"ssh","status":"info","msg":"Porta 15432 já em uso. Pulando túnel."}
+{"timestamp":"2025-07-29T11:49:24.540Z","type":"postgresql","status":"connected","host":"localhost"}
+{"timestamp":"2025-07-29T11:49:27.081Z","type":"postgresql","status":"pending","host":"localhost"}
+{"timestamp":"2025-07-29T11:49:27.081Z","type":"ssh","status":"pending","host":"134.209.215.199"}
+{"timestamp":"2025-07-29T11:49:27.081Z","type":"ssh","status":"connected","host":"134.209.215.199"}
+{"timestamp":"2025-07-29T11:49:27.081Z","type":"ssh","status":"info","msg":"Porta 15432 já em uso. Pulando túnel."}
+{"timestamp":"2025-07-29T11:49:27.082Z","type":"postgresql","status":"connected","host":"localhost"}
+{"timestamp":"2025-07-29T12:59:01.039Z","type":"postgresql","status":"pending","host":"localhost"}
+{"timestamp":"2025-07-29T12:59:01.040Z","type":"ssh","status":"pending","host":"134.209.215.199"}
+{"timestamp":"2025-07-29T12:59:02.347Z","type":"ssh","status":"connected","host":"134.209.215.199"}
+{"timestamp":"2025-07-29T12:59:02.349Z","type":"ssh","status":"tunnel_created","localPort":15432}
+{"timestamp":"2025-07-29T12:59:02.349Z","type":"postgresql","status":"connected","host":"localhost"}
+{"timestamp":"2025-07-29T12:59:02.350Z","type":"postgresql","status":"pending","host":"localhost"}
+{"timestamp":"2025-07-29T12:59:02.351Z","type":"ssh","status":"pending","host":"134.209.215.199"}
+{"timestamp":"2025-07-29T12:59:02.351Z","type":"ssh","status":"connected","host":"134.209.215.199"}
+{"timestamp":"2025-07-29T12:59:02.351Z","type":"ssh","status":"info","msg":"Porta 15432 já em uso. Pulando túnel."}
+{"timestamp":"2025-07-29T12:59:02.351Z","type":"postgresql","status":"connected","host":"localhost"}
+{"timestamp":"2025-07-29T12:59:04.807Z","type":"postgresql","status":"pending","host":"localhost"}
+{"timestamp":"2025-07-29T12:59:04.807Z","type":"ssh","status":"pending","host":"134.209.215.199"}
+{"timestamp":"2025-07-29T12:59:04.807Z","type":"ssh","status":"connected","host":"134.209.215.199"}
+{"timestamp":"2025-07-29T12:59:04.807Z","type":"ssh","status":"info","msg":"Porta 15432 já em uso. Pulando túnel."}
+{"timestamp":"2025-07-29T12:59:04.808Z","type":"postgresql","status":"connected","host":"localhost"}
+{"timestamp":"2025-07-30T20:29:59.198Z","type":"postgresql","status":"pending","host":"localhost"}
+{"timestamp":"2025-07-30T20:29:59.199Z","type":"ssh","status":"pending","host":"134.209.215.199"}
+{"timestamp":"2025-07-30T20:30:00.494Z","type":"ssh","status":"connected","host":"134.209.215.199"}
+{"timestamp":"2025-07-30T20:30:00.495Z","type":"ssh","status":"tunnel_created","localPort":15432}
+{"timestamp":"2025-07-30T20:30:00.496Z","type":"postgresql","status":"connected","host":"localhost"}
+{"timestamp":"2025-07-30T20:30:00.497Z","type":"postgresql","status":"pending","host":"localhost"}
+{"timestamp":"2025-07-30T20:30:00.497Z","type":"ssh","status":"pending","host":"134.209.215.199"}
+{"timestamp":"2025-07-30T20:30:00.497Z","type":"ssh","status":"connected","host":"134.209.215.199"}
+{"timestamp":"2025-07-30T20:30:00.498Z","type":"ssh","status":"info","msg":"Porta 15432 já em uso. Pulando túnel."}
+{"timestamp":"2025-07-30T20:30:00.498Z","type":"postgresql","status":"connected","host":"localhost"}
+{"timestamp":"2025-07-30T20:30:03.168Z","type":"postgresql","status":"pending","host":"localhost"}
+{"timestamp":"2025-07-30T20:30:03.168Z","type":"ssh","status":"pending","host":"134.209.215.199"}
+{"timestamp":"2025-07-30T20:30:03.168Z","type":"ssh","status":"connected","host":"134.209.215.199"}
+{"timestamp":"2025-07-30T20:30:03.169Z","type":"ssh","status":"info","msg":"Porta 15432 já em uso. Pulando túnel."}
+{"timestamp":"2025-07-30T20:30:03.169Z","type":"postgresql","status":"connected","host":"localhost"}
+{"timestamp":"2025-07-30T20:30:07.139Z","type":"postgresql","status":"pending","host":"localhost"}
+{"timestamp":"2025-07-30T20:30:07.139Z","type":"ssh","status":"pending","host":"134.209.215.199"}
+{"timestamp":"2025-07-30T20:30:08.525Z","type":"ssh","status":"connected","host":"134.209.215.199"}
+{"timestamp":"2025-07-30T20:30:08.526Z","type":"ssh","status":"tunnel_created","localPort":15432}
+{"timestamp":"2025-07-30T20:30:08.527Z","type":"postgresql","status":"connected","host":"localhost"}
+{"timestamp":"2025-07-30T20:30:08.528Z","type":"postgresql","status":"pending","host":"localhost"}
+{"timestamp":"2025-07-30T20:30:08.528Z","type":"ssh","status":"pending","host":"134.209.215.199"}
+{"timestamp":"2025-07-30T20:30:08.528Z","type":"ssh","status":"connected","host":"134.209.215.199"}
+{"timestamp":"2025-07-30T20:30:08.529Z","type":"ssh","status":"info","msg":"Porta 15432 já em uso. Pulando túnel."}
+{"timestamp":"2025-07-30T20:30:08.529Z","type":"postgresql","status":"connected","host":"localhost"}
+{"timestamp":"2025-07-30T20:30:10.778Z","type":"postgresql","status":"pending","host":"localhost"}
+{"timestamp":"2025-07-30T20:30:10.778Z","type":"ssh","status":"pending","host":"134.209.215.199"}
+{"timestamp":"2025-07-30T20:30:10.778Z","type":"ssh","status":"connected","host":"134.209.215.199"}
+{"timestamp":"2025-07-30T20:30:10.779Z","type":"ssh","status":"info","msg":"Porta 15432 já em uso. Pulando túnel."}
+{"timestamp":"2025-07-30T20:30:10.779Z","type":"postgresql","status":"connected","host":"localhost"}
+{"timestamp":"2025-07-30T20:36:01.202Z","type":"postgresql","status":"pending","host":"localhost"}
+{"timestamp":"2025-07-30T20:36:01.203Z","type":"ssh","status":"pending","host":"134.209.215.199"}
+{"timestamp":"2025-07-30T20:36:02.506Z","type":"ssh","status":"connected","host":"134.209.215.199"}
+{"timestamp":"2025-07-30T20:36:02.507Z","type":"ssh","status":"tunnel_created","localPort":15432}
+{"timestamp":"2025-07-30T20:36:02.508Z","type":"postgresql","status":"connected","host":"localhost"}
+{"timestamp":"2025-07-30T20:36:02.509Z","type":"postgresql","status":"pending","host":"localhost"}
+{"timestamp":"2025-07-30T20:36:02.509Z","type":"ssh","status":"pending","host":"134.209.215.199"}
+{"timestamp":"2025-07-30T20:36:02.509Z","type":"ssh","status":"connected","host":"134.209.215.199"}
+{"timestamp":"2025-07-30T20:36:02.509Z","type":"ssh","status":"info","msg":"Porta 15432 já em uso. Pulando túnel."}
+{"timestamp":"2025-07-30T20:36:02.510Z","type":"postgresql","status":"connected","host":"localhost"}
+{"timestamp":"2025-07-30T20:36:05.041Z","type":"postgresql","status":"pending","host":"localhost"}
+{"timestamp":"2025-07-30T20:36:05.041Z","type":"ssh","status":"pending","host":"134.209.215.199"}
+{"timestamp":"2025-07-30T20:36:05.041Z","type":"ssh","status":"connected","host":"134.209.215.199"}
+{"timestamp":"2025-07-30T20:36:05.042Z","type":"ssh","status":"info","msg":"Porta 15432 já em uso. Pulando túnel."}
+{"timestamp":"2025-07-30T20:36:05.042Z","type":"postgresql","status":"connected","host":"localhost"}
+{"timestamp":"2025-07-31T16:41:23.992Z","type":"postgresql","status":"pending","host":"localhost"}
+{"timestamp":"2025-07-31T16:41:23.993Z","type":"ssh","status":"pending","host":"134.209.215.199"}
+{"timestamp":"2025-07-31T16:41:25.302Z","type":"ssh","status":"connected","host":"134.209.215.199"}
+{"timestamp":"2025-07-31T16:41:25.302Z","type":"ssh","status":"info","msg":"Porta 15432 já em uso. Pulando túnel."}
+{"timestamp":"2025-07-31T16:41:25.303Z","type":"postgresql","status":"connected","host":"localhost"}
+{"timestamp":"2025-07-31T16:41:25.304Z","type":"postgresql","status":"pending","host":"localhost"}
+{"timestamp":"2025-07-31T16:41:25.304Z","type":"ssh","status":"pending","host":"134.209.215.199"}
+{"timestamp":"2025-07-31T16:41:25.304Z","type":"ssh","status":"connected","host":"134.209.215.199"}
+{"timestamp":"2025-07-31T16:41:25.305Z","type":"ssh","status":"info","msg":"Porta 15432 já em uso. Pulando túnel."}
+{"timestamp":"2025-07-31T16:41:25.305Z","type":"postgresql","status":"connected","host":"localhost"}
+{"timestamp":"2025-07-31T16:41:27.424Z","type":"postgresql","status":"pending","host":"localhost"}
+{"timestamp":"2025-07-31T16:41:27.425Z","type":"ssh","status":"pending","host":"134.209.215.199"}
+{"timestamp":"2025-07-31T16:41:27.425Z","type":"ssh","status":"connected","host":"134.209.215.199"}
+{"timestamp":"2025-07-31T16:41:27.425Z","type":"ssh","status":"info","msg":"Porta 15432 já em uso. Pulando túnel."}
+{"timestamp":"2025-07-31T16:41:27.425Z","type":"postgresql","status":"connected","host":"localhost"}
+{"timestamp":"2025-07-31T16:41:32.136Z","type":"postgresql","status":"pending","host":"localhost"}
+{"timestamp":"2025-07-31T16:41:32.136Z","type":"ssh","status":"pending","host":"134.209.215.199"}
+{"timestamp":"2025-07-31T16:41:34.606Z","type":"ssh","status":"connected","host":"134.209.215.199"}
+{"timestamp":"2025-07-31T16:41:34.607Z","type":"ssh","status":"info","msg":"Porta 15432 já em uso. Pulando túnel."}
+{"timestamp":"2025-07-31T16:41:34.607Z","type":"postgresql","status":"connected","host":"localhost"}
+{"timestamp":"2025-07-31T16:41:34.608Z","type":"postgresql","status":"pending","host":"localhost"}
+{"timestamp":"2025-07-31T16:41:34.608Z","type":"ssh","status":"pending","host":"134.209.215.199"}
+{"timestamp":"2025-07-31T16:41:34.608Z","type":"ssh","status":"connected","host":"134.209.215.199"}
+{"timestamp":"2025-07-31T16:41:34.609Z","type":"ssh","status":"info","msg":"Porta 15432 já em uso. Pulando túnel."}
+{"timestamp":"2025-07-31T16:41:34.609Z","type":"postgresql","status":"connected","host":"localhost"}
+{"timestamp":"2025-07-31T16:41:36.948Z","type":"postgresql","status":"pending","host":"localhost"}
+{"timestamp":"2025-07-31T16:41:36.948Z","type":"ssh","status":"pending","host":"134.209.215.199"}
+{"timestamp":"2025-07-31T16:41:36.948Z","type":"ssh","status":"connected","host":"134.209.215.199"}
+{"timestamp":"2025-07-31T16:41:36.948Z","type":"ssh","status":"info","msg":"Porta 15432 já em uso. Pulando túnel."}
+{"timestamp":"2025-07-31T16:41:36.948Z","type":"postgresql","status":"connected","host":"localhost"}
+{"timestamp":"2025-07-31T19:40:44.044Z","type":"postgresql","status":"pending","host":"localhost"}
+{"timestamp":"2025-07-31T19:40:44.045Z","type":"ssh","status":"pending","host":"134.209.215.199"}
+{"timestamp":"2025-07-31T19:40:45.325Z","type":"ssh","status":"connected","host":"134.209.215.199"}
+{"timestamp":"2025-07-31T19:40:45.326Z","type":"ssh","status":"tunnel_created","localPort":15432}
+{"timestamp":"2025-07-31T19:40:45.326Z","type":"postgresql","status":"connected","host":"localhost"}
+{"timestamp":"2025-07-31T19:40:45.327Z","type":"postgresql","status":"pending","host":"localhost"}
+{"timestamp":"2025-07-31T19:40:45.327Z","type":"ssh","status":"pending","host":"134.209.215.199"}
+{"timestamp":"2025-07-31T19:40:45.328Z","type":"ssh","status":"connected","host":"134.209.215.199"}
+{"timestamp":"2025-07-31T19:40:45.328Z","type":"ssh","status":"info","msg":"Porta 15432 já em uso. Pulando túnel."}
+{"timestamp":"2025-07-31T19:40:45.328Z","type":"postgresql","status":"connected","host":"localhost"}
+{"timestamp":"2025-07-31T19:40:47.455Z","type":"postgresql","status":"pending","host":"localhost"}
+{"timestamp":"2025-07-31T19:40:47.455Z","type":"ssh","status":"pending","host":"134.209.215.199"}
+{"timestamp":"2025-07-31T19:40:47.455Z","type":"ssh","status":"connected","host":"134.209.215.199"}
+{"timestamp":"2025-07-31T19:40:47.456Z","type":"ssh","status":"info","msg":"Porta 15432 já em uso. Pulando túnel."}
+{"timestamp":"2025-07-31T19:40:47.456Z","type":"postgresql","status":"connected","host":"localhost"}
+{"timestamp":"2025-07-31T19:55:37.080Z","type":"postgresql","status":"pending","host":"localhost"}
+{"timestamp":"2025-07-31T19:55:37.081Z","type":"ssh","status":"pending","host":"134.209.215.199"}
+{"timestamp":"2025-07-31T19:55:38.377Z","type":"ssh","status":"connected","host":"134.209.215.199"}
+{"timestamp":"2025-07-31T19:55:38.378Z","type":"ssh","status":"tunnel_created","localPort":15432}
+{"timestamp":"2025-07-31T19:55:38.378Z","type":"postgresql","status":"connected","host":"localhost"}
+{"timestamp":"2025-07-31T19:55:38.379Z","type":"postgresql","status":"pending","host":"localhost"}
+{"timestamp":"2025-07-31T19:55:38.379Z","type":"ssh","status":"pending","host":"134.209.215.199"}
+{"timestamp":"2025-07-31T19:55:38.379Z","type":"ssh","status":"connected","host":"134.209.215.199"}
+{"timestamp":"2025-07-31T19:55:38.379Z","type":"ssh","status":"info","msg":"Porta 15432 já em uso. Pulando túnel."}
+{"timestamp":"2025-07-31T19:55:38.379Z","type":"postgresql","status":"connected","host":"localhost"}
+{"timestamp":"2025-07-31T19:55:40.840Z","type":"postgresql","status":"pending","host":"localhost"}
+{"timestamp":"2025-07-31T19:55:40.840Z","type":"ssh","status":"pending","host":"134.209.215.199"}
+{"timestamp":"2025-07-31T19:55:40.840Z","type":"ssh","status":"connected","host":"134.209.215.199"}
+{"timestamp":"2025-07-31T19:55:40.840Z","type":"ssh","status":"info","msg":"Porta 15432 já em uso. Pulando túnel."}
+{"timestamp":"2025-07-31T19:55:40.840Z","type":"postgresql","status":"connected","host":"localhost"}
+{"timestamp":"2025-08-01T11:57:03.935Z","type":"postgresql","status":"pending","host":"localhost"}
+{"timestamp":"2025-08-01T11:57:03.936Z","type":"ssh","status":"pending","host":"134.209.215.199"}
+{"timestamp":"2025-08-01T11:57:05.241Z","type":"ssh","status":"connected","host":"134.209.215.199"}
+{"timestamp":"2025-08-01T11:57:05.242Z","type":"ssh","status":"tunnel_created","localPort":15432}
+{"timestamp":"2025-08-01T11:57:05.242Z","type":"postgresql","status":"connected","host":"localhost"}
+{"timestamp":"2025-08-01T11:57:05.243Z","type":"postgresql","status":"pending","host":"localhost"}
+{"timestamp":"2025-08-01T11:57:05.243Z","type":"ssh","status":"pending","host":"134.209.215.199"}
+{"timestamp":"2025-08-01T11:57:05.243Z","type":"ssh","status":"connected","host":"134.209.215.199"}
+{"timestamp":"2025-08-01T11:57:05.244Z","type":"ssh","status":"info","msg":"Porta 15432 já em uso. Pulando túnel."}
+{"timestamp":"2025-08-01T11:57:05.244Z","type":"postgresql","status":"connected","host":"localhost"}
+{"timestamp":"2025-08-01T11:57:07.928Z","type":"postgresql","status":"pending","host":"localhost"}
+{"timestamp":"2025-08-01T11:57:07.928Z","type":"ssh","status":"pending","host":"134.209.215.199"}
+{"timestamp":"2025-08-01T11:57:07.928Z","type":"ssh","status":"connected","host":"134.209.215.199"}
+{"timestamp":"2025-08-01T11:57:07.928Z","type":"ssh","status":"info","msg":"Porta 15432 já em uso. Pulando túnel."}
+{"timestamp":"2025-08-01T11:57:07.929Z","type":"postgresql","status":"connected","host":"localhost"}
+{"timestamp":"2025-08-01T11:57:16.902Z","type":"postgresql","status":"pending","host":"localhost"}
+{"timestamp":"2025-08-01T11:57:16.902Z","type":"ssh","status":"pending","host":"134.209.215.199"}
+{"timestamp":"2025-08-01T11:57:18.204Z","type":"ssh","status":"connected","host":"134.209.215.199"}
+{"timestamp":"2025-08-01T11:57:18.206Z","type":"ssh","status":"tunnel_created","localPort":15432}
+{"timestamp":"2025-08-01T11:57:18.206Z","type":"postgresql","status":"connected","host":"localhost"}
+{"timestamp":"2025-08-01T11:57:18.207Z","type":"postgresql","status":"pending","host":"localhost"}
+{"timestamp":"2025-08-01T11:57:18.207Z","type":"ssh","status":"pending","host":"134.209.215.199"}
+{"timestamp":"2025-08-01T11:57:18.207Z","type":"ssh","status":"connected","host":"134.209.215.199"}
+{"timestamp":"2025-08-01T11:57:18.208Z","type":"ssh","status":"info","msg":"Porta 15432 já em uso. Pulando túnel."}
+{"timestamp":"2025-08-01T11:57:18.208Z","type":"postgresql","status":"connected","host":"localhost"}
+{"timestamp":"2025-08-01T11:57:20.216Z","type":"postgresql","status":"pending","host":"localhost"}
+{"timestamp":"2025-08-01T11:57:20.216Z","type":"ssh","status":"pending","host":"134.209.215.199"}
+{"timestamp":"2025-08-01T11:57:20.216Z","type":"ssh","status":"connected","host":"134.209.215.199"}
+{"timestamp":"2025-08-01T11:57:20.217Z","type":"ssh","status":"info","msg":"Porta 15432 já em uso. Pulando túnel."}
+{"timestamp":"2025-08-01T11:57:20.217Z","type":"postgresql","status":"connected","host":"localhost"}
+{"timestamp":"2025-08-01T13:22:15.919Z","type":"postgresql","status":"pending","host":"localhost"}
+{"timestamp":"2025-08-01T13:22:15.920Z","type":"ssh","status":"pending","host":"134.209.215.199"}
+{"timestamp":"2025-08-01T13:22:17.261Z","type":"ssh","status":"connected","host":"134.209.215.199"}
+{"timestamp":"2025-08-01T13:22:17.261Z","type":"ssh","status":"tunnel_created","localPort":15432}
+{"timestamp":"2025-08-01T13:22:17.262Z","type":"postgresql","status":"connected","host":"localhost"}
+{"timestamp":"2025-08-01T13:22:17.263Z","type":"postgresql","status":"pending","host":"localhost"}
+{"timestamp":"2025-08-01T13:22:17.263Z","type":"ssh","status":"pending","host":"134.209.215.199"}
+{"timestamp":"2025-08-01T13:22:17.263Z","type":"ssh","status":"connected","host":"134.209.215.199"}
+{"timestamp":"2025-08-01T13:22:17.263Z","type":"ssh","status":"info","msg":"Porta 15432 já em uso. Pulando túnel."}
+{"timestamp":"2025-08-01T13:22:17.264Z","type":"postgresql","status":"connected","host":"localhost"}
+{"timestamp":"2025-08-01T13:22:19.708Z","type":"postgresql","status":"pending","host":"localhost"}
+{"timestamp":"2025-08-01T13:22:19.708Z","type":"ssh","status":"pending","host":"134.209.215.199"}
+{"timestamp":"2025-08-01T13:22:19.709Z","type":"ssh","status":"connected","host":"134.209.215.199"}
+{"timestamp":"2025-08-01T13:22:19.709Z","type":"ssh","status":"info","msg":"Porta 15432 já em uso. Pulando túnel."}
+{"timestamp":"2025-08-01T13:22:19.709Z","type":"postgresql","status":"connected","host":"localhost"}
+{"timestamp":"2025-08-01T18:57:33.418Z","type":"postgresql","status":"pending","host":"localhost"}
+{"timestamp":"2025-08-01T18:57:33.419Z","type":"ssh","status":"pending","host":"134.209.215.199"}
+{"timestamp":"2025-08-01T18:57:34.760Z","type":"ssh","status":"connected","host":"134.209.215.199"}
+{"timestamp":"2025-08-01T18:57:34.761Z","type":"ssh","status":"info","msg":"Porta 15432 já em uso. Pulando túnel."}
+{"timestamp":"2025-08-01T18:57:34.761Z","type":"postgresql","status":"connected","host":"localhost"}
+{"timestamp":"2025-08-01T18:57:34.762Z","type":"postgresql","status":"pending","host":"localhost"}
+{"timestamp":"2025-08-01T18:57:34.762Z","type":"ssh","status":"pending","host":"134.209.215.199"}
+{"timestamp":"2025-08-01T18:57:34.763Z","type":"ssh","status":"connected","host":"134.209.215.199"}
+{"timestamp":"2025-08-01T18:57:34.763Z","type":"ssh","status":"info","msg":"Porta 15432 já em uso. Pulando túnel."}
+{"timestamp":"2025-08-01T18:57:34.763Z","type":"postgresql","status":"connected","host":"localhost"}
+{"timestamp":"2025-08-01T18:57:36.905Z","type":"postgresql","status":"pending","host":"localhost"}
+{"timestamp":"2025-08-01T18:57:36.906Z","type":"ssh","status":"pending","host":"134.209.215.199"}
+{"timestamp":"2025-08-01T18:57:36.906Z","type":"ssh","status":"connected","host":"134.209.215.199"}
+{"timestamp":"2025-08-01T18:57:36.906Z","type":"ssh","status":"info","msg":"Porta 15432 já em uso. Pulando túnel."}
+{"timestamp":"2025-08-01T18:57:36.906Z","type":"postgresql","status":"connected","host":"localhost"}
+{"timestamp":"2025-08-01T18:58:05.253Z","type":"postgresql","status":"pending","host":"localhost"}
+{"timestamp":"2025-08-01T18:58:05.254Z","type":"ssh","status":"pending","host":"134.209.215.199"}
+{"timestamp":"2025-08-01T18:58:06.577Z","type":"ssh","status":"connected","host":"134.209.215.199"}
+{"timestamp":"2025-08-01T18:58:06.577Z","type":"ssh","status":"info","msg":"Porta 15432 já em uso. Pulando túnel."}
+{"timestamp":"2025-08-01T18:58:06.578Z","type":"postgresql","status":"connected","host":"localhost"}
+{"timestamp":"2025-08-01T18:58:06.579Z","type":"postgresql","status":"pending","host":"localhost"}
+{"timestamp":"2025-08-01T18:58:06.579Z","type":"ssh","status":"pending","host":"134.209.215.199"}
+{"timestamp":"2025-08-01T18:58:06.579Z","type":"ssh","status":"connected","host":"134.209.215.199"}
+{"timestamp":"2025-08-01T18:58:06.579Z","type":"ssh","status":"info","msg":"Porta 15432 já em uso. Pulando túnel."}
+{"timestamp":"2025-08-01T18:58:06.579Z","type":"postgresql","status":"connected","host":"localhost"}
+{"timestamp":"2025-08-01T18:58:08.541Z","type":"postgresql","status":"pending","host":"localhost"}
+{"timestamp":"2025-08-01T18:58:08.541Z","type":"ssh","status":"pending","host":"134.209.215.199"}
+{"timestamp":"2025-08-01T18:58:08.541Z","type":"ssh","status":"connected","host":"134.209.215.199"}
+{"timestamp":"2025-08-01T18:58:08.541Z","type":"ssh","status":"info","msg":"Porta 15432 já em uso. Pulando túnel."}
+{"timestamp":"2025-08-01T18:58:08.542Z","type":"postgresql","status":"connected","host":"localhost"}
+{"timestamp":"2025-08-01T18:58:09.653Z","type":"electron","status":"unhandled_rejection","reason":"listen EADDRINUSE: address already in use :::15432","stack":"Error: listen EADDRINUSE: address already in use :::15432\n    at Server.setupListenHandle [as _listen2] (node:net:1432:16)\n    at listenInCluster (node:net:1480:12)\n    at Server.listen (node:net:1568:7)\n    at /home/luis-gustavo/Documentos/Projetos/MoraLink/node_modules/ssh2-promise/lib/sshConnection.js:346:20\n    at new Promise (<anonymous>)\n    at SSHConnection.addTunnel (/home/luis-gustavo/Documentos/Projetos/MoraLink/node_modules/ssh2-promise/lib/sshConnection.js:296:20)\n    at /home/luis-gustavo/Documentos/Projetos/MoraLink/node_modules/ssh2-promise/lib/index.js:90:75\n    at process.processTicksAndRejections (node:internal/process/task_queues:96:5)\n    at async connectToServer (/home/luis-gustavo/Documentos/Projetos/MoraLink/app/modules/sshTunneling.js:12:18)\n    at async mssqlConnection.connect (/home/luis-gustavo/Documentos/Projetos/MoraLink/app/modules/connect_to_db_mssql.js:15:31)"}
+{"timestamp":"2025-08-01T18:58:48.066Z","type":"postgresql","status":"pending","host":"localhost"}
+{"timestamp":"2025-08-01T18:58:48.067Z","type":"ssh","status":"pending","host":"134.209.215.199"}
+{"timestamp":"2025-08-01T18:58:49.418Z","type":"ssh","status":"connected","host":"134.209.215.199"}
+{"timestamp":"2025-08-01T18:58:49.419Z","type":"ssh","status":"info","msg":"Porta 15432 já em uso. Pulando túnel."}
+{"timestamp":"2025-08-01T18:58:49.420Z","type":"postgresql","status":"connected","host":"localhost"}
+{"timestamp":"2025-08-01T18:58:49.421Z","type":"postgresql","status":"pending","host":"localhost"}
+{"timestamp":"2025-08-01T18:58:49.421Z","type":"ssh","status":"pending","host":"134.209.215.199"}
+{"timestamp":"2025-08-01T18:58:49.421Z","type":"ssh","status":"connected","host":"134.209.215.199"}
+{"timestamp":"2025-08-01T18:58:49.421Z","type":"ssh","status":"info","msg":"Porta 15432 já em uso. Pulando túnel."}
+{"timestamp":"2025-08-01T18:58:49.421Z","type":"postgresql","status":"connected","host":"localhost"}
+{"timestamp":"2025-08-01T18:58:51.460Z","type":"postgresql","status":"pending","host":"localhost"}
+{"timestamp":"2025-08-01T18:58:51.460Z","type":"ssh","status":"pending","host":"134.209.215.199"}
+{"timestamp":"2025-08-01T18:58:51.460Z","type":"ssh","status":"connected","host":"134.209.215.199"}
+{"timestamp":"2025-08-01T18:58:51.461Z","type":"ssh","status":"info","msg":"Porta 15432 já em uso. Pulando túnel."}
+{"timestamp":"2025-08-01T18:58:51.461Z","type":"postgresql","status":"connected","host":"localhost"}
+{"timestamp":"2025-08-01T18:58:52.539Z","type":"electron","status":"unhandled_rejection","reason":"listen EADDRINUSE: address already in use :::15432","stack":"Error: listen EADDRINUSE: address already in use :::15432\n    at Server.setupListenHandle [as _listen2] (node:net:1432:16)\n    at listenInCluster (node:net:1480:12)\n    at Server.listen (node:net:1568:7)\n    at /home/luis-gustavo/Documentos/Projetos/MoraLink/node_modules/ssh2-promise/lib/sshConnection.js:346:20\n    at new Promise (<anonymous>)\n    at SSHConnection.addTunnel (/home/luis-gustavo/Documentos/Projetos/MoraLink/node_modules/ssh2-promise/lib/sshConnection.js:296:20)\n    at /home/luis-gustavo/Documentos/Projetos/MoraLink/node_modules/ssh2-promise/lib/index.js:90:75\n    at process.processTicksAndRejections (node:internal/process/task_queues:96:5)\n    at async connectToServer (/home/luis-gustavo/Documentos/Projetos/MoraLink/app/modules/sshTunneling.js:12:18)\n    at async mssqlConnection.connect (/home/luis-gustavo/Documentos/Projetos/MoraLink/app/modules/connect_to_db_mssql.js:15:31)"}
+{"timestamp":"2025-08-01T18:59:25.617Z","type":"postgresql","status":"pending","host":"localhost"}
+{"timestamp":"2025-08-01T18:59:25.617Z","type":"ssh","status":"pending","host":"134.209.215.199"}
+{"timestamp":"2025-08-01T18:59:26.970Z","type":"ssh","status":"connected","host":"134.209.215.199"}
+{"timestamp":"2025-08-01T18:59:26.972Z","type":"ssh","status":"tunnel_created","localPort":15432}
+{"timestamp":"2025-08-01T18:59:26.972Z","type":"postgresql","status":"connected","host":"localhost"}
+{"timestamp":"2025-08-01T18:59:26.973Z","type":"postgresql","status":"pending","host":"localhost"}
+{"timestamp":"2025-08-01T18:59:26.973Z","type":"ssh","status":"pending","host":"134.209.215.199"}
+{"timestamp":"2025-08-01T18:59:26.973Z","type":"ssh","status":"connected","host":"134.209.215.199"}
+{"timestamp":"2025-08-01T18:59:26.974Z","type":"ssh","status":"info","msg":"Porta 15432 já em uso. Pulando túnel."}
+{"timestamp":"2025-08-01T18:59:26.974Z","type":"postgresql","status":"connected","host":"localhost"}
+{"timestamp":"2025-08-01T18:59:29.137Z","type":"postgresql","status":"pending","host":"localhost"}
+{"timestamp":"2025-08-01T18:59:29.138Z","type":"ssh","status":"pending","host":"134.209.215.199"}
+{"timestamp":"2025-08-01T18:59:29.138Z","type":"ssh","status":"connected","host":"134.209.215.199"}
+{"timestamp":"2025-08-01T18:59:29.138Z","type":"ssh","status":"info","msg":"Porta 15432 já em uso. Pulando túnel."}
+{"timestamp":"2025-08-01T18:59:29.138Z","type":"postgresql","status":"connected","host":"localhost"}
+{"timestamp":"2025-08-04T12:22:54.979Z","type":"postgresql","status":"pending","host":"localhost"}
+{"timestamp":"2025-08-04T12:22:54.980Z","type":"ssh","status":"pending","host":"134.209.215.199"}
+{"timestamp":"2025-08-04T12:22:56.277Z","type":"ssh","status":"connected","host":"134.209.215.199"}
+{"timestamp":"2025-08-04T12:22:56.278Z","type":"ssh","status":"info","msg":"Porta 15432 já em uso. Pulando túnel."}
+{"timestamp":"2025-08-04T12:22:56.279Z","type":"postgresql","status":"connected","host":"localhost"}
+{"timestamp":"2025-08-04T12:22:56.280Z","type":"postgresql","status":"pending","host":"localhost"}
+{"timestamp":"2025-08-04T12:22:56.281Z","type":"ssh","status":"pending","host":"134.209.215.199"}
+{"timestamp":"2025-08-04T12:22:56.281Z","type":"ssh","status":"connected","host":"134.209.215.199"}
+{"timestamp":"2025-08-04T12:22:56.281Z","type":"ssh","status":"info","msg":"Porta 15432 já em uso. Pulando túnel."}
+{"timestamp":"2025-08-04T12:22:56.281Z","type":"postgresql","status":"connected","host":"localhost"}
+{"timestamp":"2025-08-04T12:22:58.502Z","type":"postgresql","status":"pending","host":"localhost"}
+{"timestamp":"2025-08-04T12:22:58.502Z","type":"ssh","status":"pending","host":"134.209.215.199"}
+{"timestamp":"2025-08-04T12:22:58.502Z","type":"ssh","status":"connected","host":"134.209.215.199"}
+{"timestamp":"2025-08-04T12:22:58.503Z","type":"ssh","status":"info","msg":"Porta 15432 já em uso. Pulando túnel."}
+{"timestamp":"2025-08-04T12:22:58.503Z","type":"postgresql","status":"connected","host":"localhost"}
+{"timestamp":"2025-08-04T12:22:59.620Z","type":"electron","status":"unhandled_rejection","reason":"listen EADDRINUSE: address already in use :::15432","stack":"Error: listen EADDRINUSE: address already in use :::15432\n    at Server.setupListenHandle [as _listen2] (node:net:1432:16)\n    at listenInCluster (node:net:1480:12)\n    at Server.listen (node:net:1568:7)\n    at /home/luis-gustavo/Documentos/Projetos/MoraLink/node_modules/ssh2-promise/lib/sshConnection.js:346:20\n    at new Promise (<anonymous>)\n    at SSHConnection.addTunnel (/home/luis-gustavo/Documentos/Projetos/MoraLink/node_modules/ssh2-promise/lib/sshConnection.js:296:20)\n    at /home/luis-gustavo/Documentos/Projetos/MoraLink/node_modules/ssh2-promise/lib/index.js:90:75\n    at process.processTicksAndRejections (node:internal/process/task_queues:96:5)\n    at async connectToServer (/home/luis-gustavo/Documentos/Projetos/MoraLink/app/modules/sshTunneling.js:12:18)\n    at async mssqlConnection.connect (/home/luis-gustavo/Documentos/Projetos/MoraLink/app/modules/connect_to_db_mssql.js:15:31)"}
+{"timestamp":"2025-08-04T12:23:38.372Z","type":"postgresql","status":"pending","host":"localhost"}
+{"timestamp":"2025-08-04T12:23:38.372Z","type":"ssh","status":"pending","host":"134.209.215.199"}
+{"timestamp":"2025-08-04T12:23:39.724Z","type":"ssh","status":"connected","host":"134.209.215.199"}
+{"timestamp":"2025-08-04T12:23:39.725Z","type":"ssh","status":"tunnel_created","localPort":15432}
+{"timestamp":"2025-08-04T12:23:39.725Z","type":"postgresql","status":"connected","host":"localhost"}
+{"timestamp":"2025-08-04T12:23:39.727Z","type":"postgresql","status":"pending","host":"localhost"}
+{"timestamp":"2025-08-04T12:23:39.727Z","type":"ssh","status":"pending","host":"134.209.215.199"}
+{"timestamp":"2025-08-04T12:23:39.727Z","type":"ssh","status":"connected","host":"134.209.215.199"}
+{"timestamp":"2025-08-04T12:23:39.728Z","type":"ssh","status":"info","msg":"Porta 15432 já em uso. Pulando túnel."}
+{"timestamp":"2025-08-04T12:23:39.728Z","type":"postgresql","status":"connected","host":"localhost"}
+{"timestamp":"2025-08-04T12:23:43.012Z","type":"postgresql","status":"pending","host":"localhost"}
+{"timestamp":"2025-08-04T12:23:43.012Z","type":"ssh","status":"pending","host":"134.209.215.199"}
+{"timestamp":"2025-08-04T12:23:43.012Z","type":"ssh","status":"connected","host":"134.209.215.199"}
+{"timestamp":"2025-08-04T12:23:43.012Z","type":"ssh","status":"info","msg":"Porta 15432 já em uso. Pulando túnel."}
+{"timestamp":"2025-08-04T12:23:43.012Z","type":"postgresql","status":"connected","host":"localhost"}
+{"timestamp":"2025-08-04T12:45:46.854Z","type":"postgresql","status":"pending","host":"localhost"}
+{"timestamp":"2025-08-04T12:45:46.855Z","type":"ssh","status":"pending","host":"134.209.215.199"}
+{"timestamp":"2025-08-04T12:45:48.212Z","type":"ssh","status":"connected","host":"134.209.215.199"}
+{"timestamp":"2025-08-04T12:45:48.213Z","type":"ssh","status":"tunnel_created","localPort":15432}
+{"timestamp":"2025-08-04T12:45:48.213Z","type":"postgresql","status":"connected","host":"localhost"}
+{"timestamp":"2025-08-04T12:45:48.214Z","type":"postgresql","status":"pending","host":"localhost"}
+{"timestamp":"2025-08-04T12:45:48.215Z","type":"ssh","status":"pending","host":"134.209.215.199"}
+{"timestamp":"2025-08-04T12:45:48.215Z","type":"ssh","status":"connected","host":"134.209.215.199"}
+{"timestamp":"2025-08-04T12:45:48.215Z","type":"ssh","status":"info","msg":"Porta 15432 já em uso. Pulando túnel."}
+{"timestamp":"2025-08-04T12:45:48.215Z","type":"postgresql","status":"connected","host":"localhost"}
+{"timestamp":"2025-08-04T12:45:50.164Z","type":"postgresql","status":"pending","host":"localhost"}
+{"timestamp":"2025-08-04T12:45:50.164Z","type":"ssh","status":"pending","host":"134.209.215.199"}
+{"timestamp":"2025-08-04T12:45:50.164Z","type":"ssh","status":"connected","host":"134.209.215.199"}
+{"timestamp":"2025-08-04T12:45:50.164Z","type":"ssh","status":"info","msg":"Porta 15432 já em uso. Pulando túnel."}
+{"timestamp":"2025-08-04T12:45:50.164Z","type":"postgresql","status":"connected","host":"localhost"}
+{"timestamp":"2025-08-04T19:06:32.272Z","type":"postgresql","status":"pending","host":"localhost"}
+{"timestamp":"2025-08-04T19:06:32.273Z","type":"ssh","status":"pending","host":"134.209.215.199"}
+{"timestamp":"2025-08-04T19:06:33.584Z","type":"ssh","status":"connected","host":"134.209.215.199"}
+{"timestamp":"2025-08-04T19:06:33.585Z","type":"ssh","status":"tunnel_created","localPort":15432}
+{"timestamp":"2025-08-04T19:06:33.585Z","type":"postgresql","status":"connected","host":"localhost"}
+{"timestamp":"2025-08-04T19:06:33.586Z","type":"postgresql","status":"pending","host":"localhost"}
+{"timestamp":"2025-08-04T19:06:33.586Z","type":"ssh","status":"pending","host":"134.209.215.199"}
+{"timestamp":"2025-08-04T19:06:33.586Z","type":"ssh","status":"connected","host":"134.209.215.199"}
+{"timestamp":"2025-08-04T19:06:33.587Z","type":"ssh","status":"info","msg":"Porta 15432 já em uso. Pulando túnel."}
+{"timestamp":"2025-08-04T19:06:33.587Z","type":"postgresql","status":"connected","host":"localhost"}
+{"timestamp":"2025-08-04T19:06:36.403Z","type":"postgresql","status":"pending","host":"localhost"}
+{"timestamp":"2025-08-04T19:06:36.403Z","type":"ssh","status":"pending","host":"134.209.215.199"}
+{"timestamp":"2025-08-04T19:06:36.403Z","type":"ssh","status":"connected","host":"134.209.215.199"}
+{"timestamp":"2025-08-04T19:06:36.403Z","type":"ssh","status":"info","msg":"Porta 15432 já em uso. Pulando túnel."}
+{"timestamp":"2025-08-04T19:06:36.403Z","type":"postgresql","status":"connected","host":"localhost"}
+{"timestamp":"2025-08-04T19:07:04.730Z","type":"postgresql","status":"pending","host":"localhost"}
+{"timestamp":"2025-08-04T19:07:04.731Z","type":"ssh","status":"pending","host":"134.209.215.199"}
+{"timestamp":"2025-08-04T19:07:06.130Z","type":"ssh","status":"connected","host":"134.209.215.199"}
+{"timestamp":"2025-08-04T19:07:06.131Z","type":"ssh","status":"tunnel_created","localPort":15432}
+{"timestamp":"2025-08-04T19:07:06.131Z","type":"postgresql","status":"connected","host":"localhost"}
+{"timestamp":"2025-08-04T19:07:06.132Z","type":"postgresql","status":"pending","host":"localhost"}
+{"timestamp":"2025-08-04T19:07:06.132Z","type":"ssh","status":"pending","host":"134.209.215.199"}
+{"timestamp":"2025-08-04T19:07:06.132Z","type":"ssh","status":"connected","host":"134.209.215.199"}
+{"timestamp":"2025-08-04T19:07:06.133Z","type":"ssh","status":"info","msg":"Porta 15432 já em uso. Pulando túnel."}
+{"timestamp":"2025-08-04T19:07:06.133Z","type":"postgresql","status":"connected","host":"localhost"}
+{"timestamp":"2025-08-04T19:07:08.647Z","type":"postgresql","status":"pending","host":"localhost"}
+{"timestamp":"2025-08-04T19:07:08.647Z","type":"ssh","status":"pending","host":"134.209.215.199"}
+{"timestamp":"2025-08-04T19:07:08.647Z","type":"ssh","status":"connected","host":"134.209.215.199"}
+{"timestamp":"2025-08-04T19:07:08.647Z","type":"ssh","status":"info","msg":"Porta 15432 já em uso. Pulando túnel."}
+{"timestamp":"2025-08-04T19:07:08.647Z","type":"postgresql","status":"connected","host":"localhost"}
+{"timestamp":"2025-08-04T19:08:00.677Z","type":"postgresql","status":"pending","host":"localhost"}
+{"timestamp":"2025-08-04T19:08:00.677Z","type":"ssh","status":"pending","host":"134.209.215.199"}
+{"timestamp":"2025-08-04T19:08:01.995Z","type":"ssh","status":"connected","host":"134.209.215.199"}
+{"timestamp":"2025-08-04T19:08:01.996Z","type":"ssh","status":"tunnel_created","localPort":15432}
+{"timestamp":"2025-08-04T19:08:01.996Z","type":"postgresql","status":"connected","host":"localhost"}
+{"timestamp":"2025-08-04T19:08:01.997Z","type":"postgresql","status":"pending","host":"localhost"}
+{"timestamp":"2025-08-04T19:08:01.998Z","type":"ssh","status":"pending","host":"134.209.215.199"}
+{"timestamp":"2025-08-04T19:08:01.998Z","type":"ssh","status":"connected","host":"134.209.215.199"}
+{"timestamp":"2025-08-04T19:08:01.998Z","type":"ssh","status":"info","msg":"Porta 15432 já em uso. Pulando túnel."}
+{"timestamp":"2025-08-04T19:08:01.998Z","type":"postgresql","status":"connected","host":"localhost"}
+{"timestamp":"2025-08-04T19:08:04.466Z","type":"postgresql","status":"pending","host":"localhost"}
+{"timestamp":"2025-08-04T19:08:04.466Z","type":"ssh","status":"pending","host":"134.209.215.199"}
+{"timestamp":"2025-08-04T19:08:04.466Z","type":"ssh","status":"connected","host":"134.209.215.199"}
+{"timestamp":"2025-08-04T19:08:04.466Z","type":"ssh","status":"info","msg":"Porta 15432 já em uso. Pulando túnel."}
+{"timestamp":"2025-08-04T19:08:04.466Z","type":"postgresql","status":"connected","host":"localhost"}

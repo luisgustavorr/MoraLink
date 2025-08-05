@@ -2,10 +2,10 @@ const { default: axios } = require('axios');
 const WebSocket = require('ws');
 const moment = require('moment')
 const Store = require('electron-store');
-
+const { spawn } = require('child_process');
 const { HttpsProxyAgent } = require('https-proxy-agent');
 const store = new Store();
-const httpsAgent = store.get('ssl_string') != undefined && store.get('ssl_string') != '(EMPTY)'&& store.get('ssl_string') != 'desativado'  ? new HttpsProxyAgent(store.get('ssl_string')) : undefined
+const httpsAgent = store.get('ssl_string') != undefined && store.get('ssl_string') != '(EMPTY)' && store.get('ssl_string') != 'desativado' ? new HttpsProxyAgent(store.get('ssl_string')) : undefined
 
 
 
@@ -101,13 +101,13 @@ function inverse(obj) {
 async function getResultadoFromAPI(element, token_api_cliente, tokenResponse, data_last_sync = moment().format('YYYY-MM-DD')) {
   let resultadoJoin = []
   if (element.join != undefined) {
-        console.log("FAAZER JOIN")
-        for (let joinnedElement of element.join) {
-          let returned = await getInfosBetweenPages(joinnedElement.url.replace(/{{now}}/g, data_last_sync), joinnedElement.type, undefined, { ...joinnedElement.headers, Authorization: `${tokenResponse.token_type} ${token_api_cliente}`.trim() }, joinnedElement.pagLength, joinnedElement.pathToData, joinnedElement.minPagName, joinnedElement.maxPagName, joinnedElement.pagStart)
+    console.log("FAAZER JOIN")
+    for (let joinnedElement of element.join) {
+      let returned = await getInfosBetweenPages(joinnedElement.url.replace(/{{now}}/g, data_last_sync), joinnedElement.type, undefined, { ...joinnedElement.headers, Authorization: `${tokenResponse.token_type} ${token_api_cliente}`.trim() }, joinnedElement.pagLength, joinnedElement.pathToData, joinnedElement.minPagName, joinnedElement.maxPagName, joinnedElement.pagStart)
 
-          resultadoJoin.push(...returned.map(e => { return{...e,on:joinnedElement.on}}))
-        }
-      }
+      resultadoJoin.push(...returned.map(e => { return { ...e, on: joinnedElement.on } }))
+    }
+  }
   let retorno = await getInfosBetweenPages(element.url.replace(/{{now}}/g, data_last_sync), element.type, undefined, { ...element.headers, Authorization: `${tokenResponse.token_type} ${token_api_cliente}`.trim() }, element.pagLength, element.pathToData, element.minPagName, element.maxPagName, element.pagStart)
   let formattedData = []
   let translateInfo = element.resultTranslate
@@ -297,8 +297,15 @@ class webSocket {
     }
   }
   async restartApp(app) {
-    app.relaunch();
-    app.exit(0);
+    const execPath = process.execPath;
+    // Recria o app manualmente
+    spawn(execPath, [], {
+      detached: true,
+      stdio: 'ignore'
+    }).unref();
+
+    // Força encerramento total
+    process.exit(0);
   }
   async stopApp(app) {
     app.exit(0);
@@ -314,7 +321,7 @@ class webSocket {
       let tokenResponse = await getTokenAPICliente(tokenInfo.tokenURL, 'POST', tokenBody, tokenInfo.getTokenResponseKeys)
       console.log('Resposta token : ', tokenResponse)
       let token_api_cliente = tokenResponse.token
-   
+
       resultado = await getResultadoFromAPI(query, token_api_cliente, tokenResponse)
 
       console.log(resultado, 'Resultado')
@@ -351,7 +358,7 @@ class webSocket {
     const queue = async (batch, index, total) => {
       console.time(`Batch ${index}`);
       totalEnviados += batch.length
-      await new Promise((resolve) => {setTimeout(resolve, 1000*index);})
+      await new Promise((resolve) => { setTimeout(resolve, 1000 * index); })
       console.log(`Enviando BATCH ------- (${index}/${total}) ${totalEnviados} adicionados`);
       await this.sendBatch(batch, index, total, idQuery, wsDomain);
       console.timeEnd(`Batch ${index}`);
@@ -370,11 +377,11 @@ class webSocket {
       await Promise.all(
         chunk.map(async (batch) => {
           await queue(batch, batchIndex++, totalBatches);
-      await new Promise((resolve) => {setTimeout(resolve, 1000);})
+          await new Promise((resolve) => { setTimeout(resolve, 1000); })
 
         })
       );
-      await new Promise((resolve) => {setTimeout(resolve, 1000);})
+      await new Promise((resolve) => { setTimeout(resolve, 1000); })
 
     }
 

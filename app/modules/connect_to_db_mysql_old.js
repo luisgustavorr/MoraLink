@@ -6,7 +6,8 @@ const PoolManager = require('mysql-connection-pool-manager');
 const sshTunneling = require('./sshTunneling')
 
 class mysqlConnection {
-    constructor() {
+   constructor(connInfo) {
+
         this.MySql = {
             host: store.get("host_db"),
             user: store.get("user_db"),
@@ -50,16 +51,7 @@ class mysqlConnection {
             }catch{
                 console.log('eRROO NA VERSÃO ')
             }
-            console.log('Conexão Mysql Old',JSON.stringify({
-                host: store.get("host_db"),
-                user: store.get("user_db"),
-                password: store.get("password_db"),
-                database: store.get("db_name_db"),
-                port: Number(store.get("port_db")) || 3306,
-                insecureAuth: true,   // Habilita autenticação antiga
-                ssl: false            // Desabilita SSL
-
-            }))
+   
             this.connection = mysql.createPool({
                 host: store.get("host_db"),
                 user: store.get("user_db"),
