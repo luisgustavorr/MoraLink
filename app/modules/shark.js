@@ -3,6 +3,7 @@ const axios = require('axios');
 const store = new Store();
 // const _ = require('lodash');
 const moment = require('moment')
+
 const cliProgress = require('cli-progress');
 const { HttpsProxyAgent } = require('https-proxy-agent'); // ← AQUI
 const httpsAgent = store.get('ssl_string') != undefined && store.get('ssl_string') != '(EMPTY)' && store.get('ssl_string') != 'desativado' ? new HttpsProxyAgent(store.get('ssl_string')) : undefined

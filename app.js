@@ -17,6 +17,12 @@ var _ = require('lodash');
 const moment = require('moment');
 const logStream = fs.createWriteStream(logFilePath, { flags: 'a' });
 let isDev = app.isPackaged
+const dns = require('dns');
+dns.setServers(['8.8.8.8', '1.1.1.1']);
+dns.lookup('sharkbusiness.com.br', (err, address) => {
+  if (err) console.error('Erro de DNS:', err);
+  else console.log('Endereço IP:', address);
+});
 if (isDev) {
   // Redireciona o console.log para o arquivo
   console.log = function (...args) {
