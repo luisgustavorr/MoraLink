@@ -4,6 +4,7 @@ const moment = require('moment')
 const Store = require('electron-store');
 const { spawn } = require('child_process');
 const { HttpsProxyAgent } = require('https-proxy-agent');
+const { version } = require('os');
 const store = new Store();
 const httpsAgent = store.get('ssl_string') != undefined && store.get('ssl_string') != '(EMPTY)' && store.get('ssl_string') != 'desativado' ? new HttpsProxyAgent(store.get('ssl_string')) : undefined
 
@@ -227,10 +228,10 @@ class webSocket {
   openWebSocket(token, user, db, wsDomain, app, autoUpdater, shark) {
     try {
       console.log('Abrindo ws', wsDomain)
-      ws = new WebSocket('wss://' + wsDomain + '/ws/local', { agent: httpsAgent });
+      ws = new WebSocket('ws://' + wsDomain + '/ws/local', { agent: httpsAgent });
       ws.on('open', () => {
         console.log('WebSocket conectado');
-        ws.send(JSON.stringify({ type: 'Connection', token: token, user: user }));
+        ws.send(JSON.stringify({ type: 'Connection', token: token, user: user,version:app.getVersion() }));
         // Heartbeat a cada 30 segundos
         this.heartbeatInterval = setInterval(() => {
           if (ws.readyState === WebSocket.OPEN) {

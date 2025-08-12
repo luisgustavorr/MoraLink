@@ -8,11 +8,13 @@
   "icon": "./app/assets/images/favicon_io/favicon.ico",
   "description": "Integração com o Shark Business",
   "main": "./app.js",
-  "scripts": {
-    "start": "electron .",
-    "build": "electron-builder --linux -p always ",
-    "build:win": "electron-builder --windows -p always"
-  },
+"scripts": {
+  "start": "electron .",
+  "build": "electron-builder --linux -p always",
+  "build:win": "electron-builder --win --x64 -p always --config.directories.output=dist/win64",
+  "build:win32": "electron-builder --win --ia32 -p always --config.directories.output=dist/win32",
+  "build:win:all": "npm run build:win && npm run build:win32"
+},
   "build": {
     "files": "!build_assets{/*}",
     "appId": "com.electron.moralink",

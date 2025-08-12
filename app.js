@@ -83,7 +83,6 @@ autoUpdater.allowPrerelease = false; // Bloqueia versões beta
 autoUpdater.on('checking-for-update', () => {
   console.log('Verificando atualizações...');
 });
-
 autoUpdater.on('update-available', async (info) => {
   console.log(`Uma nova versão (${info.version}) está disponível.`)
   const { response } = await dialog.showMessageBox({
