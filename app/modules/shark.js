@@ -17,38 +17,39 @@ class sharkConnection {
   }
   async getToken() {
     let usuario = await this.db.exec('SELECT * FROM client_info WHERE "user" = ?', [store.get('user')]);
-    console.log(usuario)
     if (usuario.length == 0 || usuario[0]["ativo"] == true || usuario[0]["ativo"] == "true") {
-      let data = JSON.stringify({
-        "username": store.get('user'),
-        "password": store.get('password')
-      });
+      console.log('USUÁRIO:',usuario[0]["token"])
+
       console.log('HTTP AGENT SENDO USADO : ', store.get('ssl_string'))
       let config = {
-        method: 'post',
+        method: 'get',
         maxBodyLength: Infinity,
-        url: 'https://sharkbusiness.com.br/api/v2/autentificar/obter-token-status/',
+        url: 'https://sharkbusiness.com.br/api/v2/autentificar/check-status/',
         headers: {
           'Content-Type': 'application/json',
-          'User-Agent': 'insomnia/2023.5.8'
+          'User-Agent': 'insomnia/2023.5.8',
+          'Authorization':`Token ${usuario[0]["token"]}`
         },
-        httpsAgent: httpsAgent,
-        data: data
+        httpsAgent: httpsAgent
       };
       await new Promise((resolve) => {
         axios.request(config)
           .then(async (response) => {
             // usuario = await this.db.exec('INSERT INTO client_info (token,descricao) VALUES (?,?)', [response.data.token, store.get('user')]);
-            this.token = response.data.token
-            // if (!response.data.status) {
-            //   await this.db.exec('UPDATE client_info SET  "ativo" = ? WHERE "user" = ?', [response.data.status, store.get('user')]);
-            //   console.log('Status desativado')
-            //   this.token = undefined
-            // }
+            this.token = usuario[0]["token"]
+            if (!response.data.status) {
+              await this.db.exec('UPDATE client_info SET  "ativo" = ? WHERE "user" = ?', [response.data.status, store.get('user')]);
+              console.log('Status desativado')
+              this.token = undefined
+            }
             resolve(true)
           })
-          .catch((error) => {
-            console.log(error)
+          .catch((err) => {
+            console.log('Config:',JSON.stringify(config))
+            console.error("Status:", err.response?.status);
+            console.error("Response:", JSON.stringify(err.response?.data));
+            console.error("Headers:", err.response?.headers);
+            console.error("Request Body:", data);
             resolve(true)
 
           });
@@ -60,7 +61,6 @@ class sharkConnection {
         this.token = undefined
       }
     }
-
     return this.token
   }
 

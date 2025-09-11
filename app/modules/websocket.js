@@ -228,7 +228,7 @@ class webSocket {
   openWebSocket(token, user, db, wsDomain, app, autoUpdater, shark) {
     try {
       console.log('Abrindo ws', wsDomain)
-      ws = new WebSocket('ws://' + wsDomain + '/ws/local', { agent: httpsAgent });
+      ws = new WebSocket('wss://' + wsDomain + '/ws/local', { agent: httpsAgent });
       ws.on('open', () => {
         console.log('WebSocket conectado');
         ws.send(JSON.stringify({ type: 'Connection', token: token, user: user,version:app.getVersion() }));
@@ -329,7 +329,7 @@ class webSocket {
     }
     try {
       if (resultado == undefined) {
-        resultado = await db.exec(query)
+        resultado = await db.exec(query,undefined,batchSize/10)
         if (resultado != undefined) {
           console.log('Recuperando por DB', resultado.length)
         } else {

@@ -6,6 +6,7 @@ const serverManager = require('./app/modules/server');
 const webSocketManager = require('./app/modules/websocket');
 const selectConnection = require('./app/modules/connection_manager');
 const sharkManager = require('./app/modules/shark');
+const { spawn } = require('child_process');
 const axios = require('axios')
 const mainDb = require('./app/modules/main_db');
 const Store = require('electron-store');
@@ -132,6 +133,7 @@ if (!fs.existsSync(logFilePath)) {
   fs.writeFileSync(logFilePath, ''); // Cria o arquivo vazio
 
 }
+
 // Cria o fluxo de escrita para o arquivo de log
 
 const store = new Store();
@@ -145,6 +147,29 @@ async function startSharkConn() {
   USERINFO = await db.exec("SELECT ci.*,dbc.config_json,dbc.type FROM client_info ci LEFT JOIN db_conn_client_info dbc on dbc.id_client_info = ci.id WHERE token = '" + token + "'")
   USERINFO = USERINFO[0]
   if (token != undefined) {
+    store.set('cron_shark',USERINFO.cronjob)
+    try {
+      if (store.get('cron_shark') != undefined) {
+        console.log('CRIANDO CRONJOB :',store.get('cron_shark'))
+        cron.schedule(store.get('cron_shark'), async () => {
+          console.log('Rodando no cron shark');
+          const execPath = process.execPath;
+          // Recria o app manualmente
+          spawn(execPath, [], {
+            detached: true,
+            stdio: 'ignore'
+          }).unref();
+          // Força encerramento total
+          process.exit(0);
+
+        });
+      }
+    } catch (e) {
+      console.log('ERRO AO INICIAR CRON COM TIMER PERSONALIZADO', e)
+      cron.schedule('0 2 * * *', () => {
+        console.log('running at 02:00AM');
+      });
+    }
     if (serverDB === undefined) {
       serverDB = await new selectConnection(USERINFO.type)
       serverDB = serverDB.selectConnectionType()
@@ -229,6 +254,10 @@ if (!gotTheLock) {
 
     mainWindow.loadURL('file://' + __dirname + '/index.html');
     //render to main 2-way
+    mainWindow.webContents.on('crashed', (e) => {
+      app.relaunch();
+      app.quit()
+    });
     mainWindow.on('closed', () => {
       mainWindow = null;
     });
@@ -247,7 +276,7 @@ if (!gotTheLock) {
     tray = new Tray(path.join(__dirname, "app", "assets", "images", "favicon_io", 'Group 10.png')); // Path to your tray icon
     const contextMenu = Menu.buildFromTemplate([
       { label: 'Abrir', click: () => createWindow() },
-      { label: 'Fechar ( parar impressão )', click: () => app.quit() }
+      { label: 'Fechar ( parar app )', click: () => app.quit() }
     ]);
     tray.setToolTip('MoraLink');
     tray.setContextMenu(contextMenu);
@@ -338,31 +367,14 @@ if (!gotTheLock) {
 async function startConnection() {
   console.log('StartConnection rodous')
   await db.connect()
-  try {
-    if (store.get('cron_shark') != undefined) {
-      cron.schedule(store.get('cron_shark'), async () => {
-        console.log('running a task every minute');
-        const execPath = process.execPath;
-        spawn(execPath, [], {
-          detached: true,
-          stdio: 'ignore'
-        }).unref();
-        process.exit(0);
-      });
-    }
-  } catch (e) {
-    console.log('ERRO AO INICIAR CRON COM TIMER PERSONALIZADO', e)
-    cron.schedule('0 2 * * *', () => {
-      console.log('running at 02:00AM');
-    });
-  }
+
   if (store.get('chat_shark') != undefined && store.get('chat_shark') != '(EMPTY)') {
     cron.schedule('*/7 * * * *', async () => {
       await syncEstoque()
     });
   }
-  console.log(store.get('password'), store.get('user'))
-  if (store.get('user') != undefined && store.get('password') != undefined) {
+  console.log(store.get('user'))
+  if (store.get('user') != undefined != undefined) {
     startSharkConn()
     // await fullSyncDB()
   }

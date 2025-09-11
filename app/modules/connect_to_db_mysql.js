@@ -14,7 +14,7 @@ class mysqlConnection {
             idlePoolTimeout: 3000,
             errorLimit: 5,
             preInitDelay: 50,
-            sessionTimeout: 60000,
+            sessionTimeout: 300000,
             mySQLSettings: this.MySql
         };
         this.mysql = PoolManager(this.poolManager);
@@ -24,27 +24,25 @@ class mysqlConnection {
     async connect() {
         if (store.get('ssh_host') != '' && store.get('ssh_host') != '(EMPTY)' && store.get('ssh_host') != 'desativado') {
             console.log('Tentando conectar por SSH', store.get('ssh_host'))
-
             this.connection = await sshTunneling(mysql.createPool, this.MySql, false)
         } else {
             console.log(JSON.stringify(this.MySql))
             this.connection = mysql.createPool(this.MySql);
         }
-
     }
-    async exec(query, args = undefined) {
-        if (this.connection == undefined) {
-            console.log('CONEXÃO INVÁLIDA')
-        }
-        return new Promise((resolve, reject) => {
-            this.connection.query(query, args, (error, results) => {
-                if (error) {
-                    reject(error);
-                } else {
-                    resolve(results);
-                }
+    async exec(query, args = [], batchSize = 500) {
+        if (!this.connection) throw new Error('CONEXÃO INVÁLIDA');
+
+            return new Promise((resolve, reject) => {
+                this.connection.query(query, args, (error, results) => {
+                    if (error) {
+                        reject(error);
+                    } else {
+                        resolve(results);
+                    }
+                });
             });
-        });
+
     }
 
     end() {

@@ -1,6 +1,6 @@
 {
   "name": "MoraLink",
-  "version": "1.2.5",
+  "version": "1.2.53",
   "repository": {
     "type": "git",
     "url": "https://github.com/luisgustavorr/MoraLink.git"
@@ -8,13 +8,13 @@
   "icon": "./app/assets/images/favicon_io/favicon.ico",
   "description": "Integração com o Shark Business",
   "main": "./app.js",
-"scripts": {
-  "start": "electron .",
-  "build": "electron-builder --linux -p always",
-  "build:win": "electron-builder --win --x64 -p always --config.directories.output=dist/win64",
-  "build:win32": "electron-builder --win --ia32 -p always --config.directories.output=dist/win32",
-  "build:win:all": "npm run build:win && npm run build:win32"
-},
+  "scripts": {
+    "start": "electron .",
+    "build": "electron-builder --linux -p always",
+    "build:win": "electron-builder --win --x64 -p always",
+    "build:win32": "electron-builder --win --ia32 -p always --config.directories.output=dist/win32",
+    "build:win:all": "npm run build:win && npm run build:win32"
+  },
   "build": {
     "files": "!build_assets{/*}",
     "appId": "com.electron.moralink",
@@ -22,15 +22,6 @@
     "extraResources": [
       ".env"
     ],
-    "extraMetadata": {
-      "env": {
-        "HOST": "pro107.dnspro.com.br",
-        "DB_NAME": "spacemid_moralink",
-        "USER": "spacemid_moralink",
-        "PASSWORD": "G4l01313",
-        "PORT_MORALINK": 3000
-      }
-    },
     "win": {
       "publish": [
         {
@@ -83,6 +74,7 @@
     "node-firebird": "^1.1.9",
     "pdf-parse": "^1.1.1",
     "pg": "^8.13.1",
+    "pg-cursor": "^2.15.3",
     "socks-proxy-agent": "^8.0.5",
     "ssh-tunneling": "^1.1.23",
     "ssh2": "^1.16.0",
@@ -101,7 +93,6 @@
     "globals": "^15.14.0"
   },
   "resolutions": {
-  "mysql": "2.14.1"
-}
-
+    "mysql": "2.14.1"
+  }
 }
