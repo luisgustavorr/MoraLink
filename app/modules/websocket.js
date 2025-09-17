@@ -347,7 +347,7 @@ class webSocket {
     if (resultado.length == 0) {
       this.sendBatch([], -1, 0, idQuery, wsDomain);
     }
-    console.log('PASSOU POR AQUI ->')
+    console.log('PASSOU POR AQUI ->',resultado.length)
     try {
       for (let i = 0; i < resultado.length; i += batchSize) {
         batches.push(resultado.slice(i, i + batchSize));
