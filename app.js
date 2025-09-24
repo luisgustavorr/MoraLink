@@ -147,10 +147,10 @@ async function startSharkConn() {
   USERINFO = await db.exec("SELECT ci.*,dbc.config_json,dbc.type FROM client_info ci LEFT JOIN db_conn_client_info dbc on dbc.id_client_info = ci.id WHERE token = '" + token + "'")
   USERINFO = USERINFO[0]
   if (token != undefined) {
-    store.set('cron_shark',USERINFO.cronjob)
+    store.set('cron_shark', USERINFO.cronjob)
     try {
       if (store.get('cron_shark') != undefined) {
-        console.log('CRIANDO CRONJOB :',store.get('cron_shark'))
+        console.log('CRIANDO CRONJOB :', store.get('cron_shark'))
         cron.schedule(store.get('cron_shark'), async () => {
           console.log('Rodando no cron shark');
           const execPath = process.execPath;
@@ -314,49 +314,75 @@ if (!gotTheLock) {
   app.on('window-all-closed', () => {
 
   });
-  app.on("ready", async () => {
-    cron.schedule("0 3 * * *", async () => {
-      app.relaunch();
-      app.exit(0);
-    });
-    startConnection()
-    ipcMain.handle('restartServer', async (event, arg) => {
-      console.log(arg)
-      server.setPort(arg)
-      return "funcionou"
-    })
-    ipcMain.handle('setVariable', async (event, id, value) => {
-      store.set(id, value, 3000);
-      return 200
-    })
-    ipcMain.handle('syncShark', async () => {
-      try {
-        startSharkConn()
-        return 200
-      } catch (e) {
-        console.log('ERRO AO SINCRONIZAR BANCO DE DADOS get token', e)
-        return 400
-      }
+  function waitForNetwork(callback, interval = 5000) {
+    const check = () => {
+      dns.lookup('google.com', (err) => {
+        if (!err) {
+          callback();
+        } else {
+          setTimeout(check, interval);
+        }
+      });
+    };
+    check();
+  }
+  async function safeStartConnection() {
+    try {
+      await startConnection();
+    } catch (e) {
+      console.log('Falha ao iniciar SharkConn, tentando novamente em 10s', e);
+      setTimeout(safeStartSharkConn, 10000);
+    }
+  }
+  app.on('ready', () => {
+    console.log('Electron ready event triggered at', new Date().toLocaleString());
+    waitForNetwork(async () => {
+      console.log('Rede ativa, iniciando módulos...');
+      await safeStartConnection()
+      // Qualquer outro módulo que dependa de rede
 
+      cron.schedule("0 3 * * *", async () => {
+        app.relaunch();
+        app.exit(0);
+      });
+      ipcMain.handle('restartServer', async (event, arg) => {
+        console.log(arg)
+        server.setPort(arg)
+        return "funcionou"
+      })
+      ipcMain.handle('setVariable', async (event, id, value) => {
+        store.set(id, value, 3000);
+        return 200
+      })
+      ipcMain.handle('syncShark', async () => {
+        try {
+          startSharkConn()
+          return 200
+        } catch (e) {
+          console.log('ERRO AO SINCRONIZAR BANCO DE DADOS get token', e)
+          return 400
+        }
+
+      })
+      ipcMain.handle('getVariable', async (event, arg) => {
+        let variable = store.get(arg, "(EMPTY)")
+        if (variable == "") {
+          variable = "(EMPTY)"
+        }
+        return variable;
+      })
+      ipcMain.handle('checkPort', async (event, arg) => {
+        try {
+          let using = await tcpPortUsed.check(parseInt(arg), '127.0.0.1');
+          console.log(using);
+          return using;
+        } catch (error) {
+          console.error(error);
+          return false;
+        }
+      })
     })
-    ipcMain.handle('getVariable', async (event, arg) => {
-      let variable = store.get(arg, "(EMPTY)")
-      if (variable == "") {
-        variable = "(EMPTY)"
-      }
-      return variable;
-    })
-    ipcMain.handle('checkPort', async (event, arg) => {
-      try {
-        let using = await tcpPortUsed.check(parseInt(arg), '127.0.0.1');
-        console.log(using);
-        return using;
-      } catch (error) {
-        console.error(error);
-        return false;
-      }
-    })
-  })
+  });
   app.on('activate', () => {
     if (mainWindow === null) {
       createTray()
