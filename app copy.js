@@ -379,3 +379,37 @@ async function startConnection() {
     // await fullSyncDB()
   }
 }
+function compareObjects(objetoBase, objetoAoAnalisar, comparar = true) {
+  if (!comparar || objetoBase == undefined || objetoBase == null) return false
+  let distinct = false
+  Object.keys(objetoBase).forEach(e => {
+    if (objetoBase[e] instanceof Date || objetoAoAnalisar[e] instanceof Date || objetoAoAnalisar[e] == `Invalid date` || objetoBase[e] == `Invalid date`) {
+      objetoBase[e] = moment(objetoBase[e]).format('YYYY-MM-DD')
+      objetoAoAnalisar[e] = moment(objetoAoAnalisar[e]).format('YYYY-MM-DD')
+
+    }
+    try {
+      if (objetoBase[e].toString().replace(/ /g, '') != objetoAoAnalisar[e].toString().replace(/ /g, '')) {
+        console.log('APP.JS -> ', e, `'${objetoBase[e]}'`, `'${objetoAoAnalisar[e]}'`)
+        distinct = true
+      }
+    } catch {
+      if (objetoBase[e] != objetoAoAnalisar[e]) {
+        console.log('APP.JS -> ', e, `'${objetoBase[e]}'`, `'${objetoAoAnalisar[e]}'`)
+
+        distinct = true
+      }
+    }
+
+  })
+  return distinct
+}
+
+
+function inverse(obj) {
+  var retobj = {};
+  for (var key in obj) {
+    retobj[obj[key]] = key;
+  }
+  return retobj;
+}

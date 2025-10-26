@@ -14,55 +14,84 @@ class sharkConnection {
     this.produtos = undefined
     this.categorias = undefined
     this.clientes = undefined
+    this.retries = 0
+        this.urlteste = "https://sharkbusiness.com.br/api/v2/autentificar/check-status/";
+
   }
-  async getToken() {
-    let usuario = await this.db.exec('SELECT * FROM client_info WHERE "user" = ?', [store.get('user')]);
-    if (usuario.length == 0 || usuario[0]["ativo"] == true || usuario[0]["ativo"] == "true") {
-      console.log('USUÁRIO:',usuario[0]["token"])
+ async getToken() {
+  let usuario = await this.db.exec(
+    'SELECT * FROM client_info WHERE "user" = ?',
+    [store.get('user')]
+  );
 
-      console.log('HTTP AGENT SENDO USADO : ', store.get('ssl_string'))
-      let config = {
-        method: 'get',
-        maxBodyLength: Infinity,
-        url: 'https://sharkbusiness.com.br/api/v2/autentificar/check-status/',
-        headers: {
-          'Content-Type': 'application/json',
-          'User-Agent': 'insomnia/2023.5.8',
-          'Authorization':`Token ${usuario[0]["token"]}`
-        },
-        httpsAgent: httpsAgent
-      };
-      await new Promise((resolve) => {
-        axios.request(config)
-          .then(async (response) => {
-            // usuario = await this.db.exec('INSERT INTO client_info (token,descricao) VALUES (?,?)', [response.data.token, store.get('user')]);
-            this.token = usuario[0]["token"]
-            if (!response.data.status) {
-              await this.db.exec('UPDATE client_info SET  "ativo" = ? WHERE "user" = ?', [response.data.status, store.get('user')]);
-              console.log('Status desativado')
-              this.token = undefined
-            }
-            resolve(true)
-          })
-          .catch((err) => {
-            console.log('Config:',JSON.stringify(config))
-            console.error("Status:", err.response?.status);
-            console.error("Response:", JSON.stringify(err.response?.data));
-            console.error("Headers:", err.response?.headers);
-            console.error("Request Body:", data);
-            resolve(true)
+  if (usuario.length === 0 || usuario[0]["ativo"] === true || usuario[0]["ativo"] === "true") {
+    console.log('USUÁRIO:', usuario[0]["token"]);
+    console.log('HTTP AGENT SENDO USADO:', store.get('ssl_string'));
 
-          });
-      })
+    const config = {
+      method: 'get',
+      maxBodyLength: Infinity,
+      url: this.urlteste,
+      headers: {
+        'Content-Type': 'application/json',
+        'User-Agent': 'insomnia/2023.5.8',
+        'Authorization': `Token ${usuario[0]["token"]}`
+      },
+      httpsAgent: httpsAgent
+    };
 
-    } else {
-      this.token = usuario[0].token
-      if (usuario[0]["ativo"] == false || usuario[0]["ativo"] == "false") {
-        this.token = undefined
+    try {
+      const response = await axios.request(config);
+
+      this.token = usuario[0]["token"];
+
+      if (!response.data.status) {
+        await this.db.exec(
+          'UPDATE client_info SET "ativo" = ? WHERE "user" = ?',
+          [response.data.status, store.get('user')]
+        );
+        console.log('Status desativado');
+        this.token = undefined;
       }
+
+      // Reset retries after success
+      this.retries = 0;
+      return this.token;
+
+    } catch (err) {
+      console.error("Status:", err.response?.status);
+      console.error("Response:", JSON.stringify(err.response?.data));
+      console.error("Headers:", err.response?.headers);
+      console.log('Tentativa:', this.retries);
+
+      // Handle retry URL switch
+      if (this.retries === 1) {
+        this.urlteste = "https://sharkbusiness.com.br/api/v2/autentificar/check-status/";
+      }
+
+      if (this.retries >= 5) {
+        console.log('Limite de tentativas atingido');
+        this.retries = 0;
+        return undefined;
+      }
+
+      this.retries += 1;
+      console.log(`Esperando 1 minuto antes de tentar novamente... (tentativa ${this.retries})`);
+      await new Promise(r => setTimeout(r, 60000));
+
+      // Properly await the next retry
+      return this.getToken();
     }
-    return this.token
+
+  } else {
+    this.token = usuario[0].token;
+    if (usuario[0]["ativo"] === false || usuario[0]["ativo"] === "false") {
+      this.token = undefined;
+    }
   }
+
+  return this.token;
+}
 
   async cleanShark(token = this.token, infos = ['vendedores', 'vendas', 'produto', 'cliente', 'categoria']) {
     const BATCH_SIZE = 25; // Tamanho do lote de requisições
@@ -72,7 +101,7 @@ class sharkConnection {
     console.log(infos)
     for (const e of infos) {
       let dadosShark = await this.getInfosBetweenPages(e, undefined, token);
-      dadosShark = dadosShark.filter(item => item.id_externo != null && item.id_externo != undefined);
+      // dadosShark = dadosShark.filter(item => item.id_externo != null && item.id_externo != undefined);
       const bar1 = new cliProgress.SingleBar({}, cliProgress.Presets.shades_classic);
       bar1.start(dadosShark.length, 0);
       let totalRequests = 0; // contador global

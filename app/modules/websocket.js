@@ -26,18 +26,30 @@ async function accessObjectByPath(array, pathToInfo) {
   }
   return recursiveInfo
 }
-async function getInfosBetweenPages(url, type, body, headers, batchSize = 1, pathToData = undefined, minPagName = undefined, maxPagName = "page", page = 1) {
+async function getInfosBetweenPages(url, type, body, headers, batchSize = 1, pathToData = undefined, minPagName = undefined, maxPagName = "", page ) {
   let arrayCompleto = [];
   let hasMorePages = true;
   let pageSelected = undefined
+  let onlyOnce = false
   if (minPagName != undefined) {
     url += `${minPagName}={{minPag}}`
   }
+  if( maxPagName != ""){
   url += `&${maxPagName}={{currentPage}}`
+
+  }
+  if(page == undefined){
+    console.log('CANCELADA')
+    page = 1
+    onlyOnce = true
+  }
   const fetchPage = async (currentPage) => {
     pageSelected = currentPage
     try {
       if (hasMorePages) {
+        if(onlyOnce){
+          hasMorePages = false
+        }
         // console.log('CurrentPage hp:',currentPage,batchSize)
 
         const response = await sendRequestToClientAPI(`${url.replace(/{{minPag}}/g, currentPage - batchSize).replace(/{{currentPage}}/g, batchSize)}`, type, undefined, headers)
@@ -122,6 +134,7 @@ async function getResultadoFromAPI(element, token_api_cliente, tokenResponse, da
     delete translateInfo['filter']
   }
   let translateInfoKeys = inverse(translateInfo)
+  let i = 1
 
   for (const unformattedElement of retorno) {
     let joinnedInfo = resultadoJoin.find(sub => eval(sub.on))
@@ -173,6 +186,7 @@ async function getResultadoFromAPI(element, token_api_cliente, tokenResponse, da
       }
     }
     formattedData.push(formatedElement)
+    i++
   }
   let resultado = formattedData
   console.log(resultado, 'result')
@@ -230,7 +244,7 @@ class webSocket {
       console.log('Abrindo ws', wsDomain)
       ws = new WebSocket('wss://' + wsDomain + '/ws/local', { agent: httpsAgent });
       ws.on('open', () => {
-        console.log('WebSocket conectado');
+      
         ws.send(JSON.stringify({ type: 'Connection', token: token, user: user,version:app.getVersion() }));
         // Heartbeat a cada 30 segundos
         this.heartbeatInterval = setInterval(() => {
@@ -266,7 +280,6 @@ class webSocket {
             return
           }
           if (command["type"] !== undefined && command["type"] === "Query") {
-            console.log('Solicitação para gerar query :', JSON.stringify(command))
             this.execQuery(db, command["query"], command["idQuery"], wsDomain, command["batchSize"], command["getToken"])
           }
         } catch (error) {
@@ -328,6 +341,7 @@ class webSocket {
       console.log(resultado, 'Resultado')
     }
     try {
+      console.log('Executando query : ',query)
       if (resultado == undefined) {
         resultado = await db.exec(query,undefined,batchSize/10)
         if (resultado != undefined) {
