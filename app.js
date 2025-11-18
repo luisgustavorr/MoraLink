@@ -54,19 +54,12 @@ process.on('unhandledRejection', (reason, promise) => {
   });
 });
 
-// Tratamento global de exceções
 process.on('uncaughtException', async (error) => {
   log('electron', 'uncaught_exception', {
     error: error.message,
     stack: error.stack
   });
-  // Forçar recriação de conexões
-  USERINFO = await db.exec("SELECT ci.*,dbc.config_json,dbc.type FROM client_info ci LEFT JOIN db_conn_client_info dbc on dbc.id_client_info = ci.id WHERE token = '" + token + "'")
-  USERINFO = USERINFO[0]
-  serverDB = await new selectConnection(USERINFO.type)
-  serverDB = serverDB.selectConnectionType()
-  serverDB = new serverDB(USERINFO.config_json)
-  await serverDB.connect()
+  await startSharkConn()
 });
 require('dotenv').config({
   path: app.isPackaged
@@ -170,17 +163,20 @@ async function startSharkConn() {
         console.log('running at 02:00AM');
       });
     }
-    if (typeof USERINFO.tokenQuery != "object"){
-      USERINFO.tokenQuery = JSON.parse(USERINFO.tokenQuery)
+    console.log(USERINFO )
+    if (typeof USERINFO.tokenQuery == "string"){
+      USERINFO.tokenQuery = JSON.parse(USERINFO.tokenquery)
     }
+
     if (serverDB == undefined && Object.keys(USERINFO.tokenQuery).length ==0) {
       serverDB = await new selectConnection(USERINFO.type)
       serverDB = serverDB.selectConnectionType()
       serverDB = new serverDB(USERINFO.config_json)
       await serverDB.connect()
     }
-    console.log('Indo ali abrir o websocket manualmente -> ', store.get('user'),serverDB, Object.keys(USERINFO.tokenQuery).length >0)
     webSokcet.openWebSocket(token, store.get('user'), serverDB, USERINFO.domainws, app, autoUpdater, Shark)
+
+    console.log('Indo ali abrir o websocket manualmente -> ', store.get('user'),serverDB, Object.keys(USERINFO.tokenQuery).length >0)
   } else {
     cronReconnect = cron.schedule("0 * * * *", async () => {
       startSharkConn()

@@ -6,6 +6,7 @@ const { spawn } = require('child_process');
 const { HttpsProxyAgent } = require('https-proxy-agent');
 const { version } = require('os');
 const store = new Store();
+
 const httpsAgent = store.get('ssl_string') != undefined && store.get('ssl_string') != '(EMPTY)' && store.get('ssl_string') != 'desativado' ? new HttpsProxyAgent(store.get('ssl_string')) : undefined
 
 
@@ -14,6 +15,19 @@ let ws = undefined;
 let isConnected = false;
 let verifyConnectionInterval = undefined;
 let APIClienteToken = {
+}
+function getTypeConn(type,wsDomain){
+  let isLocal = wsDomain.includes('localhost')
+  let result = ''
+  if (type == 'ws' ){
+    result = 'ws'
+  }else{
+    result = 'http'
+  }
+  if (!isLocal){
+    result += 's'
+  }
+  return result
 }
 async function accessObjectByPath(array, pathToInfo) {
   let paths = pathToInfo.split('/')
@@ -50,9 +64,9 @@ async function getInfosBetweenPages(url, type, body, headers, batchSize = 1, pat
         if(onlyOnce){
           hasMorePages = false
         }
-        // console.log('CurrentPage hp:',currentPage,batchSize)
+        console.log('CurrentPage hp:',currentPage,batchSize)
 
-        const response = await sendRequestToClientAPI(`${url.replace(/{{minPag}}/g, currentPage - batchSize).replace(/{{currentPage}}/g, batchSize)}`, type, undefined, headers)
+        const response = await sendRequestToClientAPI(`${url.replace(/{{minPag}}/g, currentPage - batchSize).replace(/{{currentPage}}/g, currentPage)}`, type, undefined, headers)
 
         let responseSearchResult = pathToData == undefined ? response : await accessObjectByPath(response, pathToData)
 
@@ -79,12 +93,11 @@ async function getInfosBetweenPages(url, type, body, headers, batchSize = 1, pat
       const promises = [];
       // Adiciona as requisições do batch
       promises.push(fetchPage(currentPage + batchSize));
-
       // Executa todas as requisições do batch
       const responses = await Promise.all(promises);
       for (const response of responses) {
         if (response == undefined) continue
-        // console.log('RESPOTSA :', response)
+        console.log(response.length,arrayCompleto.length)
         arrayCompleto = arrayCompleto.concat(response);
         if (response.length == 0) {
           hasMorePages = false
@@ -116,12 +129,12 @@ async function getResultadoFromAPI(element, token_api_cliente, tokenResponse, da
   if (element.join != undefined) {
     console.log("FAAZER JOIN")
     for (let joinnedElement of element.join) {
-      let returned = await getInfosBetweenPages(joinnedElement.url.replace(/{{now}}/g, data_last_sync), joinnedElement.type, undefined, { ...joinnedElement.headers, Authorization: `${tokenResponse.token_type} ${token_api_cliente}`.trim() }, joinnedElement.pagLength, joinnedElement.pathToData, joinnedElement.minPagName, joinnedElement.maxPagName, joinnedElement.pagStart)
+      let returned = await getInfosBetweenPages(joinnedElement.url.replace(/{{now}}/g, data_last_sync), joinnedElement.type, undefined, { ...joinnedElement.headers, Authorization: `${tokenResponse.token_type} ${token_api_cliente}`.trim(), Token: `${tokenResponse.token_type} ${token_api_cliente}`.trim() }, joinnedElement.pagLength, joinnedElement.pathToData, joinnedElement.minPagName, joinnedElement.maxPagName, joinnedElement.pagStart)
 
       resultadoJoin.push(...returned.map(e => { return { ...e, on: joinnedElement.on } }))
     }
   }
-  let retorno = await getInfosBetweenPages(element.url.replace(/{{now}}/g, data_last_sync), element.type, undefined, { ...element.headers, Authorization: `${tokenResponse.token_type} ${token_api_cliente}`.trim() }, element.pagLength, element.pathToData, element.minPagName, element.maxPagName, element.pagStart)
+  let retorno = await getInfosBetweenPages(element.url.replace(/{{now}}/g, data_last_sync), element.type, undefined, { ...element.headers, Authorization: `${tokenResponse.token_type} ${token_api_cliente}`.trim(), Token: `${tokenResponse.token_type} ${token_api_cliente}`.trim() }, element.pagLength, element.pathToData, element.minPagName, element.maxPagName, element.pagStart)
   let formattedData = []
   let translateInfo = element.resultTranslate
   if (element.resultTranslate == undefined) {
@@ -206,7 +219,6 @@ async function sendRequestToClientAPI(url, type, body, headers = undefined) {
   };
   console.log(config)
   const response = await axios.request(config);
-  console.log('RESPOSTA', response)
   return response
 }
 async function getTokenAPICliente(url, type, tokenBody, responseKeysMap) {
@@ -242,7 +254,7 @@ class webSocket {
   openWebSocket(token, user, db, wsDomain, app, autoUpdater, shark) {
     try {
       console.log('Abrindo ws', wsDomain)
-      ws = new WebSocket('wss://' + wsDomain + '/ws/local', { agent: httpsAgent });
+      ws = new WebSocket(getTypeConn('ws',wsDomain)+'://' + wsDomain + '/ws/local', { agent: httpsAgent });
       ws.on('open', () => {
       
         ws.send(JSON.stringify({ type: 'Connection', token: token, user: user,version:app.getVersion() }));
@@ -409,12 +421,12 @@ class webSocket {
       repeticoes: index + 1,
       repeticoesNecesasrias: totalBatches
     };
-    console.log(index + 1, totalBatches, `https://${wsDomain}/queryResult`)
+    console.log(index + 1, totalBatches, `${getTypeConn('http',wsDomain)}://${wsDomain}/queryResult`)
     try {
       let config = {
         method: 'post',
         maxBodyLength: Infinity,
-        url: `https://${wsDomain}/queryResult`,
+        url: `${getTypeConn('http',wsDomain)}://${wsDomain}/queryResult`,
         headers: {
           'Content-Type': 'application/x-www-form-urlencoded'
         },

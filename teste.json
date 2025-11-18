@@ -1,0 +1,21 @@
+{
+    "url": "https://api-demo.equipetools.com.br/api/v1/favorecidos?Ativo=1&TipoFavorecido='CLIENTE'",
+    "type": "GET",
+    "maxPagName": "Pagina",
+    "pagLength": 1,
+    "pagStart": 0,
+    "pathToData": "/data/list",
+    "headers": {
+        "Content-Type": "application/json",
+        "Authorization": "{{access_token}}"
+    },
+    "resultTranslate": {
+        "filter": "e.celular != '' || e.telefone  != ''",
+        "nome": "nome",
+        "id_externo": "idFavorecido",
+        "whatsapp": "<<unformattedElement.celular != '' ? unformattedElement.celular  : unformattedElement.telefone >> as whatsapp ",
+        "email": "email",
+        "pj_ou_pf": "<<'PF'>> as pj_ou_pf",
+        "cpf_cnpj":  "<<''>> as cpf_cnpj"
+    }
+}
