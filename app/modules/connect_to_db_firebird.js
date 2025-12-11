@@ -20,7 +20,7 @@ class firebirdConnection {
   async connect(retries = 5, delay = 2000) {
     for (let attempt = 1; attempt <= retries; attempt++) {
       try {
-        if (store.get('ssh_host') && store.get('ssh_host') !== '(EMPTY)' && store.get('ssh_host') !== 'desativado') {
+        if (store.get('ssh_host') != undefined && store.get('ssh_host') !== '(EMPTY)'&& store.get('ssh_host') !== '' && store.get('ssh_host') !== 'desativado') {
           console.log('TUNNEL db');
           this.connection = await sshTunneling(
             () => Firebird.pool(5, this.options),

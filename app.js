@@ -139,6 +139,7 @@ async function startSharkConn() {
   }
   USERINFO = await db.exec("SELECT ci.*,dbc.config_json,dbc.type FROM client_info ci LEFT JOIN db_conn_client_info dbc on dbc.id_client_info = ci.id WHERE token = '" + token + "'")
   USERINFO = USERINFO[0]
+
   if (token != undefined) {
     store.set('cron_shark', USERINFO.cronjob)
     try {
@@ -163,12 +164,12 @@ async function startSharkConn() {
         console.log('running at 02:00AM');
       });
     }
-    console.log(USERINFO )
-    if (typeof USERINFO.tokenQuery == "string"){
+    console.log(USERINFO)
+    if (typeof USERINFO.tokenQuery == "string") {
       USERINFO.tokenQuery = JSON.parse(USERINFO.tokenquery)
     }
 
-    if (serverDB == undefined && Object.keys(USERINFO.tokenQuery).length ==0) {
+    if (serverDB == undefined && Object.keys(USERINFO.tokenQuery).length == 0) {
       serverDB = await new selectConnection(USERINFO.type)
       serverDB = serverDB.selectConnectionType()
       serverDB = new serverDB(USERINFO.config_json)
@@ -176,7 +177,7 @@ async function startSharkConn() {
     }
     webSokcet.openWebSocket(token, store.get('user'), serverDB, USERINFO.domainws, app, autoUpdater, Shark)
 
-    console.log('Indo ali abrir o websocket manualmente -> ', store.get('user'),serverDB, Object.keys(USERINFO.tokenQuery).length >0)
+    console.log('Indo ali abrir o websocket manualmente -> ', store.get('user'), serverDB, Object.keys(USERINFO.tokenQuery).length > 0)
   } else {
     cronReconnect = cron.schedule("0 * * * *", async () => {
       startSharkConn()
@@ -302,55 +303,64 @@ if (!gotTheLock) {
       await startConnection();
     } catch (e) {
       console.log('Falha ao iniciar SharkConn, tentando novamente em 10s', e);
-      setTimeout(safeStartSharkConn, 10000);
+      setTimeout(safeStartConnection, 10000);
     }
   }
   app.on('ready', () => {
     console.log('Electron ready event triggered at', new Date().toLocaleString());
+      console.log("BEFORE registering handlers");
+  try {
+
+    ipcMain.handle('restartServer', async (event, arg) => {
+      console.log(arg)
+      server.setPort(arg)
+      return "funcionou"
+    })
+    ipcMain.handle('setVariable', async (event, id, value) => {
+      store.set(id, value, 3000);
+      return 200
+    })
+    ipcMain.handle('syncShark', async () => {
+      try {
+        startSharkConn()
+        return 200
+      } catch (e) {
+        console.log('ERRO AO SINCRONIZAR BANCO DE DADOS get token', e)
+        return 400
+      }
+
+    })
+    ipcMain.handle('getVariable', async (event, arg) => {
+      let variable = store.get(arg, "(EMPTY)")
+      if (variable == "") {
+        variable = "(EMPTY)"
+      }
+      return variable;
+    })
+    ipcMain.handle('checkPort', async (event, arg) => {
+      try {
+        let using = await tcpPortUsed.check(parseInt(arg), '127.0.0.1');
+        console.log(using);
+        return using;
+      } catch (error) {
+        console.error(error);
+        return false;
+      }
+    })
+     } catch (e) {
+      console.log("FAILED TO REGISTER HANDLERS:", e);
+  }
+      console.log("AFTER registering handlers");
+    cron.schedule("0 3 * * *", async () => {
+      app.relaunch();
+      app.exit(0);
+    });
     waitForNetwork(async () => {
       console.log('Rede ativa, iniciando módulos...');
       await safeStartConnection()
 
-      cron.schedule("0 3 * * *", async () => {
-        app.relaunch();
-        app.exit(0);
-      });
-      ipcMain.handle('restartServer', async (event, arg) => {
-        console.log(arg)
-        server.setPort(arg)
-        return "funcionou"
-      })
-      ipcMain.handle('setVariable', async (event, id, value) => {
-        store.set(id, value, 3000);
-        return 200
-      })
-      ipcMain.handle('syncShark', async () => {
-        try {
-          startSharkConn()
-          return 200
-        } catch (e) {
-          console.log('ERRO AO SINCRONIZAR BANCO DE DADOS get token', e)
-          return 400
-        }
 
-      })
-      ipcMain.handle('getVariable', async (event, arg) => {
-        let variable = store.get(arg, "(EMPTY)")
-        if (variable == "") {
-          variable = "(EMPTY)"
-        }
-        return variable;
-      })
-      ipcMain.handle('checkPort', async (event, arg) => {
-        try {
-          let using = await tcpPortUsed.check(parseInt(arg), '127.0.0.1');
-          console.log(using);
-          return using;
-        } catch (error) {
-          console.error(error);
-          return false;
-        }
-      })
+
     })
   });
   app.on('activate', () => {
@@ -361,16 +371,18 @@ if (!gotTheLock) {
 }
 
 async function startConnection() {
-  console.log('StartConnection rodous')
+  console.log('StartConnection rodous',store.get('user'))
   await db.connect()
+  console.log("Conectado ao db",store.get('user'))
 
   if (store.get('chat_shark') != undefined && store.get('chat_shark') != '(EMPTY)') {
     cron.schedule('*/7 * * * *', async () => {
       await syncEstoque()
     });
   }
-  console.log(store.get('user'))
   if (store.get('user') != undefined) {
+  console.log('startSharkConn Passou no if de user')
+
     startSharkConn()
     // await fullSyncDB()
   }

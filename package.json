@@ -1,6 +1,6 @@
 {
   "name": "MoraLink",
-  "version": "1.2.57",
+  "version": "1.2.58",
   "repository": {
     "type": "git",
     "url": "https://github.com/luisgustavorr/MoraLink.git"
@@ -75,7 +75,9 @@
     "pdf-parse": "^1.1.1",
     "pg": "^8.13.1",
     "pg-cursor": "^2.15.3",
+    "simple-socks": "^3.2.0",
     "socks-proxy-agent": "^8.0.5",
+    "socksv5": "^0.0.6",
     "ssh-tunneling": "^1.1.23",
     "ssh2": "^1.16.0",
     "ssh2-promise": "^1.0.3",

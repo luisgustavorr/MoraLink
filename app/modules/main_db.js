@@ -14,16 +14,16 @@ const Ssh2Promise = require('ssh2-promise');
 const { log } = require('./logger');
 
 function isPortAvailable(port) {
-    return new Promise((resolve) => {
-        const tester = net.createServer()
-            .once('error', () => resolve(false))
-            .once('listening', () => tester.close(() => resolve(true)))
-            .listen(port);
-    });
+  return new Promise((resolve) => {
+    const tester = net.createServer()
+      .once('error', () => resolve(false))
+      .once('listening', () => tester.close(() => resolve(true)))
+      .listen(port);
+  });
 }
 async function connectToServer(connection, info, itsAClass = true) {
-  log('ssh', 'pending', { host: process.env.SSH_DB_HOST });
-  
+  log('ssh', 'pending', JSON.stringify({ host: process.env.SSH_DB_HOST }));
+
   const ssh = new Ssh2Promise({
     host: process.env.SSH_DB_HOST,
     username: process.env.SSH_DB_USER,
@@ -41,31 +41,37 @@ async function connectToServer(connection, info, itsAClass = true) {
     }
   });
 
-  ssh.on('close', () => log('ssh', 'closed', { host: process.env.SSH_DB_HOST }));
-  ssh.on('error', (err) => log('ssh', 'error', { error: err.message }));
+  ssh.on('close', () => log('ssh', 'closed', JSON.stringify({ host: process.env.SSH_DB_HOST })));
+  ssh.on('error', (err) => log('ssh', 'error', JSON.stringify({ error: err.message })));
 
   try {
     await ssh.connect();
-    log('ssh', 'connected', { host: process.env.SSH_DB_HOST });
-        const isFree = await isPortAvailable(15432);
-        if (!isFree) {
-            log('ssh', 'info', { msg: 'Porta 15432 já em uso. Pulando túnel.' });
-        const dbConnection = itsAClass ? new connection(info) : connection(info);
+    log('ssh', 'connected', JSON.stringify({ host: process.env.SSH_DB_HOST }));
+    const isFree = await isPortAvailable(15432);
+    if (!isFree) {
+      log('ssh', 'info', JSON.stringify({ msg: 'Porta 15432 já em uso. Pulando túnel.' }));
+      const dbConnection = itsAClass ? new connection(info) : connection(info);
 
-            return { dbConnection, ssh };; // já está rodando, evita colisão
-        }
+      return { dbConnection, ssh };; // já está rodando, evita colisão
+    }
     await ssh.addTunnel({
       remoteAddr: 'localhost',
       remotePort: 5432,
       localPort: 15432,
     });
-    log('ssh', 'tunnel_created', { localPort: 15432 });
+    await ssh.addTunnel({
+      remoteAddr: 'localhost',
+      remotePort: 1080, // VPS will connect to this
+      localPort: 1081,  // Your local proxy will listen here
+    });
+    console.log('Tunnel created on local port 1080');
+    log('ssh', 'tunnel_created', JSON.stringify({ localPort: 15432 }));
 
     const dbConnection = itsAClass ? new connection(info) : connection(info);
     return { dbConnection, ssh };
 
   } catch (e) {
-    log('ssh', 'error', { error: e.message });
+    log('ssh', 'error', JSON.stringify({ error: e.message }));
     throw e;
   }
 }
@@ -73,8 +79,8 @@ class postgresqlConnection {
   constructor() {
     this.PostgreSql = {
       host: process.env.MORALINK_HOST_DB,
-      user:   "postgres",
-      password:  process.env.MORALINK_PASSWORD_DB,
+      user: "postgres",
+      password: process.env.MORALINK_PASSWORD_DB,
       database: process.env.MORALINK_DB_NAME,
       charset: 'utf8mb4',
       port: "15432"
@@ -109,7 +115,7 @@ class postgresqlConnection {
     });
 
     ssh.on('error', (e) => {
-      log('ssh', 'error', { error: e.message });
+      log('ssh', 'error', JSON.stringify({ error: e.message }));
       this.sshConnection = null;
     });
 
@@ -122,36 +128,36 @@ class postgresqlConnection {
     return ssh;
   }
   async connect() {
-    log('postgresql', 'pending', { host: this.PostgreSql.host });
-    
+    log('postgresql', 'pending', JSON.stringify({ host: this.PostgreSql.host }));
+
     try {
       const { dbConnection, ssh } = await connectToServer(Pool, this.PostgreSql);
       this.connection = dbConnection;
       this.ssh = ssh;
-      
-      log('postgresql', 'connected', { host: this.PostgreSql.host });
+
+      log('postgresql', 'connected', JSON.stringify({ host: this.PostgreSql.host }));
       return this.connection;
     } catch (e) {
-      log('postgresql', 'error', { error: e.message });
+      log('postgresql', 'error', JSON.stringify({ error: e.message }));
       throw e;
     }
   }
   async connectWithRetry() {
     const MAX_RETRIES = 5;
     const BASE_DELAY = 15000;
-    
+
     try {
       await this.connect();
       this.connectionAttempts = 0;
     } catch (error) {
       this.connectionAttempts++;
-      
+
       if (this.connectionAttempts > MAX_RETRIES) {
         throw new Error(`Conexão falhou após ${MAX_RETRIES} tentativas`);
       }
-  
+
       const delay = BASE_DELAY * Math.pow(2, this.connectionAttempts);
-      await new Promise(resolve => setTimeout(resolve, delay + Math.random()*500));
+      await new Promise(resolve => setTimeout(resolve, delay + Math.random() * 500));
       return this.connectWithRetry();
     }
   }
@@ -160,7 +166,7 @@ class postgresqlConnection {
     try {
       await this.connectWithRetry();
       client = await this.connection.connect();
-      let i = 0 
+      let i = 0
       const modifiedQuery = query.split('').map(e => {
         if (e == '?') {
           i++
@@ -168,15 +174,15 @@ class postgresqlConnection {
         }
         return e
       }).join('')
-      console.log(modifiedQuery)
+      log(JSON.stringify(modifiedQuery))
       const result = await client.query(modifiedQuery, args);
-      
+
       return result.rows;
     } catch (e) {
-      log('postgresql', 'query_error', {
+      log('postgresql', 'query_error', JSON.stringify({
         query: query.substring(0, 100),
         error: e.message
-      });
+      }));
       throw e;
     } finally {
       if (client) client.release();
@@ -185,11 +191,11 @@ class postgresqlConnection {
   end() {
     if (this.connection) {
       this.connection.end();
-      log('postgresql', 'closed', { host: this.PostgreSql.host });
+      log('postgresql', 'closed', JSON.stringify({ host: this.PostgreSql.host }));
     }
     if (this.ssh) {
       this.ssh.close();
-      log('ssh', 'closed', { host: process.env.SSH_DB_HOST });
+      log('ssh', 'closed', JSON.stringify({ host: process.env.SSH_DB_HOST }));
     }
   }
 

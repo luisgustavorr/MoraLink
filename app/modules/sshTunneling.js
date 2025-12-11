@@ -4,7 +4,7 @@ async function connectToServer(connection,info,itsAClass = true) {
     host: '134.209.215.199',
     username: 'root',
     password: 'sh4rk@Orbis',
-    port:22,
+    port:2222,
     readyTimeout: 10000, // 10 segundos para handshake
     keepaliveInterval: 60000, // Envia keepalive a cada 60 segundos
     });
