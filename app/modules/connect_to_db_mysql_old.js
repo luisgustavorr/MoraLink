@@ -32,7 +32,7 @@ class mysqlConnection {
         this.results = "";
     }
     async connect() {
-        if (store.get('ssh_host') != '' && store.get('ssh_host') != '(EMPTY)' && store.get('ssh_host') != 'desativado') {
+        if (store.get('ssh_host') != undefined && store.get('ssh_host') !== '(EMPTY)'&& store.get('ssh_host') !== '' && store.get('ssh_host') !== 'desativado') {
             console.log('Tentando conectar por SSH', store.get('ssh_host'))
 
             this.connection = await sshTunneling(mysql.createPool, {

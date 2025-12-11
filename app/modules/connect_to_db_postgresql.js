@@ -22,8 +22,8 @@ class postgresqlConnection {
   async connect() {
     console.log('Conectando postgrees')
     try {
-      if (store.get('ssh_host') != '' && store.get('ssh_host') != '(EMPTY)' && store.get('ssh_host') != 'desativado') {
-        console.log('Tentando conectar por Tunnel psql "',store.get('ssh_host'),'"')
+      if (store.get('ssh_host') != undefined && store.get('ssh_host') !== '(EMPTY)' && store.get('ssh_host') !== '' && store.get('ssh_host') !== 'desativado') {
+        console.log('Tentando conectar por Tunnel psql "', store.get('ssh_host'), '"')
 
         this.connection = await sshTunneling(Pool, this.PostgreSql)
       } else {
@@ -52,7 +52,7 @@ class postgresqlConnection {
   //   });
 
   // }
-  async exec(query, args = [],readBatchLength = 5000) {
+  async exec(query, args = [], readBatchLength = 5000) {
     const cursor = this.connection.query(new Cursor(query, args));
     const allRows = [];
     return new Promise((resolve, reject) => {

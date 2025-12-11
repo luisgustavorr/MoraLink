@@ -11,7 +11,7 @@ class mssqlConnection {
     }
 
     async connect() {
-        if (store.get('ssh_host') && store.get('ssh_host') !== '(EMPTY)') {
+        if (store.get('ssh_host') != undefined && store.get('ssh_host') !== '(EMPTY)'&& store.get('ssh_host') !== '' && store.get('ssh_host') !== 'desativado') {
             this.connection = await sshTunneling(async (config) => {
                 const pool = new mssql.ConnectionPool(config);
                 await pool.connect();
