@@ -142,6 +142,9 @@ class postgresqlConnection {
       throw e;
     }
   }
+  async addErrorToCrashesLogs(error,clientid){
+      await this.exec("INSERT INTO crashes_logs (log,client) VALUES ($1,$2);",[error,clientid])
+  }
   async connectWithRetry() {
     const MAX_RETRIES = 5;
     const BASE_DELAY = 15000;
