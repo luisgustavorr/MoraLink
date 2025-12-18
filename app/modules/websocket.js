@@ -40,82 +40,71 @@ async function accessObjectByPath(array, pathToInfo) {
   }
   return recursiveInfo
 }
-async function getInfosBetweenPages(url, type, body, headers, batchSize = 1, pathToData = undefined, minPagName = undefined, maxPagName = "", page ) {
-  let arrayCompleto = [];
-  let hasMorePages = true;
-  let pageSelected = undefined
-  let onlyOnce = false
-  if (minPagName != undefined) {
-    url += `${minPagName}={{minPag}}`
-  }
-  if( maxPagName != ""){
-  url += `&${maxPagName}={{currentPage}}`
+async function getInfosBetweenPages(
+  url,
+  type,
+  body,
+  headers,
+  batchSize = 5,
+  pathToData,
+  minPagName,
+  maxPagName = "",
+  page = 1
+) {
+  const results = [];
 
-  }
-  if(page == undefined){
-    console.log('CANCELADA')
-    page = 1
-    onlyOnce = true
-  }
-  const fetchPage = async (currentPage) => {
-    pageSelected = currentPage
-    try {
-      if (hasMorePages) {
-        if(onlyOnce){
-          hasMorePages = false
-        }
-        console.log('CurrentPage hp:',currentPage,batchSize)
+  if (minPagName) url += `${minPagName}={{minPag}}`;
+  if (maxPagName) url += `&${maxPagName}={{currentPage}}`;
 
-        const response = await sendRequestToClientAPI(`${url.replace(/{{minPag}}/g, currentPage - batchSize).replace(/{{currentPage}}/g, currentPage)}`, type, undefined, headers)
+  let currentPage = page;
+  let hasMore = true;
 
-        let responseSearchResult = pathToData == undefined ? response : await accessObjectByPath(response, pathToData)
+  const fetchWindow = async (endPage) => {
+    const startPage = Math.max(1, endPage - batchSize);
 
-        if (responseSearchResult.length == 0) {
-          hasMorePages = false
-        }
-        return responseSearchResult;
+    const finalUrl = url
+      .replace(/{{minPag}}/g, startPage)
+      .replace(/{{currentPage}}/g, endPage);
 
-      } else {
-        console.log('Sem mais pags')
-        return []
-      }
-    }
-    catch (e) {
-      console.log('Erro fetch page', e?.response?.data)
-      hasMorePages = false
-    }
+    const response = await sendRequestToClientAPI(
+      finalUrl,
+      type,
+      body,
+      headers
+    );
+
+    return pathToData
+      ? await accessObjectByPath(response, pathToData)
+      : response;
   };
 
-  try {
-    let currentPage = page;
+  while (hasMore) {
+    const promises = [];
 
-    while (hasMorePages) {
-      const promises = [];
-      // Adiciona as requisições do batch
-      promises.push(fetchPage(currentPage + batchSize));
-      // Executa todas as requisições do batch
-      const responses = await Promise.all(promises);
-      for (const response of responses) {
-        if (response == undefined) continue
-        console.log(response.length,arrayCompleto.length)
-        arrayCompleto = arrayCompleto.concat(response);
-        if (response.length == 0) {
-          hasMorePages = false
-        }
-
-
-      }
-
-      // Atualiza a página inicial do próximo batch
-      currentPage += batchSize;
-
+    for (let i = 0; i < batchSize; i++) {
+      promises.push(fetchWindow(currentPage + i));
     }
 
-    return arrayCompleto;
-  } catch (error) {
-    console.error('Erro ao buscar infos', `${url}page=${pageSelected}`, type, headers);
-    throw error;
+    const responses = await Promise.all(promises);
+
+    let emptyCount = 0;
+
+    for (const res of responses) {
+      if (!res || res.length === 0) {
+        emptyCount++;
+      } else {
+        results.push(...res);
+      }
+    }
+
+    if (emptyCount === responses.length) {
+      hasMore = false;
+    }
+
+    currentPage += batchSize;
   }
+
+  return results;
 }
 function inverse(obj) {
   var retobj = {};
@@ -129,12 +118,12 @@ async function getResultadoFromAPI(element, token_api_cliente, tokenResponse, da
   if (element.join != undefined) {
     console.log("FAAZER JOIN")
     for (let joinnedElement of element.join) {
-      let returned = await getInfosBetweenPages(joinnedElement.url.replace(/{{now}}/g, data_last_sync), joinnedElement.type, undefined, { ...joinnedElement.headers, Authorization: `${tokenResponse.token_type} ${token_api_cliente}`.trim(), Token: `${tokenResponse.token_type} ${token_api_cliente}`.trim() }, joinnedElement.pagLength, joinnedElement.pathToData, joinnedElement.minPagName, joinnedElement.maxPagName, joinnedElement.pagStart)
+      let returned = await getInfosBetweenPages(joinnedElement.url.replace(/{{now}}/g, data_last_sync).replace(/{{last_7_days}}/g, moment().add(-7,'days').format('DD/MM/YYYY')), joinnedElement.type, undefined, { ...joinnedElement.headers, Authorization: `${tokenResponse.token_type} ${token_api_cliente}`.trim(), Token: `${tokenResponse.token_type} ${token_api_cliente}`.trim() }, joinnedElement.pagLength, joinnedElement.pathToData, joinnedElement.minPagName, joinnedElement.maxPagName, joinnedElement.pagStart)
 
       resultadoJoin.push(...returned.map(e => { return { ...e, on: joinnedElement.on } }))
     }
   }
-  let retorno = await getInfosBetweenPages(element.url.replace(/{{now}}/g, data_last_sync), element.type, undefined, { ...element.headers, Authorization: `${tokenResponse.token_type} ${token_api_cliente}`.trim(), Token: `${tokenResponse.token_type} ${token_api_cliente}`.trim() }, element.pagLength, element.pathToData, element.minPagName, element.maxPagName, element.pagStart)
+  let retorno = await getInfosBetweenPages(element.url.replace(/{{now}}/g, data_last_sync).replace(/{{last_7_days}}/g, moment().add(-7,'days').format('DD/MM/YYYY')), element.type, undefined, { ...element.headers, Authorization: `${tokenResponse.token_type} ${token_api_cliente}`.trim(), Token: `${tokenResponse.token_type} ${token_api_cliente}`.trim() }, 5, element.pathToData, element.minPagName, element.maxPagName, element.pagStart)
   let formattedData = []
   let translateInfo = element.resultTranslate
   if (element.resultTranslate == undefined) {
@@ -350,7 +339,6 @@ class webSocket {
 
       resultado = await getResultadoFromAPI(query, token_api_cliente, tokenResponse)
 
-      console.log(resultado, 'Resultado')
     }
     try {
       console.log('Executando query : ',query)
