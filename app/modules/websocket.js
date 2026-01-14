@@ -16,15 +16,15 @@ let isConnected = false;
 let verifyConnectionInterval = undefined;
 let APIClienteToken = {
 }
-function getTypeConn(type,wsDomain){
+function getTypeConn(type, wsDomain) {
   let isLocal = wsDomain.includes('localhost')
   let result = ''
-  if (type == 'ws' ){
+  if (type == 'ws') {
     result = 'ws'
-  }else{
+  } else {
     result = 'http'
   }
-  if (!isLocal){
+  if (!isLocal) {
     result += 's'
   }
   return result
@@ -38,6 +38,7 @@ async function accessObjectByPath(array, pathToInfo) {
 
     }
   }
+  console.log("Encontrados :",recursiveInfo.length)
   return recursiveInfo
 }
 async function getInfosBetweenPages(
@@ -49,30 +50,33 @@ async function getInfosBetweenPages(
   pathToData,
   minPagName,
   maxPagName = "",
-  page = 1
+  page = 1,
+  onlyOneRequest = false,
+  step = 50,
+  customTimeout = 1700
 ) {
   const results = [];
 
-  if (minPagName) url += `${minPagName}={{minPag}}`;
+  if (minPagName) url += `&${minPagName}={{minPag}}`;
   if (maxPagName) url += `&${maxPagName}={{currentPage}}`;
 
   let currentPage = page;
   let hasMore = true;
 
-  const fetchWindow = async (endPage) => {
+  const fetchWindow = async (endPage,minPage) => {
     const startPage = Math.max(1, endPage - batchSize);
 
     const finalUrl = url
-      .replace(/{{minPag}}/g, startPage)
+      .replace(/{{minPag}}/g, minPage || startPage)
       .replace(/{{currentPage}}/g, endPage);
-
+    console.log(startPage,minPagName,maxPagName,finalUrl,batchSize,minPage)
     const response = await sendRequestToClientAPI(
       finalUrl,
       type,
       body,
       headers
     );
-
+    await new Promise((resolve, reject) => setTimeout(resolve, customTimeout))
     return pathToData
       ? await accessObjectByPath(response, pathToData)
       : response;
@@ -80,9 +84,9 @@ async function getInfosBetweenPages(
 
   while (hasMore) {
     const promises = [];
-
     for (let i = 0; i < batchSize; i++) {
-      promises.push(fetchWindow(currentPage + i));
+      console.log("results:",results.length,batchSize)
+      promises.push(fetchWindow(currentPage + i,results.length));
     }
 
     const responses = await Promise.all(promises);
@@ -97,10 +101,9 @@ async function getInfosBetweenPages(
       }
     }
 
-    if (emptyCount === responses.length) {
+    if (emptyCount === responses.length  || onlyOneRequest == true) {
       hasMore = false;
     }
-
     currentPage += batchSize;
   }
 
@@ -113,28 +116,48 @@ function inverse(obj) {
   }
   return retobj;
 }
+
+function sanitizeNumber(number) {
+  if (number == '' || number == undefined) {
+    number = '0'
+  }
+  return parseFloat(number.replace(',', '.'))
+}
 async function getResultadoFromAPI(element, token_api_cliente, tokenResponse, data_last_sync = moment().format('YYYY-MM-DD')) {
   let resultadoJoin = []
+  let blackListedIdExternos = []
   if (element.join != undefined) {
     console.log("FAAZER JOIN")
     for (let joinnedElement of element.join) {
-      let returned = await getInfosBetweenPages(joinnedElement.url.replace(/{{now}}/g, data_last_sync).replace(/{{last_7_days}}/g, moment().add(-7,'days').format('DD/MM/YYYY')), joinnedElement.type, undefined, { ...joinnedElement.headers, Authorization: `${tokenResponse.token_type} ${token_api_cliente}`.trim(), Token: `${tokenResponse.token_type} ${token_api_cliente}`.trim() }, joinnedElement.pagLength, joinnedElement.pathToData, joinnedElement.minPagName, joinnedElement.maxPagName, joinnedElement.pagStart)
+      let returned = await getInfosBetweenPages(joinnedElement.url.replace(/{{now}}/g, data_last_sync).replace(/{{last_7_days}}/g, moment().add(-7, 'days').format('DD/MM/YYYY')), joinnedElement.type, undefined, { ...joinnedElement.headers, Authorization: `${tokenResponse.token_type} ${token_api_cliente}`.trim(), Token: `${tokenResponse.token_type} ${token_api_cliente}`.trim() }, joinnedElement.pagLength, joinnedElement.pathToData, joinnedElement.minPagName, joinnedElement.maxPagName, joinnedElement.pagStart,joinnedElement.onlyOneRequest)
 
       resultadoJoin.push(...returned.map(e => { return { ...e, on: joinnedElement.on } }))
     }
   }
-  let retorno = await getInfosBetweenPages(element.url.replace(/{{now}}/g, data_last_sync).replace(/{{last_7_days}}/g, moment().add(-7,'days').format('DD/MM/YYYY')), element.type, undefined, { ...element.headers, Authorization: `${tokenResponse.token_type} ${token_api_cliente}`.trim(), Token: `${tokenResponse.token_type} ${token_api_cliente}`.trim() }, 5, element.pathToData, element.minPagName, element.maxPagName, element.pagStart)
+  let retorno = await getInfosBetweenPages(element.url.replace(/{{now}}/g, data_last_sync).replace(/{{last_7_days}}/g, moment().add(-7, 'days').format('DD/MM/YYYY')), element.type, undefined, { ...element.headers, Authorization: `${tokenResponse.token_type} ${token_api_cliente}`.trim(), Token: `${tokenResponse.token_type} ${token_api_cliente}`.trim() }, element.batchSize, element.pathToData, element.minPagName, element.maxPagName, element.pagStart,element.onlyOneRequest,element.pagLength)
   let formattedData = []
   let translateInfo = element.resultTranslate
   if (element.resultTranslate == undefined) {
     return retorno
   }
   if (translateInfo['filter'] != undefined) {
-    retorno = retorno.filter((e) => {
-      return eval(translateInfo['filter'])
+    retorno = retorno.filter((unformattedElement) => {
+      let approved = eval(translateInfo['filter'])
+      if (!approved) {
+       if (translateInfo["blacklist_factor"] != undefined && translateInfo["blacklist_factor"] != ''){
+        console.log("Adicionando na blacklist : ")
+       
+        blackListedIdExternos.push(eval(translateInfo["blacklist_factor"]))
+
+       }
+
+      }
+      return approved
     })
     delete translateInfo['filter']
+    delete translateInfo['blacklist_factor']
   }
+  console.log("Blacklisted : ", blackListedIdExternos)
   let translateInfoKeys = inverse(translateInfo)
   let i = 1
 
@@ -187,11 +210,14 @@ async function getResultadoFromAPI(element, token_api_cliente, tokenResponse, da
         formatedElement[translateInfoKeys[e]] = unformattedElement[e] || ''
       }
     }
-    formattedData.push(formatedElement)
+    if (!blackListedIdExternos.includes(formatedElement.id_externo)) {
+      formattedData.push(formatedElement)
+
+    }
     i++
   }
   let resultado = formattedData
-  console.log(resultado, 'result')
+  console.log(resultado)
   return resultado
 }
 async function sendRequestToClientAPI(url, type, body, headers = undefined) {
@@ -243,10 +269,10 @@ class webSocket {
   openWebSocket(token, user, db, wsDomain, app, autoUpdater, shark) {
     try {
       console.log('Abrindo ws', wsDomain)
-      ws = new WebSocket(getTypeConn('ws',wsDomain)+'://' + wsDomain + '/ws/local', { agent: httpsAgent });
+      ws = new WebSocket(getTypeConn('ws', wsDomain) + '://' + wsDomain + '/ws/local', { agent: httpsAgent });
       ws.on('open', () => {
-      
-        ws.send(JSON.stringify({ type: 'Connection', token: token, user: user,version:app.getVersion() }));
+
+        ws.send(JSON.stringify({ type: 'Connection', token: token, user: user, version: app.getVersion() }));
         // Heartbeat a cada 30 segundos
         this.heartbeatInterval = setInterval(() => {
           if (ws.readyState === WebSocket.OPEN) {
@@ -341,9 +367,9 @@ class webSocket {
 
     }
     try {
-      console.log('Executando query : ',query)
+      console.log('Executando query : ', query)
       if (resultado == undefined) {
-        resultado = await db.exec(query,undefined,batchSize/10)
+        resultado = await db.exec(query, undefined, batchSize / 10)
         if (resultado != undefined) {
           console.log('Recuperando por DB', resultado.length)
         } else {
@@ -358,10 +384,11 @@ class webSocket {
       return
     }
     const batches = [];
+
     if (resultado.length == 0) {
       this.sendBatch([], -1, 0, idQuery, wsDomain);
     }
-    console.log('PASSOU POR AQUI ->',resultado.length)
+    console.log('PASSOU POR AQUI ->', resultado.length)
     try {
       for (let i = 0; i < resultado.length; i += batchSize) {
         batches.push(resultado.slice(i, i + batchSize));
@@ -372,7 +399,7 @@ class webSocket {
     // Envio paralelo controlado
     const queue = async (batch, index, total) => {
       console.time(`Batch ${index}`);
-      totalEnviados += batch.length
+      totalEnviados += batch.lengthwe
       await new Promise((resolve) => { setTimeout(resolve, 1000 * index); })
       console.log(`Enviando BATCH ------- (${index}/${total}) ${totalEnviados} adicionados`);
       await this.sendBatch(batch, index, total, idQuery, wsDomain);
@@ -392,11 +419,11 @@ class webSocket {
       await Promise.all(
         chunk.map(async (batch) => {
           await queue(batch, batchIndex++, totalBatches);
-          await new Promise((resolve) => { setTimeout(resolve, 1000); })
+          await new Promise((resolve) => { setTimeout(resolve, 500); })
 
         })
       );
-      await new Promise((resolve) => { setTimeout(resolve, 1000); })
+      await new Promise((resolve) => { setTimeout(resolve, 500); })
 
     }
 
@@ -409,12 +436,12 @@ class webSocket {
       repeticoes: index + 1,
       repeticoesNecesasrias: totalBatches
     };
-    console.log(index + 1, totalBatches, `${getTypeConn('http',wsDomain)}://${wsDomain}/queryResult`)
+    console.log(index + 1, totalBatches, `${getTypeConn('http', wsDomain)}://${wsDomain}/queryResult`)
     try {
       let config = {
         method: 'post',
         maxBodyLength: Infinity,
-        url: `${getTypeConn('http',wsDomain)}://${wsDomain}/queryResult`,
+        url: `${getTypeConn('http', wsDomain)}://${wsDomain}/queryResult`,
         headers: {
           'Content-Type': 'application/x-www-form-urlencoded'
         },
